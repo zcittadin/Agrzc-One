@@ -9,12 +9,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="1365.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.AgrzcStageOneController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="1365.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.AgrzcStageOneController">
    <left>
       <VBox prefHeight="578.0" prefWidth="180.0" BorderPane.alignment="CENTER">
          <children>
@@ -60,7 +59,7 @@
       </VBox>
    </left>
    <top>
-      <GridPane prefHeight="102.0" prefWidth="1365.0" styleClass="mainGradient" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="102.0" prefWidth="1365.0" styleClass="mainGradient" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -70,16 +69,16 @@
         </rowConstraints>
          <children>
             <ImageView fitHeight="101.0" fitWidth="200.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../style/agrozacca.png" />
-               </image>
                <GridPane.margin>
                   <Insets left="3.0" />
                </GridPane.margin>
+               <image>
+                  <Image url="@../img/agrozacca.png" />
+               </image>
             </ImageView>
             <ImageView fitHeight="94.0" fitWidth="200.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                <image>
-                  <Image url="@../style/logotipo.jpg" />
+                  <Image url="@../img/logotipo.jpg" />
                </image>
                <GridPane.margin>
                   <Insets right="3.0" />
@@ -89,6 +88,13 @@
       </GridPane>
    </top>
    <center>
-      <Pane fx:id="centralPane" BorderPane.alignment="CENTER" />
+      <GridPane fx:id="centralPane" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
    </center>
 </BorderPane>

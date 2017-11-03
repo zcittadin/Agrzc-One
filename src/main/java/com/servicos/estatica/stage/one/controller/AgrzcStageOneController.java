@@ -10,13 +10,13 @@ import javafx.scene.layout.Pane;
 public class AgrzcStageOneController implements Initializable {
 
 	public static String screenDosagemID = "DOSAGEM";
-	public static String screenDosagemFile = "/com/servicos/estatica/stage/one/app/Dosagem.fxml";
+	public static String screenDosagemFile = "/fxml/Dosagem.fxml";
 	public static String screenMistura1ID = "MISTURA1";
-	public static String screenMistura1File = "/com/servicos/estatica/stage/one/app/Mistura1.fxml";
+	public static String screenMistura1File = "/fxml/Mistura1.fxml";
 	public static String screenMoagemID = "MOAGEM";
-	public static String screenMoagemFile = "/com/servicos/estatica/stage/one/app/Moagem.fxml";
+	public static String screenMoagemFile = "/fxml/Moagem.fxml";
 	public static String screenMistura2ID = "MISTURA2";
-	public static String screenMistura2File = "/com/servicos/estatica/stage/one/app/Mistura2.fxml";
+	public static String screenMistura2File = "/fxml/Mistura2.fxml";
 
 	@FXML
 	private Pane centralPane;
@@ -30,7 +30,6 @@ public class AgrzcStageOneController implements Initializable {
 		mainContainer.loadScreen(screenMistura1ID, screenMistura1File);
 		mainContainer.loadScreen(screenMoagemID, screenMoagemFile);
 		mainContainer.loadScreen(screenMistura2ID, screenMistura2File);
-		// CurrentScreenProperty.setScreen(screenInicioID);
 
 		mainContainer.setScreen(screenDosagemID);
 		centralPane.getChildren().addAll(mainContainer);

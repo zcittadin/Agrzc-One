@@ -18,13 +18,11 @@ public class AgrzcStageOne extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("AgrzcStageOne.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/fxml/AgrzcStageOne.fxml"));
 		stage.setScene(new Scene(root));
 		stage.setTitle("Agrozacca");
 		stage.setMaximized(true);
 		stage.setResizable(false);
-		// stage.getIcons().add(new
-		// Image("/com/servicos/estatica/resicolor/lab/style/256_colors.png"));
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent event) {
 				event.consume();
