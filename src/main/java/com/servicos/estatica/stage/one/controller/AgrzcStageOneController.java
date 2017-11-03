@@ -1,11 +1,19 @@
 package com.servicos.estatica.stage.one.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class AgrzcStageOneController implements Initializable {
 
@@ -20,6 +28,14 @@ public class AgrzcStageOneController implements Initializable {
 
 	@FXML
 	private Pane centralPane;
+	@FXML
+	private ImageView imgCliente;
+	@FXML
+	private ImageView imgEstatica;
+
+	private static String TOOLTIP_CSS = "-fx-font-size: 8pt; -fx-font-weight: bold; -fx-font-style: normal; ";
+	private Tooltip tooltipCliente = new Tooltip("Informações sobre o cliente");
+	private Tooltip tooltipEstatica = new Tooltip("Informações sobre o fabricante");
 
 	ScreensController mainContainer = new ScreensController();
 
@@ -33,6 +49,11 @@ public class AgrzcStageOneController implements Initializable {
 
 		mainContainer.setScreen(screenDosagemID);
 		centralPane.getChildren().addAll(mainContainer);
+
+		tooltipCliente.setStyle(TOOLTIP_CSS);
+		tooltipEstatica.setStyle(TOOLTIP_CSS);
+		Tooltip.install(imgCliente, tooltipCliente);
+		Tooltip.install(imgEstatica, tooltipEstatica);
 	}
 
 	@FXML
@@ -53,6 +74,34 @@ public class AgrzcStageOneController implements Initializable {
 	@FXML
 	private void openMistura2() {
 		mainContainer.setScreen(screenMistura2ID);
+	}
+
+	@FXML
+	private void handleImgClienteAction() throws IOException {
+		Stage stage;
+		Parent root;
+		stage = new Stage();
+		root = FXMLLoader.load(getClass().getResource("/fxml/ClienteInfo.fxml"));
+		stage.setScene(new Scene(root));
+		stage.setTitle("Informações sobre o cliente");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initOwner(imgCliente.getScene().getWindow());
+		stage.setResizable(Boolean.FALSE);
+		stage.showAndWait();
+	}
+
+	@FXML
+	private void handleImgEstaticaAction() throws IOException {
+		Stage stage;
+		Parent root;
+		stage = new Stage();
+		root = FXMLLoader.load(getClass().getResource("/fxml/EstaticaInfo.fxml"));
+		stage.setScene(new Scene(root));
+		stage.setTitle("Informações sobre o fabricante");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initOwner(imgCliente.getScene().getWindow());
+		stage.setResizable(Boolean.FALSE);
+		stage.showAndWait();
 	}
 
 }

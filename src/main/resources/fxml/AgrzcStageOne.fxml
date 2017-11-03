@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -68,21 +69,27 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="101.0" fitWidth="200.0" pickOnBounds="true">
+            <ImageView fx:id="imgCliente" fitHeight="101.0" fitWidth="200.0" onMouseClicked="#handleImgClienteAction" pickOnBounds="true">
                <GridPane.margin>
                   <Insets left="3.0" />
                </GridPane.margin>
                <image>
                   <Image url="@../img/agrozacca.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
-            <ImageView fitHeight="94.0" fitWidth="200.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+            <ImageView fx:id="imgEstatica" fitHeight="94.0" fitWidth="200.0" onMouseClicked="#handleImgEstaticaAction" pickOnBounds="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                <image>
                   <Image url="@../img/logotipo.jpg" />
                </image>
                <GridPane.margin>
                   <Insets right="3.0" />
                </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </GridPane>
@@ -95,6 +102,9 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+         </children>
       </GridPane>
    </center>
 </BorderPane>
