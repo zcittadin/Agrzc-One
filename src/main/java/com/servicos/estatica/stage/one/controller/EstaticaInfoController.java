@@ -55,11 +55,6 @@ public class EstaticaInfoController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		/*
-		 * WebView browser = new WebView(); WebEngine webEngine =
-		 * browser.getEngine(); webEngine.load(linkEstatica.getText());
-		 */
 	}
 
 }

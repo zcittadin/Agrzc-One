@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="1365.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.AgrzcStageOneController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1365.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.AgrzcStageOneController">
    <left>
       <VBox prefHeight="578.0" prefWidth="180.0" BorderPane.alignment="CENTER">
          <children>
@@ -49,6 +49,14 @@
                </cursor>
             </Button>
             <Button layoutX="10.0" layoutY="226.0" mnemonicParsing="false" onAction="#openMistura2" prefHeight="54.0" prefWidth="180.0" text="Mistura 2">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="10.0" layoutY="295.0" mnemonicParsing="false" onAction="#openCadastros" prefHeight="54.0" prefWidth="180.0" text="Cadastros">
                <font>
                   <Font size="20.0" />
                </font>

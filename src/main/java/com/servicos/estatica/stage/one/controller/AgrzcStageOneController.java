@@ -25,6 +25,8 @@ public class AgrzcStageOneController implements Initializable {
 	public static String screenMoagemFile = "/fxml/Moagem.fxml";
 	public static String screenMistura2ID = "MISTURA2";
 	public static String screenMistura2File = "/fxml/Mistura2.fxml";
+	public static String screenCadastrosID = "CADASTROS";
+	public static String screenCadastrosFile = "/fxml/Cadastros.fxml";
 
 	@FXML
 	private Pane centralPane;
@@ -46,6 +48,7 @@ public class AgrzcStageOneController implements Initializable {
 		mainContainer.loadScreen(screenMistura1ID, screenMistura1File);
 		mainContainer.loadScreen(screenMoagemID, screenMoagemFile);
 		mainContainer.loadScreen(screenMistura2ID, screenMistura2File);
+		mainContainer.loadScreen(screenCadastrosID, screenCadastrosFile);
 
 		mainContainer.setScreen(screenDosagemID);
 		centralPane.getChildren().addAll(mainContainer);
@@ -74,6 +77,11 @@ public class AgrzcStageOneController implements Initializable {
 	@FXML
 	private void openMistura2() {
 		mainContainer.setScreen(screenMistura2ID);
+	}
+
+	@FXML
+	private void openCadastros() {
+		mainContainer.setScreen(screenCadastrosID);
 	}
 
 	@FXML
