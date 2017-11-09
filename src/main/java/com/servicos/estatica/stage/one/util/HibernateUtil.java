@@ -36,7 +36,7 @@ public class HibernateUtil {
 		configuration.addAnnotatedClass(Formula.class);
 		configuration.addAnnotatedClass(Quantidade.class);
 		configuration.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
-		configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost/agrozacca");
+		configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost/agrozacca?useTimezone=true&serverTimezone=UTC");
 		configuration.setProperty("hibernate.connection.username", "root");
 		configuration.setProperty("hibernate.connection.password", "root");
 		configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");

@@ -2,6 +2,8 @@ package com.servicos.estatica.stage.one.app;
 
 import java.util.Optional;
 
+import com.servicos.estatica.stage.one.util.HibernateUtil;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -36,6 +38,11 @@ public class AgrzcStageOne extends Application {
 			}
 		});
 		stage.show();
+	}
+	
+	@Override
+	public void stop() throws Exception {
+		HibernateUtil.closeSessionFactory();
 	}
 
 	public static void main(String[] args) {

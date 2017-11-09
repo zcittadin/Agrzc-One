@@ -50,7 +50,7 @@ public class AgrzcStageOneController implements Initializable {
 		mainContainer.loadScreen(screenMistura2ID, screenMistura2File);
 		mainContainer.loadScreen(screenCadastrosID, screenCadastrosFile);
 
-		mainContainer.setScreen(screenDosagemID);
+		mainContainer.setScreen(screenCadastrosID);
 		centralPane.getChildren().addAll(mainContainer);
 
 		tooltipCliente.setStyle(TOOLTIP_CSS);
