@@ -27,13 +27,22 @@ public class MateriaDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
-	
+
+	public void removeMateria(Materia materia) {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		session.remove(materia);
+		session.getTransaction().commit();
+		session.close();
+
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<Materia> findMaterias() {
 		Session session = HibernateUtil.openSession();
 		session.beginTransaction();
 		Query query = session.createQuery("SELECT m FROM Materia m ORDER BY id DESC");
-		query.setMaxResults(15);
+		query.setMaxResults(30);
 		List<Materia> list = new ArrayList<>();
 		list = query.getResultList();
 		session.close();

@@ -3,13 +3,17 @@ package com.servicos.estatica.stage.one.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.stage.one.app.ControlledScreen;
 import com.servicos.estatica.stage.one.dao.MateriaDAO;
 import com.servicos.estatica.stage.one.model.Materia;
 import com.servicos.estatica.stage.one.util.AlertUtil;
+import com.servicos.estatica.stage.one.util.Toast;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -19,13 +23,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 @SuppressWarnings("rawtypes")
 public class CadastrosController implements Initializable, ControlledScreen {
@@ -42,7 +51,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 	private static ObservableList<Materia> materias = FXCollections.observableArrayList();
 
 	private static MateriaDAO materiaDAO = new MateriaDAO();
-	private static Materia materia;
+	// private static Materia materia;
 
 	ScreensController myController;
 
@@ -53,7 +62,8 @@ public class CadastrosController implements Initializable, ControlledScreen {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		prepareTables();
+		findMaterias();
 	}
 
 	private void findMaterias() {
@@ -66,17 +76,17 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		};
 
 		searchTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-
+				tblMateria.setItems(materias);
 			}
 		});
 
 		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				AlertUtil.makeAlert(AlertType.ERROR, "Erro",
-						"Ocorreu uma falha ao consultar as matérias-prima existentes.");
+				AlertUtil.makeError("Erro", "Ocorreu uma falha ao consultar as matérias-prima existentes.");
 			}
 		});
 		new Thread(searchTask).start();
@@ -100,15 +110,13 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			stage.initOwner(tblMateria.getScene().getWindow());
 			stage.setResizable(Boolean.FALSE);
 			stage.showAndWait();
-		} catch (
-
-		IOException e) {
+			findMaterias();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	@FXML
-	private void editMateria() {
+	private void editMateria(Materia mat) {
 		try {
 			Stage stage;
 			Parent root;
@@ -119,15 +127,129 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
 			root = (Parent) fxmlloader.load(url.openStream());
 			stage.setScene(new Scene(root));
-			((CadastroMateriaController) fxmlloader.getController()).setContext(materia, tblMateria.getScene());
+			((CadastroMateriaController) fxmlloader.getController()).setContext(mat, tblMateria.getScene());
 			stage.setTitle("Gerenciar matéria-prima");
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(tblMateria.getScene().getWindow());
 			stage.setResizable(Boolean.FALSE);
 			stage.showAndWait();
+			findMaterias();
+			tblMateria.refresh();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void prepareTables() {
+
+		colNomeMateria.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Materia, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(CellDataFeatures<Materia, String> cell) {
+						final Materia mat = cell.getValue();
+						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(
+								mat.getNomeMateria());
+						return simpleObject;
+					}
+				});
+
+		Callback<TableColumn<Materia, String>, TableCell<Materia, String>> cellEditarFactory = new Callback<TableColumn<Materia, String>, TableCell<Materia, String>>() {
+			@Override
+			public TableCell call(final TableColumn<Materia, String> param) {
+				final TableCell<Materia, String> cell = new TableCell<Materia, String>() {
+
+					final Button btn = new Button();
+
+					@Override
+					public void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						} else {
+							btn.setOnAction(event -> {
+								Materia mat = getTableView().getItems().get(getIndex());
+								editMateria(mat);
+							});
+							// Tooltip.install(btn, tooltipReport);
+							btn.setStyle("-fx-graphic: url('/icons/Modify.png');");
+							btn.setCursor(Cursor.HAND);
+							setGraphic(btn);
+							setText(null);
+						}
+					}
+				};
+				return cell;
+			}
+		};
+		colEditarMateria.setCellFactory(cellEditarFactory);
+
+		Callback<TableColumn<Materia, String>, TableCell<Materia, String>> cellExcluirFactory = new Callback<TableColumn<Materia, String>, TableCell<Materia, String>>() {
+			@Override
+			public TableCell call(final TableColumn<Materia, String> param) {
+				final TableCell<Materia, String> cell = new TableCell<Materia, String>() {
+
+					final Button btn = new Button();
+
+					@Override
+					public void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						} else {
+							btn.setOnAction(event -> {
+								Optional<ButtonType> result = AlertUtil.makeConfirm("Confirmar exclusão",
+										"Tem certeza que deseja excluir esta matéria-prima?.");
+								if (result.get() == ButtonType.OK) {
+									Materia mat = getTableView().getItems().get(getIndex());
+									Task<Void> exclusionTask = new Task<Void>() {
+										@Override
+										protected Void call() throws Exception {
+											materiaDAO.removeMateria(mat);
+											materias.remove(mat);
+											tblMateria.refresh();
+											return null;
+										}
+									};
+									exclusionTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+										@Override
+										public void handle(WorkerStateEvent arg0) {
+											Toast.makeToast((Stage) tblMateria.getScene().getWindow(),
+													"Matéria-prima removida com sucesso.");
+											materias.remove(mat);
+											tblMateria.refresh();
+										}
+									});
+									exclusionTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+										@Override
+										public void handle(WorkerStateEvent arg0) {
+											AlertUtil.makeError("Erro",
+													"Ocorreu uma falha ao tentar remover a matéria-prima selecionada.");
+											tblMateria.setItems(materias);
+											tblMateria.refresh();
+										}
+									});
+									new Thread(exclusionTask).start();
+								}
+
+							});
+							// Tooltip.install(btn, tooltipReport);
+							btn.setStyle("-fx-graphic: url('/icons/Delete.png');");
+							btn.setCursor(Cursor.HAND);
+							setGraphic(btn);
+							setText(null);
+						}
+					}
+				};
+				return cell;
+			}
+		};
+		colExcluirMateria.setCellFactory(cellExcluirFactory);
+
+		colNomeMateria.setStyle("-fx-alignment: CENTER;");
+		colEditarMateria.setStyle("-fx-alignment: CENTER;");
+		colExcluirMateria.setStyle("-fx-alignment: CENTER;");
 	}
 
 }

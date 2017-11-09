@@ -15,7 +15,12 @@ import javafx.util.Duration;
 
 public class Toast {
 
-	public static void makeToast(Stage ownerStage, String toastMsg, int toastDelay, int fadeInDelay, int fadeOutDelay) {
+	public static void makeToast(Stage ownerStage, String toastMsg) {
+		
+		int toastMsgTime = 5000;
+		int fadeInDelay = 600;
+		int fadeOutDelay = 600;
+		
 		Stage toastStage = new Stage();
 		toastStage.initOwner(ownerStage);
 		toastStage.setResizable(false);
@@ -43,7 +48,7 @@ public class Toast {
 		fadeInTimeline.setOnFinished((ae) -> {
 			new Thread(() -> {
 				try {
-					Thread.sleep(toastDelay);
+					Thread.sleep(toastMsgTime);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

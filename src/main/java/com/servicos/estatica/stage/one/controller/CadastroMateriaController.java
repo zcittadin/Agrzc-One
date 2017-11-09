@@ -15,8 +15,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -29,6 +27,8 @@ public class CadastroMateriaController implements Initializable {
 	private Materia materia;
 	private Scene parentScene;
 
+	private static String toastMsg;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -37,12 +37,14 @@ public class CadastroMateriaController implements Initializable {
 	public void setContext(Materia materia, Scene parentScene) {
 		this.materia = materia;
 		this.parentScene = parentScene;
+		if (materia != null)
+			txtNome.setText(materia.getNomeMateria());
 	}
 
 	@FXML
 	private void saveMateria(ActionEvent event) {
 		if (txtNome.getText() == null || "".equals(txtNome.getText().trim())) {
-			AlertUtil.makeAlert(AlertType.WARNING, "Atenção", "Informe um nome para o cadastro da matéria-prima.");
+			AlertUtil.makeWarning("Atenção", "Informe um nome para o cadastro da matéria-prima.");
 			txtNome.requestFocus();
 			return;
 		}
@@ -53,9 +55,11 @@ public class CadastroMateriaController implements Initializable {
 				if (materia == null) {
 					materia = new Materia(null, txtNome.getText());
 					materiaDAO.saveMateria(materia);
+					toastMsg = "Cadastro efetuado com sucesso";
 				} else {
 					materia.setNomeMateria(txtNome.getText());
 					materiaDAO.updateMateria(materia);
+					toastMsg = "Matéria-prima atualizada com sucesso";
 				}
 				return null;
 			}
@@ -65,7 +69,7 @@ public class CadastroMateriaController implements Initializable {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
 				// fetch(false);
-				makeToast("Matéria-prima cadastrada com sucesso.");
+				Toast.makeToast((Stage) parentScene.getWindow(), toastMsg);
 				Stage stage = (Stage) txtNome.getScene().getWindow();
 				stage.close();
 			}
@@ -75,25 +79,13 @@ public class CadastroMateriaController implements Initializable {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
 				// fetch(false);
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Erro");
-				alert.setHeaderText("Ocorreu uma falha ao cadastrar a matéria-prima.");
-				alert.showAndWait();
+				AlertUtil.makeError("Erro", "Ocorreu uma falha ao cadastrar a matéria-prima.");
 				Stage stage = (Stage) txtNome.getScene().getWindow();
 				stage.close();
 			}
 		});
 		Thread t = new Thread(saveTask);
 		t.start();
-	}
-	
-	private void makeToast(String message) {
-		String toastMsg = message;
-		int toastMsgTime = 5000;
-		int fadeInTime = 600;
-		int fadeOutTime = 600;
-		Stage stage = (Stage) parentScene.getWindow();
-		Toast.makeToast(stage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
 	}
 
 }
