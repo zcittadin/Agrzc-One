@@ -2,3 +2,15 @@
 	-fx-background-color: linear-gradient(to bottom, #ffff88 0.0%,#ffff42 94.0%);
 }
 
+.btAdd {
+  -fx-graphic: url('../icons/Add.png');
+}
+
+.btOk {
+  -fx-graphic: url('../icons/Ok.png');
+}
+
+.btCancel {
+  -fx-graphic: url('../icons/Cancel.png');
+}
+

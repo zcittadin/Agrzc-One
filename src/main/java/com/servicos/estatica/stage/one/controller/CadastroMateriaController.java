@@ -88,4 +88,10 @@ public class CadastroMateriaController implements Initializable {
 		t.start();
 	}
 
+	@FXML
+	private void cancel() {
+		Stage stage = (Stage) txtNome.getScene().getWindow();
+		stage.close();
+	}
+
 }

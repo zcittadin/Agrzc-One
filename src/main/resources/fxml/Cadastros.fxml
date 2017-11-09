@@ -4,6 +4,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -16,7 +17,7 @@
    <center>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="638.0" prefWidth="1185.0">
+            <HBox prefHeight="869.0" prefWidth="1579.0">
                <children>
                   <VBox prefHeight="638.0" prefWidth="419.0">
                      <children>
@@ -38,22 +39,27 @@
                               <Insets top="50.0" />
                            </VBox.margin>
                         </TableView>
+                        <ProgressIndicator fx:id="progMaterias" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false">
+                           <VBox.margin>
+                              <Insets top="-380.0" />
+                           </VBox.margin>
+                        </ProgressIndicator>
+                        <Button mnemonicParsing="false" onAction="#addMateria" styleClass="btAdd" stylesheets="@../css/style.css" text="Cadastrar matéria-prima">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="115.0" top="250.0" />
+                           </VBox.margin>
+                        </Button>
                      </children>
                      <HBox.margin>
                         <Insets left="80.0" />
                      </HBox.margin>
                   </VBox>
-                  <Button mnemonicParsing="false" onAction="#addMateria" text="Cadastrar matéria-prima">
-                     <HBox.margin>
-                        <Insets left="30.0" top="130.0" />
-                     </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
                </children>
             </HBox>
          </children>

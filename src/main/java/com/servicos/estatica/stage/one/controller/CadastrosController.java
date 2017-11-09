@@ -28,6 +28,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -47,6 +48,8 @@ public class CadastrosController implements Initializable, ControlledScreen {
 	private TableColumn colEditarMateria;
 	@FXML
 	private TableColumn colExcluirMateria;
+	@FXML
+	private ProgressIndicator progMaterias;
 
 	private static ObservableList<Materia> materias = FXCollections.observableArrayList();
 
@@ -70,6 +73,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		Task<Void> searchTask = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
+				progMaterias.setVisible(true);
 				materias = FXCollections.observableList((List<Materia>) materiaDAO.findMaterias());
 				return null;
 			}
@@ -79,13 +83,14 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(WorkerStateEvent arg0) {
+				progMaterias.setVisible(false);
 				tblMateria.setItems(materias);
 			}
 		});
-
 		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
+				progMaterias.setVisible(false);
 				AlertUtil.makeError("Erro", "Ocorreu uma falha ao consultar as matérias-prima existentes.");
 			}
 		});
