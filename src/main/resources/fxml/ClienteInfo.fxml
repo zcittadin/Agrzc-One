@@ -18,7 +18,7 @@
             <Image url="@../img/agrozacca.png" />
          </image>
       </ImageView>
-      <Button fx:id="btVoltar" layoutX="162.0" layoutY="351.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="84.0" text="Voltar">
+      <Button fx:id="btVoltar" layoutX="162.0" layoutY="351.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="84.0" styleClass="btBack" stylesheets="@../css/style.css" text="Voltar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

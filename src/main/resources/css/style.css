@@ -14,3 +14,15 @@
   -fx-graphic: url('../icons/Cancel.png');
 }
 
+.btBack {
+  -fx-graphic: url('../icons/Back.png');
+}
+
+.btSave {
+  -fx-graphic: url('../icons/Save.png');
+}
+
+.combo-font {
+	-fx-font: 14px "Regular";
+}
+

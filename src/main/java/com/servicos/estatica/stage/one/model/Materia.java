@@ -77,7 +77,7 @@ public class Materia implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Materia [id=" + id + ", nomeMateria=" + nomeMateria + "]";
+		return nomeMateria;
 	}
 
 	@Override

@@ -50,6 +50,16 @@ public class CadastrosController implements Initializable, ControlledScreen {
 	private TableColumn colExcluirMateria;
 	@FXML
 	private ProgressIndicator progMaterias;
+	@FXML
+	private TableView tblFormula;
+	@FXML
+	private TableColumn colNomeFormula;
+	@FXML
+	private TableColumn colPesoFormula;
+	@FXML
+	private TableColumn colEditarFormula;
+	@FXML
+	private TableColumn colExcluirFormula;
 
 	private static ObservableList<Materia> materias = FXCollections.observableArrayList();
 
@@ -140,6 +150,30 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			stage.showAndWait();
 			findMaterias();
 			tblMateria.refresh();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	private void addFormula() {
+		try {
+			Stage stage;
+			Parent root;
+			stage = new Stage();
+			URL url = getClass().getResource("/fxml/CadFormulas.fxml");
+			FXMLLoader fxmlloader = new FXMLLoader();
+			fxmlloader.setLocation(url);
+			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
+			root = (Parent) fxmlloader.load(url.openStream());
+			stage.setScene(new Scene(root));
+			//((CadastroFormulaController) fxmlloader.getController()).setContext(null, tblMateria.getScene());
+			stage.setTitle("Gerenciar formulação");
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(tblMateria.getScene().getWindow());
+			stage.setResizable(Boolean.FALSE);
+			stage.showAndWait();
+			findMaterias();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -240,7 +274,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 
 							});
 							// Tooltip.install(btn, tooltipReport);
-							btn.setStyle("-fx-graphic: url('/icons/Delete.png');");
+							btn.setStyle("-fx-graphic: url('/icons/Trash.png');");
 							btn.setCursor(Cursor.HAND);
 							setGraphic(btn);
 							setText(null);
