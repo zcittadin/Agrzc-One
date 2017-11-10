@@ -7,7 +7,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.stage.one.app.ControlledScreen;
+import com.servicos.estatica.stage.one.dao.FormulaDAO;
 import com.servicos.estatica.stage.one.dao.MateriaDAO;
+import com.servicos.estatica.stage.one.model.Formula;
 import com.servicos.estatica.stage.one.model.Materia;
 import com.servicos.estatica.stage.one.util.AlertUtil;
 import com.servicos.estatica.stage.one.util.Toast;
@@ -62,9 +64,10 @@ public class CadastrosController implements Initializable, ControlledScreen {
 	private TableColumn colExcluirFormula;
 
 	private static ObservableList<Materia> materias = FXCollections.observableArrayList();
+	private static ObservableList<Formula> formulas = FXCollections.observableArrayList();
 
 	private static MateriaDAO materiaDAO = new MateriaDAO();
-	// private static Materia materia;
+	private static FormulaDAO formulaDAO = new FormulaDAO();
 
 	ScreensController myController;
 
@@ -77,6 +80,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 	public void initialize(URL location, ResourceBundle resources) {
 		prepareTables();
 		findMaterias();
+		findFormulas();
 	}
 
 	private void findMaterias() {
@@ -84,6 +88,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			@Override
 			protected Void call() throws Exception {
 				progMaterias.setVisible(true);
+				tblMateria.setDisable(true);
 				materias = FXCollections.observableList((List<Materia>) materiaDAO.findMaterias());
 				return null;
 			}
@@ -94,6 +99,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
 				progMaterias.setVisible(false);
+				tblMateria.setDisable(false);
 				tblMateria.setItems(materias);
 			}
 		});
@@ -101,7 +107,39 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
 				progMaterias.setVisible(false);
+				tblMateria.setDisable(false);
 				AlertUtil.makeError("Erro", "Ocorreu uma falha ao consultar as matérias-prima existentes.");
+			}
+		});
+		new Thread(searchTask).start();
+	}
+
+	private void findFormulas() {
+		Task<Void> searchTask = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				// progMaterias.setVisible(true);
+				// tblMateria.setDisable(true);
+				formulas = FXCollections.observableList((List<Formula>) formulaDAO.findFormulas());
+				return null;
+			}
+		};
+
+		searchTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+				// progMaterias.setVisible(false);
+				// tblMateria.setDisable(false);
+				tblFormula.setItems(formulas);
+			}
+		});
+		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+				// progMaterias.setVisible(false);
+				// tblMateria.setDisable(false);
+				AlertUtil.makeError("Erro", "Ocorreu uma falha ao consultar as formulações existentes.");
 			}
 		});
 		new Thread(searchTask).start();
@@ -167,13 +205,13 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
 			root = (Parent) fxmlloader.load(url.openStream());
 			stage.setScene(new Scene(root));
-			//((CadastroFormulaController) fxmlloader.getController()).setContext(null, tblMateria.getScene());
+			((CadastroFormulaController) fxmlloader.getController()).setContext(tblMateria.getScene());
 			stage.setTitle("Gerenciar formulação");
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(tblMateria.getScene().getWindow());
 			stage.setResizable(Boolean.FALSE);
 			stage.showAndWait();
-			findMaterias();
+			findFormulas();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -210,7 +248,6 @@ public class CadastrosController implements Initializable, ControlledScreen {
 								Materia mat = getTableView().getItems().get(getIndex());
 								editMateria(mat);
 							});
-							// Tooltip.install(btn, tooltipReport);
 							btn.setStyle("-fx-graphic: url('/icons/Modify.png');");
 							btn.setCursor(Cursor.HAND);
 							setGraphic(btn);
@@ -273,7 +310,6 @@ public class CadastrosController implements Initializable, ControlledScreen {
 								}
 
 							});
-							// Tooltip.install(btn, tooltipReport);
 							btn.setStyle("-fx-graphic: url('/icons/Trash.png');");
 							btn.setCursor(Cursor.HAND);
 							setGraphic(btn);
@@ -289,6 +325,91 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		colNomeMateria.setStyle("-fx-alignment: CENTER;");
 		colEditarMateria.setStyle("-fx-alignment: CENTER;");
 		colExcluirMateria.setStyle("-fx-alignment: CENTER;");
+
+		colNomeFormula.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Formula, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(CellDataFeatures<Formula, String> cell) {
+						final Formula formula = cell.getValue();
+						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(
+								formula.getNomeFormula());
+						return simpleObject;
+					}
+				});
+
+		colPesoFormula.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Formula, Double>, ObservableValue<Double>>() {
+					public ObservableValue<Double> call(CellDataFeatures<Formula, Double> cell) {
+						final Formula formula = cell.getValue();
+						final SimpleObjectProperty<Double> simpleObject = new SimpleObjectProperty<Double>(
+								formula.getPesoTotal());
+						return simpleObject;
+					}
+				});
+
+		Callback<TableColumn<Formula, String>, TableCell<Formula, String>> cellEditarFormulaFactory = new Callback<TableColumn<Formula, String>, TableCell<Formula, String>>() {
+			@Override
+			public TableCell call(final TableColumn<Formula, String> param) {
+				final TableCell<Materia, String> cell = new TableCell<Materia, String>() {
+
+					final Button btn = new Button();
+
+					@Override
+					public void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						} else {
+							btn.setOnAction(event -> {
+								// Materia mat = getTableView().getItems().get(getIndex());
+								// editMateria(mat);
+							});
+							btn.setStyle("-fx-graphic: url('/icons/Modify.png');");
+							btn.setCursor(Cursor.HAND);
+							setGraphic(btn);
+							setText(null);
+						}
+					}
+				};
+				return cell;
+			}
+		};
+		colEditarFormula.setCellFactory(cellEditarFormulaFactory);
+
+		Callback<TableColumn<Formula, String>, TableCell<Formula, String>> cellExcluirFormulaFactory = new Callback<TableColumn<Formula, String>, TableCell<Formula, String>>() {
+			@Override
+			public TableCell call(final TableColumn<Formula, String> param) {
+				final TableCell<Materia, String> cell = new TableCell<Materia, String>() {
+
+					final Button btn = new Button();
+
+					@Override
+					public void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						} else {
+							btn.setOnAction(event -> {
+								// Materia mat = getTableView().getItems().get(getIndex());
+								// editMateria(mat);
+							});
+							btn.setStyle("-fx-graphic: url('/icons/Trash.png');");
+							btn.setCursor(Cursor.HAND);
+							setGraphic(btn);
+							setText(null);
+						}
+					}
+				};
+				return cell;
+			}
+		};
+		colExcluirFormula.setCellFactory(cellExcluirFormulaFactory);
+
+		colNomeFormula.setStyle("-fx-alignment: CENTER;");
+		colPesoFormula.setStyle("-fx-alignment: CENTER;");
+		colEditarFormula.setStyle("-fx-alignment: CENTER;");
+		colExcluirFormula.setStyle("-fx-alignment: CENTER;");
 	}
 
 }

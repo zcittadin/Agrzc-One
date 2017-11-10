@@ -53,7 +53,7 @@ public class CadastroMateriaController implements Initializable {
 			@Override
 			protected Void call() throws Exception {
 				if (materia == null) {
-					materia = new Materia(null, txtNome.getText());
+					materia = new Materia(null, txtNome.getText(), null);
 					materiaDAO.saveMateria(materia);
 					toastMsg = "Cadastro efetuado com sucesso";
 				} else {
@@ -84,8 +84,7 @@ public class CadastroMateriaController implements Initializable {
 				stage.close();
 			}
 		});
-		Thread t = new Thread(saveTask);
-		t.start();
+		new Thread(saveTask).start();
 	}
 
 	@FXML

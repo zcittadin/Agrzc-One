@@ -48,4 +48,13 @@ public class MateriaDAO {
 		session.close();
 		return list;
 	}
+
+	public Materia findById(Long id) {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("SELECT m FROM Materia m WHERE id = :id");
+		query.setParameter("id", id);
+		Materia m = (Materia) query.getResultList().get(0);
+		return m;
+	}
 }
