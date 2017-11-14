@@ -57,4 +57,13 @@ public class MateriaDAO {
 		Materia m = (Materia) query.getResultList().get(0);
 		return m;
 	}
+
+	public Materia findByName(String name) {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("SELECT m FROM Materia m WHERE nomeMateria LIKE :name");
+		query.setParameter("name", name);
+		Materia m = (Materia) query.getResultList().get(0);
+		return m;
+	}
 }

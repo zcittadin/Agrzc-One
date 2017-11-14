@@ -81,6 +81,11 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </TableView>
+                        <ProgressIndicator fx:id="progFormulas" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false">
+                           <VBox.margin>
+                              <Insets top="-390.0" />
+                           </VBox.margin>
+                        </ProgressIndicator>
                         <Button mnemonicParsing="false" onAction="#addFormula" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova formulação">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -89,7 +94,7 @@
                               <Font size="14.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="420.0" top="40.0" />
+                              <Insets left="420.0" top="270.0" />
                            </VBox.margin>
                         </Button>
                      </children>

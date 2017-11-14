@@ -2,6 +2,7 @@ package com.servicos.estatica.stage.one.model;
 
 public class ItemFormula {
 
+	private Long idQuantidade;
 	private Long idMateria;
 	private String nomeMateria;
 	private Double quantidade;
@@ -10,10 +11,19 @@ public class ItemFormula {
 
 	}
 
-	public ItemFormula(Long idMateria, String nomeMateria, Double quantidade) {
+	public ItemFormula(Long idQuantidade, Long idMateria, String nomeMateria, Double quantidade) {
+		this.idQuantidade = idQuantidade;
 		this.idMateria = idMateria;
 		this.nomeMateria = nomeMateria;
 		this.quantidade = quantidade;
+	}
+
+	public Long getIdQuantidade() {
+		return idQuantidade;
+	}
+
+	public void setIdQuantidade(Long idQuantidade) {
+		this.idQuantidade = idQuantidade;
 	}
 
 	public Long getIdMateria() {

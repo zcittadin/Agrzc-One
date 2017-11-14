@@ -1,6 +1,7 @@
 package com.servicos.estatica.stage.one.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -15,7 +16,6 @@ import com.servicos.estatica.stage.one.util.AlertUtil;
 import com.servicos.estatica.stage.one.util.FormatterUtil;
 import com.servicos.estatica.stage.one.util.Toast;
 
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -33,11 +33,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.stage.Stage;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.converter.DoubleStringConverter;
 
 @SuppressWarnings("rawtypes")
 public class CadastroFormulaController implements Initializable {
@@ -73,11 +77,15 @@ public class CadastroFormulaController implements Initializable {
 
 	private static ObservableList<ItemFormula> itens = FXCollections.observableArrayList();
 	private static ObservableList<Materia> materias = FXCollections.observableArrayList();
+	private static List<ItemFormula> itensToRemove = new ArrayList<>();
+	private static List<ItemFormula> itensCopy = new ArrayList<>();
 
 	private static String COMMA = ",";
 	private static String DOT = ".";
 
 	private Double total = new Double(0);
+
+	private Formula formula;
 
 	private Scene parentScene;
 
@@ -99,8 +107,18 @@ public class CadastroFormulaController implements Initializable {
 		tblFormula.setItems(itens);
 	}
 
-	public void setContext(Scene parentScene) {
+	public void setContext(Formula formula, Scene parentScene) {
 		this.parentScene = parentScene;
+		this.formula = formula;
+		itens.clear();
+		itensCopy.clear();
+		itensToRemove.clear();
+		if (formula != null) {
+			tblFormula.setEditable(true);
+			populateFields();
+		} else {
+			tblFormula.setEditable(false);
+		}
 	}
 
 	@FXML
@@ -114,7 +132,7 @@ public class CadastroFormulaController implements Initializable {
 			txtQuantidade.requestFocus();
 			return;
 		}
-		itens.add(new ItemFormula(materia.getId(), materia.getNomeMateria(),
+		itens.add(new ItemFormula(null, materia.getId(), materia.getNomeMateria(),
 				Double.parseDouble(FormatterUtil.adjustDecimal(txtQuantidade.getText(), COMMA, DOT))));
 		txtQuantidade.clear();
 		tblFormula.refresh();
@@ -128,13 +146,45 @@ public class CadastroFormulaController implements Initializable {
 			protected Void call() throws Exception {
 				progItens.setVisible(true);
 				tblFormula.setDisable(true);
-				Formula formula = new Formula(null, txtFormula.getText(), Double.parseDouble(lblTotal.getText()), null);
-				formulaDAO.saveFormula(formula);
+				if (formula != null) {
+					formula.setNomeFormula(txtFormula.getText());
+					formula.setPesoTotal(Double.parseDouble(lblTotal.getText()));
+					formula.setQuantidades(null);
+					formulaDAO.updateFormula(formula);
+				} else {
+					formula = new Formula(null, txtFormula.getText(), Double.parseDouble(lblTotal.getText()), null);
+					formulaDAO.saveFormula(formula);
+				}
 				itens.forEach(it -> {
-					Materia mat = materiaDAO.findById(it.getIdMateria());
-					Quantidade q = new Quantidade(null, mat, formula, it.getQuantidade());
-					quantidadeDAO.saveQuantidade(q);
+					if (it.getIdQuantidade() == null) {
+						Materia mat = materiaDAO.findByName(it.getNomeMateria());
+						quantidadeDAO.saveQuantidade(new Quantidade(null, mat, formula, it.getQuantidade()));
+					} else {
+						itensCopy.forEach(itCopy -> {
+							if ((it.getIdQuantidade() == itCopy.getIdQuantidade())
+									&& (!it.getNomeMateria().equals(itCopy.getNomeMateria())
+											|| (it.getQuantidade() != itCopy.getQuantidade()))) {
+								Materia mat = materiaDAO.findByName(it.getNomeMateria());
+								it.setIdMateria(mat.getId());
+								Quantidade q = quantidadeDAO.findById(it.getIdQuantidade());
+								if (q != null) {
+									q.setMateriaQuantidade(mat);
+									q.setPeso(it.getQuantidade());
+									quantidadeDAO.updateQuantidade(q);
+								}
+							}
+						});
+					}
 				});
+				if (!itensToRemove.isEmpty()) {
+					itensToRemove.forEach(it -> {
+						Materia m = null;
+						m = materiaDAO.findById(it.getIdMateria());
+						Quantidade q = quantidadeDAO.findByMateriaAndFormula(m, formula);
+						if (q != null)
+							quantidadeDAO.removeQuantidade(q);
+					});
+				}
 				return null;
 			}
 		};
@@ -144,6 +194,8 @@ public class CadastroFormulaController implements Initializable {
 				progItens.setVisible(false);
 				tblFormula.setDisable(false);
 				itens.clear();
+				itensCopy.clear();
+				itensToRemove.clear();
 				Toast.makeToast((Stage) parentScene.getWindow(), "Formulação salva com sucesso.");
 				Stage stage = (Stage) tblFormula.getScene().getWindow();
 				stage.close();
@@ -159,10 +211,14 @@ public class CadastroFormulaController implements Initializable {
 				Stage stage = (Stage) tblFormula.getScene().getWindow();
 				stage.close();
 			}
-
 		});
 		new Thread(saveTask).start();
+	}
 
+	private void editQuantidade(ItemFormula item) {
+		txtQuantidade.setTextFormatter(null);
+		txtQuantidade.setText(item.getQuantidade().toString());
+		FormatterUtil.formatNumberField(txtQuantidade);
 	}
 
 	@FXML
@@ -179,27 +235,48 @@ public class CadastroFormulaController implements Initializable {
 	}
 
 	@SuppressWarnings("unchecked")
+	private void populateFields() {
+		txtFormula.setText(formula.getNomeFormula());
+		lblTotal.setText(formula.getPesoTotal().toString());
+		comboMateria.setDisable(false);
+		txtQuantidade.setDisable(false);
+		btAdicionar.setDisable(false);
+		List<Quantidade> quantidades = quantidadeDAO.findByFormula(formula);
+		quantidades.forEach(q -> {
+			itens.add(new ItemFormula(q.getId(), q.getMateriaQuantidade().getId(),
+					q.getMateriaQuantidade().getNomeMateria(), q.getPeso()));
+			itensCopy.add(new ItemFormula(q.getId(), q.getMateriaQuantidade().getId(),
+					q.getMateriaQuantidade().getNomeMateria(), q.getPeso()));
+		});
+		tblFormula.setItems(itens);
+	}
+
+	@SuppressWarnings("unchecked")
 	private void prepareTable() {
+		ObservableList<String> nomesMateria = FXCollections.observableArrayList();
+		materias.forEach(str -> {
+			nomesMateria.add(str.getNomeMateria());
+		});
+		colMateria.setCellValueFactory(new PropertyValueFactory<ItemFormula, String>("nomeMateria"));
+		colMateria.setCellFactory(ComboBoxTableCell.forTableColumn(nomesMateria));
+		colMateria.setOnEditCommit(new EventHandler<CellEditEvent<ItemFormula, String>>() {
+			@Override
+			public void handle(CellEditEvent<ItemFormula, String> t) {
+				ItemFormula item = (ItemFormula) t.getTableView().getItems().get(t.getTablePosition().getRow());
+				item.setNomeMateria(t.getNewValue());
+			}
+		});
 
-		colMateria.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<ItemFormula, String>, ObservableValue<String>>() {
-					public ObservableValue<String> call(CellDataFeatures<ItemFormula, String> cell) {
-						final ItemFormula item = cell.getValue();
-						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(
-								item.getNomeMateria());
-						return simpleObject;
-					}
-				});
-
-		colQuantidade.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<ItemFormula, Double>, ObservableValue<Double>>() {
-					public ObservableValue<Double> call(CellDataFeatures<ItemFormula, Double> cell) {
-						final ItemFormula item = cell.getValue();
-						final SimpleObjectProperty<Double> simpleObject = new SimpleObjectProperty<Double>(
-								item.getQuantidade());
-						return simpleObject;
-					}
-				});
+		colQuantidade.setCellValueFactory(new PropertyValueFactory<ItemFormula, Double>("quantidade"));
+		colQuantidade.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+		colQuantidade.setOnEditCommit(new EventHandler<CellEditEvent<ItemFormula, Double>>() {
+			@Override
+			public void handle(CellEditEvent<ItemFormula, Double> t) {
+				((ItemFormula) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+						.setQuantidade(t.getNewValue());
+				calculaTotal();
+			}
+		});
 
 		Callback<TableColumn<ItemFormula, String>, TableCell<ItemFormula, String>> cellEditarFactory = new Callback<TableColumn<ItemFormula, String>, TableCell<ItemFormula, String>>() {
 			@Override
@@ -216,8 +293,8 @@ public class CadastroFormulaController implements Initializable {
 							setText(null);
 						} else {
 							btn.setOnAction(event -> {
-								// ItemFormula it = getTableView().getItems().get(getIndex());
-								// editMateria(mat);
+								ItemFormula it = getTableView().getItems().get(getIndex());
+								editQuantidade(it);
 							});
 							btn.setStyle("-fx-graphic: url('/icons/Modify.png');");
 							btn.setCursor(Cursor.HAND);
@@ -248,6 +325,7 @@ public class CadastroFormulaController implements Initializable {
 							btn.setOnAction(event -> {
 								ItemFormula it = getTableView().getItems().get(getIndex());
 								itens.remove(it);
+								itensToRemove.add(it);
 								tblFormula.refresh();
 								calculaTotal();
 								comboMateria.requestFocus();

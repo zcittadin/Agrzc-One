@@ -20,6 +20,22 @@ public class FormulaDAO {
 		session.close();
 	}
 
+	public void updateFormula(Formula formula) {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		session.update(formula);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	public void removeFormula(Formula formula) {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		session.remove(formula);
+		session.getTransaction().commit();
+		session.close();
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<Formula> findFormulas() {
 		Session session = HibernateUtil.openSession();

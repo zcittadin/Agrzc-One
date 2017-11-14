@@ -62,6 +62,8 @@ public class CadastrosController implements Initializable, ControlledScreen {
 	private TableColumn colEditarFormula;
 	@FXML
 	private TableColumn colExcluirFormula;
+	@FXML
+	private ProgressIndicator progFormulas;
 
 	private static ObservableList<Materia> materias = FXCollections.observableArrayList();
 	private static ObservableList<Formula> formulas = FXCollections.observableArrayList();
@@ -118,8 +120,8 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		Task<Void> searchTask = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
-				// progMaterias.setVisible(true);
-				// tblMateria.setDisable(true);
+				progFormulas.setVisible(true);
+				tblFormula.setDisable(true);
 				formulas = FXCollections.observableList((List<Formula>) formulaDAO.findFormulas());
 				return null;
 			}
@@ -129,16 +131,16 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				// progMaterias.setVisible(false);
-				// tblMateria.setDisable(false);
+				progFormulas.setVisible(false);
+				tblFormula.setDisable(false);
 				tblFormula.setItems(formulas);
 			}
 		});
 		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				// progMaterias.setVisible(false);
-				// tblMateria.setDisable(false);
+				progFormulas.setVisible(false);
+				tblFormula.setDisable(false);
 				AlertUtil.makeError("Erro", "Ocorreu uma falha ao consultar as formulações existentes.");
 			}
 		});
@@ -205,13 +207,38 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
 			root = (Parent) fxmlloader.load(url.openStream());
 			stage.setScene(new Scene(root));
-			((CadastroFormulaController) fxmlloader.getController()).setContext(tblMateria.getScene());
+			((CadastroFormulaController) fxmlloader.getController()).setContext(null, tblMateria.getScene());
 			stage.setTitle("Gerenciar formulação");
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(tblMateria.getScene().getWindow());
 			stage.setResizable(Boolean.FALSE);
 			stage.showAndWait();
 			findFormulas();
+			tblFormula.refresh();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void editFormula(Formula f) {
+		try {
+			Stage stage;
+			Parent root;
+			stage = new Stage();
+			URL url = getClass().getResource("/fxml/CadFormulas.fxml");
+			FXMLLoader fxmlloader = new FXMLLoader();
+			fxmlloader.setLocation(url);
+			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
+			root = (Parent) fxmlloader.load(url.openStream());
+			stage.setScene(new Scene(root));
+			((CadastroFormulaController) fxmlloader.getController()).setContext(f, tblFormula.getScene());
+			stage.setTitle("Gerenciar formulação");
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(tblFormula.getScene().getWindow());
+			stage.setResizable(Boolean.FALSE);
+			stage.showAndWait();
+			findFormulas();
+			tblFormula.refresh();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -308,7 +335,6 @@ public class CadastrosController implements Initializable, ControlledScreen {
 									});
 									new Thread(exclusionTask).start();
 								}
-
 							});
 							btn.setStyle("-fx-graphic: url('/icons/Trash.png');");
 							btn.setCursor(Cursor.HAND);
@@ -349,7 +375,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		Callback<TableColumn<Formula, String>, TableCell<Formula, String>> cellEditarFormulaFactory = new Callback<TableColumn<Formula, String>, TableCell<Formula, String>>() {
 			@Override
 			public TableCell call(final TableColumn<Formula, String> param) {
-				final TableCell<Materia, String> cell = new TableCell<Materia, String>() {
+				final TableCell<Formula, String> cell = new TableCell<Formula, String>() {
 
 					final Button btn = new Button();
 
@@ -361,8 +387,8 @@ public class CadastrosController implements Initializable, ControlledScreen {
 							setText(null);
 						} else {
 							btn.setOnAction(event -> {
-								// Materia mat = getTableView().getItems().get(getIndex());
-								// editMateria(mat);
+								Formula f = getTableView().getItems().get(getIndex());
+								editFormula(f);
 							});
 							btn.setStyle("-fx-graphic: url('/icons/Modify.png');");
 							btn.setCursor(Cursor.HAND);
@@ -379,7 +405,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		Callback<TableColumn<Formula, String>, TableCell<Formula, String>> cellExcluirFormulaFactory = new Callback<TableColumn<Formula, String>, TableCell<Formula, String>>() {
 			@Override
 			public TableCell call(final TableColumn<Formula, String> param) {
-				final TableCell<Materia, String> cell = new TableCell<Materia, String>() {
+				final TableCell<Formula, String> cell = new TableCell<Formula, String>() {
 
 					final Button btn = new Button();
 
@@ -391,8 +417,37 @@ public class CadastrosController implements Initializable, ControlledScreen {
 							setText(null);
 						} else {
 							btn.setOnAction(event -> {
-								// Materia mat = getTableView().getItems().get(getIndex());
-								// editMateria(mat);
+								Optional<ButtonType> result = AlertUtil.makeConfirm("Confirmar exclusão",
+										"Tem certeza que deseja excluir esta formulação?.");
+								if (result.get() == ButtonType.OK) {
+									Formula f = getTableView().getItems().get(getIndex());
+									Task<Void> exclusionTask = new Task<Void>() {
+										@Override
+										protected Void call() throws Exception {
+											formulaDAO.removeFormula(f);
+											return null;
+										}
+									};
+									exclusionTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+										@Override
+										public void handle(WorkerStateEvent arg0) {
+											Toast.makeToast((Stage) tblMateria.getScene().getWindow(),
+													"Formulação removida com sucesso.");
+											formulas.remove(f);
+											tblFormula.refresh();
+										}
+									});
+									exclusionTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+										@Override
+										public void handle(WorkerStateEvent arg0) {
+											AlertUtil.makeError("Erro",
+													"Ocorreu uma falha ao tentar remover a formulação selecionada.");
+											tblFormula.setItems(materias);
+											tblFormula.refresh();
+										}
+									});
+									new Thread(exclusionTask).start();
+								}
 							});
 							btn.setStyle("-fx-graphic: url('/icons/Trash.png');");
 							btn.setCursor(Cursor.HAND);

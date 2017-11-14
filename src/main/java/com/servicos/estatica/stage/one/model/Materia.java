@@ -25,7 +25,7 @@ public class Materia implements Serializable {
 	private Long id;
 	@Column(name = "nome_materia")
 	private String nomeMateria;
-	@OneToMany(orphanRemoval = true, mappedBy = "materiaQuantidade", targetEntity = Quantidade.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(orphanRemoval = true, mappedBy = "materiaQuantidade", targetEntity = Quantidade.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Quantidade> quantidades;
 
 	public Materia() {

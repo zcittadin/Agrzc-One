@@ -27,7 +27,7 @@ public class Formula implements Serializable {
 	private String nomeFormula;
 	@Column(name = "peso_total")
 	private Double pesoTotal;
-	@OneToMany(orphanRemoval = true, mappedBy = "formulaQuantidade", targetEntity = Quantidade.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(orphanRemoval = false, mappedBy = "formulaQuantidade", targetEntity = Quantidade.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Quantidade> quantidades;
 
 	public Formula() {
