@@ -72,37 +72,27 @@
    <top>
       <GridPane prefHeight="102.0" prefWidth="1365.0" styleClass="mainGradient" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="830.0" minWidth="10.0" prefWidth="812.0" />
+          <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints maxWidth="950.0" minWidth="10.0" prefWidth="1012.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.0" minWidth="10.0" prefWidth="98.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="imgCliente" fitHeight="101.0" fitWidth="200.0" onMouseClicked="#handleImgClienteAction" pickOnBounds="true">
-               <GridPane.margin>
-                  <Insets left="3.0" />
-               </GridPane.margin>
-               <image>
-                  <Image url="@../img/agrozacca.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fx:id="imgEstatica" fitHeight="94.0" fitWidth="200.0" onMouseClicked="#handleImgEstaticaAction" pickOnBounds="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
-               <image>
-                  <Image url="@../img/logotipo.jpg" />
-               </image>
-               <GridPane.margin>
-                  <Insets right="3.0" />
-               </GridPane.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="labelGradient" stylesheets="@../css/style.css" GridPane.columnIndex="1">
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.hgrow="NEVER">
+               <children>
+                  <ImageView fx:id="imgCliente" fitHeight="101.0" fitWidth="200.0" onMouseClicked="#handleImgClienteAction" pickOnBounds="true">
+                     <image>
+                        <Image url="@../img/agrozacca.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="labelGradient" stylesheets="@../css/style.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
                <children>
                   <Label fx:id="lblInfo" text="Sistema em espera" textFill="#2fff00">
                      <font>
@@ -112,6 +102,18 @@
                         <Bloom />
                      </effect>
                   </Label>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.hgrow="NEVER">
+               <children>
+                  <ImageView fx:id="imgEstatica" fitHeight="94.0" fitWidth="200.0" onMouseClicked="#handleImgEstaticaAction" pickOnBounds="true">
+                     <image>
+                        <Image url="@../img/logotipo.jpg" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
                </children>
             </VBox>
          </children>
