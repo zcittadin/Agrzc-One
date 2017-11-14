@@ -59,8 +59,6 @@ public class CadastroFormulaController implements Initializable {
 	@FXML
 	private TableColumn colQuantidade;
 	@FXML
-	private TableColumn colEditar;
-	@FXML
 	private TableColumn colExcluir;
 	@FXML
 	private Label lblTotal;
@@ -215,12 +213,6 @@ public class CadastroFormulaController implements Initializable {
 		new Thread(saveTask).start();
 	}
 
-	private void editQuantidade(ItemFormula item) {
-		txtQuantidade.setTextFormatter(null);
-		txtQuantidade.setText(item.getQuantidade().toString());
-		FormatterUtil.formatNumberField(txtQuantidade);
-	}
-
 	@FXML
 	private void enableFields() {
 		if (txtFormula.getText() == null || "".equals(txtFormula.getText().trim())) {
@@ -232,6 +224,12 @@ public class CadastroFormulaController implements Initializable {
 			txtQuantidade.setDisable(false);
 			btAdicionar.setDisable(false);
 		}
+	}
+
+	@FXML
+	private void cancel() {
+		Stage stage = (Stage) tblFormula.getScene().getWindow();
+		stage.close();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -266,7 +264,7 @@ public class CadastroFormulaController implements Initializable {
 				item.setNomeMateria(t.getNewValue());
 			}
 		});
-
+		
 		colQuantidade.setCellValueFactory(new PropertyValueFactory<ItemFormula, Double>("quantidade"));
 		colQuantidade.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 		colQuantidade.setOnEditCommit(new EventHandler<CellEditEvent<ItemFormula, Double>>() {
@@ -277,36 +275,6 @@ public class CadastroFormulaController implements Initializable {
 				calculaTotal();
 			}
 		});
-
-		Callback<TableColumn<ItemFormula, String>, TableCell<ItemFormula, String>> cellEditarFactory = new Callback<TableColumn<ItemFormula, String>, TableCell<ItemFormula, String>>() {
-			@Override
-			public TableCell call(final TableColumn<ItemFormula, String> param) {
-				final TableCell<ItemFormula, String> cell = new TableCell<ItemFormula, String>() {
-
-					final Button btn = new Button();
-
-					@Override
-					public void updateItem(String item, boolean empty) {
-						super.updateItem(item, empty);
-						if (empty) {
-							setGraphic(null);
-							setText(null);
-						} else {
-							btn.setOnAction(event -> {
-								ItemFormula it = getTableView().getItems().get(getIndex());
-								editQuantidade(it);
-							});
-							btn.setStyle("-fx-graphic: url('/icons/Modify.png');");
-							btn.setCursor(Cursor.HAND);
-							setGraphic(btn);
-							setText(null);
-						}
-					}
-				};
-				return cell;
-			}
-		};
-		colEditar.setCellFactory(cellEditarFactory);
 
 		Callback<TableColumn<ItemFormula, String>, TableCell<ItemFormula, String>> cellExcluirFactory = new Callback<TableColumn<ItemFormula, String>, TableCell<ItemFormula, String>>() {
 			@Override
@@ -344,7 +312,6 @@ public class CadastroFormulaController implements Initializable {
 
 		colMateria.setStyle("-fx-alignment: CENTER;");
 		colQuantidade.setStyle("-fx-alignment: CENTER;");
-		colEditar.setStyle("-fx-alignment: CENTER;");
 		colExcluir.setStyle("-fx-alignment: CENTER;");
 	}
 

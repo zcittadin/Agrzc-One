@@ -17,68 +17,101 @@
    <center>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="869.0" prefWidth="1579.0">
+            <Label text="Gerenciamento de matéria-prima e formulações">
+               <VBox.margin>
+                  <Insets left="50.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="976.0" prefWidth="1744.0">
                <children>
-                  <VBox prefHeight="638.0" prefWidth="419.0">
+                  <VBox prefHeight="943.0" prefWidth="592.0">
                      <children>
-                        <Label text="Matérias-prima disponíveis">
+                        <HBox prefHeight="120.0" prefWidth="592.0">
+                           <children>
+                              <Label text="Matérias-prima disponíveis">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="100.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Button mnemonicParsing="false" onAction="#addMateria" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova matéria-prima">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="175.0" top="106.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
                            <VBox.margin>
-                              <Insets left="80.0" top="70.0" />
+                              <Insets top="45.0" />
                            </VBox.margin>
-                           <font>
-                              <Font size="21.0" />
-                           </font>
-                        </Label>
-                        <TableView fx:id="tblMateria" prefHeight="640.0" prefWidth="419.0">
+                        </HBox>
+                        <TableView fx:id="tblMateria" prefHeight="775.0" prefWidth="592.0">
                           <columns>
-                            <TableColumn fx:id="colNomeMateria" prefWidth="258.0" resizable="false" text="Nome da matéria-prima" />
-                              <TableColumn fx:id="colEditarMateria" prefWidth="82.0" resizable="false" text="Editar" />
-                              <TableColumn fx:id="colExcluirMateria" prefWidth="78.0" resizable="false" text="Excluir" />
+                            <TableColumn fx:id="colNomeMateria" prefWidth="418.9999694824219" resizable="false" text="Nome da matéria-prima" />
+                              <TableColumn fx:id="colEditarMateria" prefWidth="85.0" resizable="false" text="Editar" />
+                              <TableColumn fx:id="colExcluirMateria" prefWidth="86.0" resizable="false" text="Excluir" />
                           </columns>
                            <VBox.margin>
-                              <Insets top="10.0" />
+                              <Insets />
                            </VBox.margin>
                         </TableView>
                         <ProgressIndicator fx:id="progMaterias" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false">
                            <VBox.margin>
-                              <Insets top="-390.0" />
+                              <Insets top="-440.0" />
                            </VBox.margin>
                         </ProgressIndicator>
-                        <Button mnemonicParsing="false" onAction="#addMateria" styleClass="btAdd" stylesheets="@../css/style.css" text="Cadastrar matéria-prima">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="115.0" top="270.0" />
-                           </VBox.margin>
-                        </Button>
                      </children>
                      <HBox.margin>
-                        <Insets left="80.0" />
+                        <Insets left="50.0" />
                      </HBox.margin>
                   </VBox>
                   <VBox prefHeight="869.0" prefWidth="966.0">
                      <children>
-                        <Label text="Formulações">
-                           <font>
-                              <Font size="21.0" />
-                           </font>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Formulações disponíveis">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="100.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Button mnemonicParsing="false" onAction="#addFormula" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova formulação">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="591.0" top="106.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
                            <VBox.margin>
-                              <Insets left="420.0" top="70.0" />
+                              <Insets top="45.0" />
                            </VBox.margin>
-                        </Label>
-                        <TableView fx:id="tblFormula" prefHeight="640.0" prefWidth="966.0">
+                        </HBox>
+                        <TableView fx:id="tblFormula" prefHeight="775.0" prefWidth="966.0">
                           <columns>
                             <TableColumn fx:id="colNomeFormula" prefWidth="571.0" resizable="false" text="Nome da formulação" />
                             <TableColumn fx:id="colPesoFormula" prefWidth="198.0" resizable="false" text="Peso total (Kg)" />
                               <TableColumn fx:id="colEditarFormula" prefWidth="101.0" resizable="false" text="Editar" />
-                              <TableColumn fx:id="colExcluirFormula" prefWidth="95.0" resizable="false" text="Excluir" />
+                              <TableColumn fx:id="colExcluirFormula" prefWidth="94.0" resizable="false" text="Excluir" />
                           </columns>
                            <VBox.margin>
-                              <Insets top="10.0" />
+                              <Insets />
                            </VBox.margin>
                         </TableView>
                         <ProgressIndicator fx:id="progFormulas" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false">
@@ -86,23 +119,15 @@
                               <Insets top="-390.0" />
                            </VBox.margin>
                         </ProgressIndicator>
-                        <Button mnemonicParsing="false" onAction="#addFormula" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova formulação">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="420.0" top="270.0" />
-                           </VBox.margin>
-                        </Button>
                      </children>
                      <HBox.margin>
-                        <Insets left="200.0" />
+                        <Insets left="70.0" />
                      </HBox.margin>
                   </VBox>
                </children>
+               <VBox.margin>
+                  <Insets top="-90.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>

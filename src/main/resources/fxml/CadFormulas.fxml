@@ -135,12 +135,11 @@
                      <children>
                         <VBox prefHeight="508.0" prefWidth="763.0">
                            <children>
-                              <TableView fx:id="tblFormula" prefHeight="409.0" prefWidth="701.0">
+                              <TableView fx:id="tblFormula" prefHeight="448.0" prefWidth="701.0">
                                 <columns>
-                                  <TableColumn fx:id="colMateria" prefWidth="338.0" text="Matéria-prima" />
-                                  <TableColumn fx:id="colQuantidade" prefWidth="140.0" text="Quantidade (Kg)" />
-                                    <TableColumn fx:id="colEditar" prefWidth="113.0" text="Editar" />
-                                    <TableColumn fx:id="colExcluir" prefWidth="108.0" text="Excluir" />
+                                  <TableColumn fx:id="colMateria" prefWidth="466.0" text="Matéria-prima" />
+                                  <TableColumn fx:id="colQuantidade" prefWidth="135.0" text="Quantidade (Kg)" />
+                                    <TableColumn fx:id="colExcluir" prefWidth="98.0" text="Excluir" />
                                 </columns>
                                  <VBox.margin>
                                     <Insets left="30.0" right="32.0" />
@@ -151,17 +150,35 @@
                                     <Insets top="-270.0" />
                                  </VBox.margin>
                               </ProgressIndicator>
-                              <Button mnemonicParsing="false" onAction="#saveFormula" styleClass="btSave" stylesheets="@../css/style.css" text="Salvar">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
+                              <HBox prefHeight="82.0" prefWidth="763.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#saveFormula" styleClass="btSave" stylesheets="@../css/style.css" text="Salvar">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <HBox.margin>
+                                          <Insets left="300.0" top="30.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancel" styleClass="btCancel" stylesheets="@../css/style.css" text="Cancelar">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="30.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
                                  <VBox.margin>
-                                    <Insets left="340.0" top="165.0" />
+                                    <Insets top="150.0" />
                                  </VBox.margin>
-                              </Button>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>
