@@ -64,6 +64,10 @@ public class CadastrosController implements Initializable, ControlledScreen {
 	private TableColumn colExcluirFormula;
 	@FXML
 	private ProgressIndicator progFormulas;
+	@FXML
+	private Button btAddMateria;
+	@FXML
+	private Button btAddFormula;
 
 	private static ObservableList<Materia> materias = FXCollections.observableArrayList();
 	private static ObservableList<Formula> formulas = FXCollections.observableArrayList();
@@ -91,6 +95,8 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			protected Void call() throws Exception {
 				progMaterias.setVisible(true);
 				tblMateria.setDisable(true);
+				btAddMateria.setDisable(true);
+				btAddFormula.setDisable(true);
 				materias = FXCollections.observableList((List<Materia>) materiaDAO.findMaterias());
 				return null;
 			}
@@ -102,6 +108,8 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			public void handle(WorkerStateEvent arg0) {
 				progMaterias.setVisible(false);
 				tblMateria.setDisable(false);
+				btAddMateria.setDisable(false);
+				btAddFormula.setDisable(false);
 				tblMateria.setItems(materias);
 			}
 		});
@@ -110,6 +118,8 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			public void handle(WorkerStateEvent arg0) {
 				progMaterias.setVisible(false);
 				tblMateria.setDisable(false);
+				btAddMateria.setDisable(false);
+				btAddFormula.setDisable(false);
 				AlertUtil.makeError("Erro", "Ocorreu uma falha ao consultar as matérias-prima existentes.");
 			}
 		});

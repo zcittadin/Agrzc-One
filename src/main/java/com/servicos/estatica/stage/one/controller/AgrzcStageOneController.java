@@ -4,16 +4,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class AgrzcStageOneController implements Initializable {
 
@@ -34,6 +38,10 @@ public class AgrzcStageOneController implements Initializable {
 	private ImageView imgCliente;
 	@FXML
 	private ImageView imgEstatica;
+	@FXML
+	private Label lblInfo;
+	
+	private static FadeTransition labelTransition;
 
 	private static String TOOLTIP_CSS = "-fx-font-size: 8pt; -fx-font-weight: bold; -fx-font-style: normal; ";
 	private Tooltip tooltipCliente = new Tooltip("Informações sobre o cliente");
@@ -57,6 +65,8 @@ public class AgrzcStageOneController implements Initializable {
 		tooltipEstatica.setStyle(TOOLTIP_CSS);
 		Tooltip.install(imgCliente, tooltipCliente);
 		Tooltip.install(imgEstatica, tooltipEstatica);
+		configAnimations();
+		labelTransition.play();
 	}
 
 	@FXML
@@ -110,6 +120,14 @@ public class AgrzcStageOneController implements Initializable {
 		stage.initOwner(imgCliente.getScene().getWindow());
 		stage.setResizable(Boolean.FALSE);
 		stage.showAndWait();
+	}
+	
+	private void configAnimations() {
+		labelTransition = new FadeTransition(Duration.millis(900), lblInfo);
+		labelTransition.setFromValue(0.0);
+		labelTransition.setToValue(1.0);
+		labelTransition.setCycleCount(Timeline.INDEFINITE);
+		labelTransition.setAutoReverse(Boolean.TRUE);
 	}
 
 }

@@ -39,7 +39,7 @@
                                     <Insets top="100.0" />
                                  </HBox.margin>
                               </Label>
-                              <Button mnemonicParsing="false" onAction="#addMateria" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova matéria-prima">
+                              <Button fx:id="btAddMateria" mnemonicParsing="false" onAction="#addMateria" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova matéria-prima">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -67,7 +67,7 @@
                         </TableView>
                         <ProgressIndicator fx:id="progMaterias" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false">
                            <VBox.margin>
-                              <Insets top="-440.0" />
+                              <Insets top="-455.0" />
                            </VBox.margin>
                         </ProgressIndicator>
                      </children>
@@ -87,7 +87,7 @@
                                     <Insets top="100.0" />
                                  </HBox.margin>
                               </Label>
-                              <Button mnemonicParsing="false" onAction="#addFormula" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova formulação">
+                              <Button fx:id="btAddFormula" mnemonicParsing="false" onAction="#addFormula" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova formulação">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -116,7 +116,7 @@
                         </TableView>
                         <ProgressIndicator fx:id="progFormulas" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false">
                            <VBox.margin>
-                              <Insets top="-390.0" />
+                              <Insets top="-455.0" />
                            </VBox.margin>
                         </ProgressIndicator>
                      </children>
