@@ -13,6 +13,7 @@ import com.servicos.estatica.stage.one.dao.QuantidadeDAO;
 import com.servicos.estatica.stage.one.model.Formula;
 import com.servicos.estatica.stage.one.model.Materia;
 import com.servicos.estatica.stage.one.model.Quantidade;
+import com.servicos.estatica.stage.one.shared.CadastroProperty;
 import com.servicos.estatica.stage.one.util.AlertUtil;
 import com.servicos.estatica.stage.one.util.Toast;
 
@@ -453,6 +454,8 @@ public class CadastrosController implements Initializable, ControlledScreen {
 													"Formulação removida com sucesso.");
 											formulas.remove(f);
 											tblFormula.refresh();
+											CadastroProperty.cadastroFormulaProperty().set((!CadastroProperty.getFormulaChanged()));
+											CadastroProperty.setFormulaChanged(!CadastroProperty.getFormulaChanged());
 										}
 									});
 									exclusionTask.setOnFailed(new EventHandler<WorkerStateEvent>() {

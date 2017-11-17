@@ -36,22 +36,22 @@ public class DosagemController implements Initializable, ControlledScreen {
 	@Override
 	public void setScreenParent(ScreensController screenPage) {
 		myController = screenPage;
-
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		rectForm.setFill(Color.TRANSPARENT);
+		populateComboFormulas();
+	}
+
+	public void populateComboFormulas() {
 		formulas = FXCollections.observableList((List<Formula>) formulaDAO.findFormulas());
-
 		comboFormulas.setItems(formulas);
-
 		comboFormulas.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Formula>() {
 			public void changed(ObservableValue<? extends Formula> observable, Formula oldValue, Formula newValue) {
 				selectedFormula = newValue;
 			}
 		});
-
 	}
 
 }
