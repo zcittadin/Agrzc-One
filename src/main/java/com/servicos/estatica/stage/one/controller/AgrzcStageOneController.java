@@ -57,7 +57,6 @@ public class AgrzcStageOneController implements Initializable {
 		mainContainer.loadScreen(screenMoagemID, screenMoagemFile);
 		mainContainer.loadScreen(screenMistura2ID, screenMistura2File);
 		mainContainer.loadScreen(screenCadastrosID, screenCadastrosFile);
-
 		mainContainer.setScreen(screenCadastrosID);
 		centralPane.getChildren().addAll(mainContainer);
 
