@@ -58,12 +58,12 @@
                               <Insets left="19.0" top="-90.0" />
                            </StackPane.margin>
                         </Line>
-                        <Label text="Peso atual:">
+                        <Label text="Peso atual (Kg):">
                            <font>
                               <Font size="16.0" />
                            </font>
                            <StackPane.margin>
-                              <Insets left="-290.0" top="-40.0" />
+                              <Insets left="-270.0" top="-40.0" />
                            </StackPane.margin>
                         </Label>
                         <Label text="0000.00" textFill="#6000fc">
