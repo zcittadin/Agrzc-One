@@ -9,8 +9,11 @@ import java.util.ResourceBundle;
 import com.servicos.estatica.stage.one.app.ControlledScreen;
 import com.servicos.estatica.stage.one.dao.FormulaDAO;
 import com.servicos.estatica.stage.one.dao.MateriaDAO;
+import com.servicos.estatica.stage.one.dao.QuantidadeDAO;
 import com.servicos.estatica.stage.one.model.Formula;
 import com.servicos.estatica.stage.one.model.Materia;
+import com.servicos.estatica.stage.one.model.Quantidade;
+import com.servicos.estatica.stage.one.shared.CadastroProperty;
 import com.servicos.estatica.stage.one.util.AlertUtil;
 import com.servicos.estatica.stage.one.util.Toast;
 
@@ -72,8 +75,11 @@ public class CadastrosController implements Initializable, ControlledScreen {
 	private static ObservableList<Materia> materias = FXCollections.observableArrayList();
 	private static ObservableList<Formula> formulas = FXCollections.observableArrayList();
 
+	private static Double pesoToRecalc;
+
 	private static MateriaDAO materiaDAO = new MateriaDAO();
 	private static FormulaDAO formulaDAO = new FormulaDAO();
+	private static QuantidadeDAO quantidadeDAO = new QuantidadeDAO();
 
 	ScreensController myController;
 
@@ -144,6 +150,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 				progFormulas.setVisible(false);
 				tblFormula.setDisable(false);
 				tblFormula.setItems(formulas);
+				tblFormula.refresh();
 			}
 		});
 		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
@@ -313,7 +320,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 						} else {
 							btn.setOnAction(event -> {
 								Optional<ButtonType> result = AlertUtil.makeConfirm("Confirmar exclusão",
-										"Tem certeza que deseja excluir esta matéria-prima?.");
+										"Podem haver formulações que estejam utilizando esta matéria-prima. Tem certeza que deseja excluir?.");
 								if (result.get() == ButtonType.OK) {
 									Materia mat = getTableView().getItems().get(getIndex());
 									Task<Void> exclusionTask = new Task<Void>() {
@@ -332,6 +339,8 @@ public class CadastrosController implements Initializable, ControlledScreen {
 													"Matéria-prima removida com sucesso.");
 											materias.remove(mat);
 											tblMateria.refresh();
+											calculaTotais();
+											findFormulas();
 										}
 									});
 									exclusionTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
@@ -445,6 +454,8 @@ public class CadastrosController implements Initializable, ControlledScreen {
 													"Formulação removida com sucesso.");
 											formulas.remove(f);
 											tblFormula.refresh();
+											CadastroProperty.cadastroFormulaProperty().set((!CadastroProperty.getFormulaChanged()));
+											CadastroProperty.setFormulaChanged(!CadastroProperty.getFormulaChanged());
 										}
 									});
 									exclusionTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
@@ -475,6 +486,19 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		colPesoFormula.setStyle("-fx-alignment: CENTER;");
 		colEditarFormula.setStyle("-fx-alignment: CENTER;");
 		colExcluirFormula.setStyle("-fx-alignment: CENTER;");
+	}
+
+	private void calculaTotais() {
+		List<Formula> formulas = formulaDAO.findFormulas();
+		formulas.forEach(frm -> {
+			List<Quantidade> quantidades = quantidadeDAO.findByFormula(frm);
+			pesoToRecalc = new Double(0);
+			quantidades.forEach(qtd -> {
+				pesoToRecalc += qtd.getPeso();
+			});
+			frm.setPesoTotal(pesoToRecalc);
+			formulaDAO.updateFormula(frm);
+		});
 	}
 
 }

@@ -75,8 +75,7 @@ public class Formula implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Formula [id=" + id + ", nomeFormula=" + nomeFormula + ", pesoTotal=" + pesoTotal + ", quantidades="
-				+ quantidades + "]";
+		return nomeFormula;
 	}
 
 	@Override

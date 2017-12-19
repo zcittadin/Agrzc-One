@@ -37,7 +37,7 @@ public class QuantidadeDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
-	
+
 	public Quantidade findById(Long id) {
 		Session session = HibernateUtil.openSession();
 		session.beginTransaction();
@@ -55,6 +55,19 @@ public class QuantidadeDAO {
 				.createQuery("SELECT q FROM Quantidade q where formulaQuantidade = :idFormula ORDER BY id DESC");
 		query.setParameter("idFormula", formula);
 		query.setMaxResults(30);
+		List<Quantidade> list = new ArrayList<>();
+		list = query.getResultList();
+		session.close();
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Quantidade> findByMateria(Materia materia) {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		Query query = session
+				.createQuery("SELECT q FROM Quantidade q where materiaQuantidade = :idMateria ORDER BY id DESC");
+		query.setParameter("idMateria", materia);
 		List<Quantidade> list = new ArrayList<>();
 		list = query.getResultList();
 		session.close();

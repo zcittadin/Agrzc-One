@@ -12,6 +12,7 @@ import com.servicos.estatica.stage.one.model.Formula;
 import com.servicos.estatica.stage.one.model.ItemFormula;
 import com.servicos.estatica.stage.one.model.Materia;
 import com.servicos.estatica.stage.one.model.Quantidade;
+import com.servicos.estatica.stage.one.shared.CadastroProperty;
 import com.servicos.estatica.stage.one.util.AlertUtil;
 import com.servicos.estatica.stage.one.util.FormatterUtil;
 import com.servicos.estatica.stage.one.util.Toast;
@@ -82,7 +83,7 @@ public class CadastroFormulaController implements Initializable {
 	private static String DOT = ".";
 
 	private Double total = new Double(0);
-
+	
 	private Formula formula;
 
 	private Scene parentScene;
@@ -194,6 +195,8 @@ public class CadastroFormulaController implements Initializable {
 				itens.clear();
 				itensCopy.clear();
 				itensToRemove.clear();
+				CadastroProperty.cadastroFormulaProperty().set((!CadastroProperty.getFormulaChanged()));
+				CadastroProperty.setFormulaChanged(!CadastroProperty.getFormulaChanged());
 				Toast.makeToast((Stage) parentScene.getWindow(), "Formulação salva com sucesso.");
 				Stage stage = (Stage) tblFormula.getScene().getWindow();
 				stage.close();
@@ -264,7 +267,7 @@ public class CadastroFormulaController implements Initializable {
 				item.setNomeMateria(t.getNewValue());
 			}
 		});
-		
+
 		colQuantidade.setCellValueFactory(new PropertyValueFactory<ItemFormula, Double>("quantidade"));
 		colQuantidade.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 		colQuantidade.setOnEditCommit(new EventHandler<CellEditEvent<ItemFormula, Double>>() {

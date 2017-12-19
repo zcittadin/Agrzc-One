@@ -2,15 +2,24 @@ package com.servicos.estatica.stage.one.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import com.servicos.estatica.stage.one.shared.CadastroProperty;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
@@ -31,6 +40,14 @@ public class AgrzcStageOneController implements Initializable {
 	public static String screenMistura2File = "/fxml/Mistura2.fxml";
 	public static String screenCadastrosID = "CADASTROS";
 	public static String screenCadastrosFile = "/fxml/Cadastros.fxml";
+	public static String screenCadastroFormulasID = "CADASTROS_FORMULAS";
+	public static String screenCadastroFormulasFile = "/fxml/CadFormulas.fxml";
+
+	private CadastrosController cadastrosController = new CadastrosController();
+	private DosagemController dosagemController = new DosagemController();
+	private Mistura1Controller mistura1Controller = new Mistura1Controller();
+	private Mistura2Controller mistura2Controller = new Mistura2Controller();
+	private MoagemController moagemController = new MoagemController();
 
 	@FXML
 	private Pane centralPane;
@@ -40,7 +57,7 @@ public class AgrzcStageOneController implements Initializable {
 	private ImageView imgEstatica;
 	@FXML
 	private Label lblInfo;
-	
+
 	private static FadeTransition labelTransition;
 
 	private static String TOOLTIP_CSS = "-fx-font-size: 8pt; -fx-font-weight: bold; -fx-font-style: normal; ";
@@ -52,19 +69,19 @@ public class AgrzcStageOneController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		mainContainer.loadScreen(screenDosagemID, screenDosagemFile);
-		mainContainer.loadScreen(screenMistura1ID, screenMistura1File);
-		mainContainer.loadScreen(screenMoagemID, screenMoagemFile);
-		mainContainer.loadScreen(screenMistura2ID, screenMistura2File);
-		mainContainer.loadScreen(screenCadastrosID, screenCadastrosFile);
-
-		mainContainer.setScreen(screenCadastrosID);
+		mainContainer.loadScreenAndController(screenDosagemID, screenDosagemFile, dosagemController);
+		mainContainer.loadScreenAndController(screenMistura1ID, screenMistura1File, mistura1Controller);
+		mainContainer.loadScreenAndController(screenMoagemID, screenMoagemFile, moagemController);
+		mainContainer.loadScreenAndController(screenMistura2ID, screenMistura2File, mistura2Controller);
+		mainContainer.loadScreenAndController(screenCadastrosID, screenCadastrosFile, cadastrosController);
+		mainContainer.setScreen(screenDosagemID);
 		centralPane.getChildren().addAll(mainContainer);
 
 		tooltipCliente.setStyle(TOOLTIP_CSS);
 		tooltipEstatica.setStyle(TOOLTIP_CSS);
 		Tooltip.install(imgCliente, tooltipCliente);
 		Tooltip.install(imgEstatica, tooltipEstatica);
+		initListeners();
 		configAnimations();
 		labelTransition.play();
 	}
@@ -92,6 +109,17 @@ public class AgrzcStageOneController implements Initializable {
 	@FXML
 	private void openCadastros() {
 		mainContainer.setScreen(screenCadastrosID);
+	}
+	
+	@FXML
+	private void exit() {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmar encerramento");
+		alert.setHeaderText("Deseja realmente sair do sistema?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			Platform.exit();
+		}
 	}
 
 	@FXML
@@ -121,7 +149,17 @@ public class AgrzcStageOneController implements Initializable {
 		stage.setResizable(Boolean.FALSE);
 		stage.showAndWait();
 	}
-	
+
+	private void initListeners() {
+		CadastroProperty.setFormulaChanged(false);
+		CadastroProperty.cadastroFormulaProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				dosagemController.populateComboFormulas();
+			}
+		});
+	}
+
 	private void configAnimations() {
 		labelTransition = new FadeTransition(Duration.millis(900), lblInfo);
 		labelTransition.setFromValue(0.0);

@@ -27,6 +27,14 @@
   -fx-graphic: url('../icons/Save.png');
 }
 
+.btUseFormula {
+  -fx-graphic: url('../icons/basket_put.png');
+}
+
+.btExit {
+  -fx-graphic: url('../icons/Exit.png');
+}
+
 .combo-font {
 	-fx-font: 14px "Regular";
 }

@@ -66,6 +66,17 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Button layoutX="10.0" layoutY="349.0" mnemonicParsing="false" onAction="#exit" prefHeight="54.0" prefWidth="180.0" styleClass="btExit" stylesheets="@../css/style.css" text="Sair">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <VBox.margin>
+                  <Insets top="470.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </left>
