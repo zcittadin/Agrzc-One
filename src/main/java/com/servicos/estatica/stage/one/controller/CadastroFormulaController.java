@@ -83,7 +83,7 @@ public class CadastroFormulaController implements Initializable {
 	private static String DOT = ".";
 
 	private Double total = new Double(0);
-	
+
 	private Formula formula;
 
 	private Scene parentScene;

@@ -1,97 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import eu.hansolo.medusa.Clock?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1365.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.AgrzcStageOneController">
-   <left>
-      <VBox prefHeight="578.0" prefWidth="180.0" BorderPane.alignment="CENTER">
-         <children>
-            <Clock dateVisible="true" lcdDesign="ORANGE" prefHeight="83.0" prefWidth="180.0" running="true" secondsVisible="true" skinType="LCD">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin></Clock>
-            <Button mnemonicParsing="false" onAction="#openDosagem" prefHeight="54.0" prefWidth="180.0" text="Dosagem">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
-            <Button layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onAction="#openMistura1" prefHeight="54.0" prefWidth="180.0" text="Mistura 1">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="10.0" layoutY="172.0" mnemonicParsing="false" onAction="#openMoagem" prefHeight="54.0" prefWidth="180.0" text="Moagem">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="10.0" layoutY="226.0" mnemonicParsing="false" onAction="#openMistura2" prefHeight="54.0" prefWidth="180.0" text="Mistura 2">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="10.0" layoutY="295.0" mnemonicParsing="false" onAction="#openCadastros" prefHeight="54.0" prefWidth="180.0" text="Formulações">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="10.0" layoutY="349.0" mnemonicParsing="false" onAction="#exit" prefHeight="54.0" prefWidth="180.0" styleClass="btExit" stylesheets="@../css/style.css" text="Sair">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <VBox.margin>
-                  <Insets top="470.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
-   </left>
-   <top>
-      <GridPane prefHeight="102.0" prefWidth="1365.0" styleClass="mainGradient" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints maxWidth="950.0" minWidth="10.0" prefWidth="1012.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.0" minWidth="10.0" prefWidth="98.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.hgrow="NEVER">
+
+<AnchorPane prefHeight="950.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.AgrzcStageOneController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1028.0" prefWidth="1920.0" styleClass="mainGradient" stylesheets="@../css/style.css">
+         <top>
+            <AnchorPane prefHeight="104.0" prefWidth="1920.0" styleClass="mainGradient" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fx:id="imgCliente" fitHeight="101.0" fitWidth="200.0" onMouseClicked="#handleImgClienteAction" pickOnBounds="true">
                      <image>
@@ -101,11 +26,16 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="labelGradient" stylesheets="@../css/style.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
-               <children>
-                  <Label fx:id="lblInfo" text="Sistema em espera" textFill="#2fff00">
+                  <ImageView fx:id="imgEstatica" fitHeight="96.0" fitWidth="196.0" layoutX="1716.0" layoutY="4.0" onMouseClicked="#handleImgEstaticaAction" pickOnBounds="true">
+                     <image>
+                        <Image url="@../img/logotipo.jpg" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <Label layoutX="438.0" layoutY="7.0" prefHeight="88.0" prefWidth="1075.0" styleClass="labelGradient" stylesheets="@../css/style.css" />
+                  <Label fx:id="lblInfo" layoutX="705.0" layoutY="16.0" text="Sistema em espera" textFill="#2fff00">
                      <font>
                         <Font name="Dot Matrix" size="62.0" />
                      </font>
@@ -114,33 +44,66 @@
                      </effect>
                   </Label>
                </children>
-            </VBox>
-            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.hgrow="NEVER">
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane prefHeight="950.0" prefWidth="220.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="imgEstatica" fitHeight="94.0" fitWidth="200.0" onMouseClicked="#handleImgEstaticaAction" pickOnBounds="true">
-                     <image>
-                        <Image url="@../img/logotipo.jpg" />
-                     </image>
+                  <Clock dateVisible="true" layoutX="10.0" layoutY="14.0" lcdDesign="ORANGE" prefHeight="83.0" prefWidth="180.0" running="true" secondsVisible="true" skinType="LCD" />
+                  <Button layoutY="171.0" mnemonicParsing="false" onAction="#openDosagem" prefHeight="54.0" prefWidth="214.0" text="Dosagem">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </ImageView>
+                  </Button>
+                  <Button layoutY="225.0" mnemonicParsing="false" onAction="#openMistura1" prefHeight="54.0" prefWidth="214.0" text="Mistura 1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutY="333.0" mnemonicParsing="false" onAction="#openMoagem" prefHeight="54.0" prefWidth="214.0" text="Moagem">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutY="279.0" mnemonicParsing="false" onAction="#openMistura2" prefHeight="54.0" prefWidth="214.0" text="Mistura 2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutY="117.0" mnemonicParsing="false" onAction="#openCadastros" prefHeight="54.0" prefWidth="214.0" text="Formulações">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutY="856.0" mnemonicParsing="false" onAction="#exit" prefHeight="54.0" prefWidth="214.0" styleClass="btExit" stylesheets="@../css/style.css" text="Sair">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children>
-            </VBox>
-         </children>
-      </GridPane>
-   </top>
-   <center>
-      <GridPane fx:id="centralPane" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Separator orientation="VERTICAL" prefHeight="200.0" />
-         </children>
-      </GridPane>
-   </center>
-</BorderPane>
+            </AnchorPane>
+         </left>
+         <center>
+            <AnchorPane fx:id="centralPane" prefHeight="950.0" prefWidth="1700.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

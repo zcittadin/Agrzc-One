@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="151.0" minWidth="600.0" prefHeight="151.0" prefWidth="600.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.SilosMateriaController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Informe um nome para a matéria-prima:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btOk" layoutX="201.0" layoutY="107.0" mnemonicParsing="false" onAction="#saveSilo" prefHeight="30.0" prefWidth="99.0" styleClass="btOk" stylesheets="@../css/style.css" text="Ok">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btCancel" layoutX="310.0" layoutY="107.0" mnemonicParsing="false" onAction="#cancel" prefHeight="30.0" prefWidth="99.0" styleClass="btCancel" stylesheets="@../css/style.css" text="Cancela">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ComboBox fx:id="comboMateria" layoutX="14.0" layoutY="58.0" prefHeight="30.0" prefWidth="570.0" promptText="Selecione uma matéria-prima" styleClass="combo-font" stylesheets="@../css/style.css" />
+      <CheckBox fx:id="chkVazio" layoutX="437.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#toggleVazio" text="Marcar como vazio">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </CheckBox>
+   </children>
+</AnchorPane>

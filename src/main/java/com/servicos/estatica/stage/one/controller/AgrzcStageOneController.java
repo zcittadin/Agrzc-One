@@ -110,7 +110,7 @@ public class AgrzcStageOneController implements Initializable {
 	private void openCadastros() {
 		mainContainer.setScreen(screenCadastrosID);
 	}
-	
+
 	@FXML
 	private void exit() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);

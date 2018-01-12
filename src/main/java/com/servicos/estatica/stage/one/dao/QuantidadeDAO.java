@@ -44,6 +44,7 @@ public class QuantidadeDAO {
 		Query query = session.createQuery("SELECT q FROM Quantidade q WHERE id = :id");
 		query.setParameter("id", id);
 		Quantidade q = (Quantidade) query.getResultList().get(0);
+		session.close();
 		return q;
 	}
 

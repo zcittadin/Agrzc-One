@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -8,131 +7,60 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane cacheShape="false" minHeight="950.0" minWidth="1750.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Gerenciamento de matéria-prima e formulações">
-               <VBox.margin>
-                  <Insets left="50.0" top="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="35.0" />
-               </font>
-            </Label>
-            <HBox prefHeight="976.0" prefWidth="1744.0">
-               <children>
-                  <VBox prefHeight="943.0" prefWidth="592.0">
-                     <children>
-                        <HBox prefHeight="120.0" prefWidth="592.0">
-                           <children>
-                              <Label text="Matérias-prima disponíveis">
-                                 <font>
-                                    <Font size="21.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets top="100.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Button fx:id="btAddMateria" mnemonicParsing="false" onAction="#addMateria" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova matéria-prima">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="175.0" top="106.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="45.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <TableView fx:id="tblMateria" prefHeight="775.0" prefWidth="592.0">
-                          <columns>
-                            <TableColumn fx:id="colNomeMateria" prefWidth="418.9999694824219" resizable="false" text="Nome da matéria-prima" />
-                              <TableColumn fx:id="colEditarMateria" prefWidth="85.0" resizable="false" text="Editar" />
-                              <TableColumn fx:id="colExcluirMateria" prefWidth="86.0" resizable="false" text="Excluir" />
-                          </columns>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </TableView>
-                        <ProgressIndicator fx:id="progMaterias" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false">
-                           <VBox.margin>
-                              <Insets top="-455.0" />
-                           </VBox.margin>
-                        </ProgressIndicator>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="50.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="869.0" prefWidth="966.0">
-                     <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label text="Formulações disponíveis">
-                                 <font>
-                                    <Font size="21.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets top="100.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Button fx:id="btAddFormula" mnemonicParsing="false" onAction="#addFormula" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova formulação">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="591.0" top="106.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="45.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <TableView fx:id="tblFormula" prefHeight="775.0" prefWidth="966.0">
-                          <columns>
-                            <TableColumn fx:id="colNomeFormula" prefWidth="571.0" resizable="false" text="Nome da formulação" />
-                            <TableColumn fx:id="colPesoFormula" prefWidth="198.0" resizable="false" text="Peso total (Kg)" />
-                              <TableColumn fx:id="colEditarFormula" prefWidth="101.0" resizable="false" text="Editar" />
-                              <TableColumn fx:id="colExcluirFormula" prefWidth="94.0" resizable="false" text="Excluir" />
-                          </columns>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </TableView>
-                        <ProgressIndicator fx:id="progFormulas" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false">
-                           <VBox.margin>
-                              <Insets top="-455.0" />
-                           </VBox.margin>
-                        </ProgressIndicator>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="70.0" />
-                     </HBox.margin>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets top="-90.0" />
-               </VBox.margin>
-            </HBox>
-         </children>
-      </VBox>
-   </center>
-   <left>
-      <Separator orientation="VERTICAL" prefHeight="200.0" BorderPane.alignment="CENTER" />
-   </left>
-</BorderPane>
+
+<AnchorPane prefHeight="920.0" prefWidth="1712.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Separator orientation="VERTICAL" prefHeight="920.0" />
+      <Label layoutX="10.0" layoutY="10.0" text="Gerenciamento de matéria-prima e formulações">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="53.0" layoutY="93.0" text="Matérias-prima disponíveis">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Button fx:id="btAddMateria" layoutX="480.0" layoutY="93.0" mnemonicParsing="false" onAction="#addMateria" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova matéria-prima">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <ProgressIndicator fx:id="progMaterias" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false" />
+      <TableView fx:id="tblMateria" layoutX="53.0" layoutY="123.0" prefHeight="775.0" prefWidth="592.0">
+        <columns>
+          <TableColumn fx:id="colNomeMateria" prefWidth="418.9999694824219" resizable="false" text="Nome da matéria-prima" />
+            <TableColumn fx:id="colEditarMateria" prefWidth="85.0" resizable="false" text="Editar" />
+            <TableColumn fx:id="colExcluirMateria" prefWidth="86.0" resizable="false" text="Excluir" />
+        </columns>
+      </TableView>
+      <Label layoutX="692.0" layoutY="93.0" text="Formulações disponíveis">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Button fx:id="btAddFormula" layoutX="1511.0" layoutY="93.0" mnemonicParsing="false" onAction="#addFormula" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova formulação">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <TableView fx:id="tblFormula" layoutX="692.0" layoutY="123.0" prefHeight="775.0" prefWidth="966.0">
+        <columns>
+          <TableColumn fx:id="colNomeFormula" prefWidth="571.0" resizable="false" text="Nome da formulação" />
+          <TableColumn fx:id="colPesoFormula" prefWidth="198.0" resizable="false" text="Peso total (Kg)" />
+            <TableColumn fx:id="colEditarFormula" prefWidth="101.0" resizable="false" text="Editar" />
+            <TableColumn fx:id="colExcluirFormula" prefWidth="94.0" resizable="false" text="Excluir" />
+        </columns>
+      </TableView>
+      <ProgressIndicator fx:id="progFormulas" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false" />
+   </children>
+</AnchorPane>

@@ -9,6 +9,7 @@ import org.hibernate.service.ServiceRegistry;
 import com.servicos.estatica.stage.one.model.Formula;
 import com.servicos.estatica.stage.one.model.Materia;
 import com.servicos.estatica.stage.one.model.Quantidade;
+import com.servicos.estatica.stage.one.model.Silo;
 
 public class HibernateUtil {
 
@@ -35,6 +36,7 @@ public class HibernateUtil {
 		configuration.addAnnotatedClass(Materia.class);
 		configuration.addAnnotatedClass(Formula.class);
 		configuration.addAnnotatedClass(Quantidade.class);
+		configuration.addAnnotatedClass(Silo.class);
 		configuration.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
 		configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost/agrozacca?useTimezone=true&serverTimezone=UTC");
 		configuration.setProperty("hibernate.connection.username", "root");
