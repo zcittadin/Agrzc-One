@@ -55,6 +55,7 @@ public class MateriaDAO {
 		Query query = session.createQuery("SELECT m FROM Materia m WHERE id = :id");
 		query.setParameter("id", id);
 		Materia m = (Materia) query.getResultList().get(0);
+		session.close();
 		return m;
 	}
 
@@ -64,6 +65,7 @@ public class MateriaDAO {
 		Query query = session.createQuery("SELECT m FROM Materia m WHERE nomeMateria LIKE :name");
 		query.setParameter("name", name);
 		Materia m = (Materia) query.getResultList().get(0);
+		session.close();
 		return m;
 	}
 }

@@ -37,6 +37,7 @@ public class SiloDAO {
 		Query query = session.createQuery("SELECT s FROM Silo s WHERE silo LIKE :silo");
 		query.setParameter("silo", silo);
 		Silo s = (Silo) query.getResultList().get(0);
+		session.close();
 		return s;
 	}
 

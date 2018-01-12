@@ -112,10 +112,10 @@ public class DosagemController implements Initializable, ControlledScreen {
 			((SilosMateriaController) fxmlloader.getController()).setContext(silo);
 			stage.setTitle("Gerenciar matéria-prima");
 			stage.initModality(Modality.APPLICATION_MODAL);
-			// stage.initOwner(tblMateria.getScene().getWindow());
+			stage.initOwner(comboFormulas.getScene().getWindow());
 			stage.setResizable(Boolean.FALSE);
 			stage.showAndWait();
-			// findMaterias();
+			verifySilosStatus();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -143,7 +143,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 		searchTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				silos.forEach(s -> {
+				silos.stream().forEach(s -> {
 					switch (s.getSilo()) {
 					case "Silo 1":
 						if (s.getMateria() != null) {

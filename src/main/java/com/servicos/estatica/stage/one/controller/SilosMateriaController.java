@@ -8,7 +8,6 @@ import com.servicos.estatica.stage.one.dao.MateriaDAO;
 import com.servicos.estatica.stage.one.dao.SiloDAO;
 import com.servicos.estatica.stage.one.model.Materia;
 import com.servicos.estatica.stage.one.model.Silo;
-import com.servicos.estatica.stage.one.shared.SiloMateriasProperty;
 import com.servicos.estatica.stage.one.util.AlertUtil;
 
 import javafx.beans.value.ChangeListener;
@@ -20,6 +19,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
@@ -27,6 +27,8 @@ public class SilosMateriaController implements Initializable {
 
 	@FXML
 	ComboBox<Materia> comboMateria;
+	@FXML
+	CheckBox chkVazio;
 
 	private static ObservableList<Materia> materias = FXCollections.observableArrayList();
 
@@ -43,8 +45,13 @@ public class SilosMateriaController implements Initializable {
 
 	public void setContext(Silo silo) {
 		this.silo = silo;
-		if (silo.getMateria() != null)
+		if (silo.getMateria() != null) {
 			comboMateria.setValue(silo.getMateria());
+			chkVazio.setSelected(false);
+		} else {
+			comboMateria.setDisable(true);
+			chkVazio.setSelected(true);
+		}
 	}
 
 	public void populateComboMaterias() {
@@ -58,6 +65,17 @@ public class SilosMateriaController implements Initializable {
 	}
 
 	@FXML
+	private void toggleVazio() {
+		if (chkVazio.isSelected()) {
+			comboMateria.setDisable(true);
+			selectedMateria = null;
+		} else {
+			comboMateria.setDisable(false);
+			selectedMateria = comboMateria.getValue();
+		}
+	}
+
+	@FXML
 	private void cancel() {
 		Stage stage = (Stage) comboMateria.getScene().getWindow();
 		stage.close();
@@ -65,8 +83,12 @@ public class SilosMateriaController implements Initializable {
 
 	@FXML
 	private void saveSilo() {
+		if (!chkVazio.isSelected() && selectedMateria == null) {
+			AlertUtil.makeWarning("Atenção", "Selecione uma matéria-prima ou marque o silo como vazio.");
+			return;
+		}
 		silo.setMateria(selectedMateria);
-		Task<Void> searchTask = new Task<Void>() {
+		Task<Void> saveTask = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
 				siloDAO.updateSilo(silo);
@@ -74,22 +96,20 @@ public class SilosMateriaController implements Initializable {
 			}
 		};
 
-		searchTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+		saveTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				SiloMateriasProperty.setSiloMateria(selectedMateria);
 				Stage stage = (Stage) comboMateria.getScene().getWindow();
 				stage.close();
 			}
 		});
-		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-
 				AlertUtil.makeError("Erro", "Ocorreu uma falha ao salvar a matéria-prima do silo.");
 			}
 		});
-		new Thread(searchTask).start();
+		new Thread(saveTask).start();
 
 	}
 

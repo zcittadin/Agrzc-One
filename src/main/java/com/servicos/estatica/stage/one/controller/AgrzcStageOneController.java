@@ -5,9 +5,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.servicos.estatica.stage.one.model.Materia;
 import com.servicos.estatica.stage.one.shared.CadastroProperty;
-import com.servicos.estatica.stage.one.shared.SiloMateriasProperty;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
@@ -152,19 +150,12 @@ public class AgrzcStageOneController implements Initializable {
 		stage.showAndWait();
 	}
 
-	@SuppressWarnings("unchecked")
 	private void initListeners() {
 		CadastroProperty.setFormulaChanged(false);
 		CadastroProperty.cadastroFormulaProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				dosagemController.populateComboFormulas();
-			}
-		});
-		SiloMateriasProperty.siloMateriaProperty().addListener(new ChangeListener<Materia>() {
-			@Override
-			public void changed(ObservableValue<? extends Materia> observable, Materia oldValue, Materia newValue) {
-				dosagemController.verifySilosStatus();
 			}
 		});
 	}
