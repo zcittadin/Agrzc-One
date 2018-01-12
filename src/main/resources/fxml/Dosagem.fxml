@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -8,114 +7,50 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="950.0" minWidth="1750.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <StackPane prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                        <Rectangle fx:id="rectForm" arcHeight="20.0" arcWidth="20.0" fill="#fffb00" height="296.0" stroke="#ff5722" strokeType="INSIDE" width="418.0">
-                           <StackPane.margin>
-                              <Insets left="20.0" top="-60.0" />
-                           </StackPane.margin>
-                        </Rectangle>
-                        <Label text="Formulação selecionada:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <StackPane.margin>
-                              <Insets left="-200.0" top="-310.0" />
-                           </StackPane.margin>
-                        </Label>
-                        <ComboBox fx:id="comboFormulas" prefHeight="25.0" prefWidth="396.0" promptText="Selecione uma formulação para iniciar a dosagem" styleClass="combo-font" stylesheets="@../css/style.css">
-                           <StackPane.margin>
-                              <Insets left="20.0" top="-250.0" />
-                           </StackPane.margin>
-                        </ComboBox>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="btUseFormula" stylesheets="@../css/style.css" text="Iniciar dosagem">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <StackPane.margin>
-                              <Insets top="-160.0" />
-                           </StackPane.margin>
-                        </Button>
-                        <Line endX="315.0" startX="-100.0" stroke="#ff5722">
-                           <StackPane.margin>
-                              <Insets left="19.0" top="-90.0" />
-                           </StackPane.margin>
-                        </Line>
-                        <Label text="Peso atual (Kg):">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <StackPane.margin>
-                              <Insets left="-270.0" top="-40.0" />
-                           </StackPane.margin>
-                        </Label>
-                        <Label text="0000.00" textFill="#6000fc">
-                           <font>
-                              <Font size="96.0" />
-                           </font>
-                           <StackPane.margin>
-                              <Insets top="80.0" />
-                           </StackPane.margin>
-                        </Label>
-                        <Label text="Ciclo de dosagem">
-                           <StackPane.margin>
-                              <Insets left="-120.0" top="-470.0" />
-                           </StackPane.margin>
-                           <font>
-                              <Font size="35.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="150.0" />
-                     </VBox.margin>
-                  </StackPane>
-               </children>
-               <HBox.margin>
-                  <Insets left="30.0" />
-               </HBox.margin>
-            </VBox>
-            <Separator orientation="VERTICAL" prefHeight="200.0">
-               <HBox.margin>
-                  <Insets left="50.0" />
-               </HBox.margin>
-            </Separator>
-            <VBox prefHeight="950.0" prefWidth="1175.0">
-               <children>
-                  <ImageView fitHeight="829.0" fitWidth="1159.0" pickOnBounds="true" preserveRatio="true">
-                     <VBox.margin>
-                        <Insets top="80.0" />
-                     </VBox.margin>
-                     <image>
-                        <Image url="@../img/sinotico.png" />
-                     </image>
-                  </ImageView>
-               </children>
-               <HBox.margin>
-                  <Insets left="30.0" />
-               </HBox.margin>
-            </VBox>
-         </children>
-      </HBox>
-   </center>
-   <left>
-      <Separator orientation="VERTICAL" prefHeight="200.0" BorderPane.alignment="CENTER" />
-   </left>
-</BorderPane>
+<AnchorPane prefHeight="920.0" prefWidth="1712.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="829.0" fitWidth="1159.0" layoutX="452.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/sinotico.png" />
+         </image>
+      </ImageView>
+      <Separator orientation="VERTICAL" prefHeight="920.0" />
+      <Separator layoutX="520.0" orientation="VERTICAL" prefHeight="920.0" />
+      <Rectangle fx:id="rectForm" arcHeight="20.0" arcWidth="20.0" fill="#fffb00" height="296.0" layoutX="48.0" layoutY="144.0" stroke="#ff5722" strokeType="INSIDE" width="418.0" />
+      <ComboBox fx:id="comboFormulas" layoutX="59.0" layoutY="182.0" prefHeight="25.0" prefWidth="396.0" promptText="Selecione uma formulação para iniciar a dosagem" styleClass="combo-font" stylesheets="@../css/style.css" />
+      <Button layoutX="172.0" layoutY="227.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="btUseFormula" stylesheets="@../css/style.css" text="Iniciar dosagem">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="58.0" layoutY="290.0" text="Peso atual (Kg):">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="81.0" layoutY="292.0" text="0000.00" textFill="#6000fc">
+         <font>
+            <Font size="96.0" />
+         </font>
+      </Label>
+      <Line endX="315.0" layoutX="149.0" layoutY="276.0" startX="-100.0" stroke="#ff5722" />
+      <Label layoutX="58.0" layoutY="151.0" text="Formulação selecionada:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="14.0" text="Ciclo de dosagem">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
