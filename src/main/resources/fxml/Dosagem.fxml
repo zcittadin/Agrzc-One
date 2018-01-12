@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -11,6 +12,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.Sphere?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="920.0" prefWidth="1712.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
@@ -35,11 +37,6 @@
       <Label layoutX="58.0" layoutY="290.0" text="Peso atual (Kg):">
          <font>
             <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="81.0" layoutY="292.0" text="0000.00" textFill="#6000fc">
-         <font>
-            <Font size="96.0" />
          </font>
       </Label>
       <Line endX="315.0" layoutX="149.0" layoutY="276.0" startX="-100.0" stroke="#ff5722" />
@@ -107,6 +104,29 @@
       <Label layoutX="1351.0" layoutY="169.0" text="4">
          <font>
             <Font size="18.0" />
+         </font>
+      </Label>
+      <Sphere fx:id="sensorAlto1" layoutX="815.0" layoutY="153.0" radius="7.0" />
+      <Sphere fx:id="sensorBaixo1" layoutX="856.0" layoutY="315.0" radius="7.0" />
+      <Sphere fx:id="sensorAlto2" layoutX="978.0" layoutY="153.0" radius="7.0" />
+      <Sphere fx:id="sensorBaixo2" layoutX="1018.0" layoutY="315.0" radius="7.0" />
+      <Sphere fx:id="sensorAlto3" layoutX="1133.0" layoutY="153.0" radius="7.0" />
+      <Sphere fx:id="sensorBaixo3" layoutX="1173.0" layoutY="315.0" radius="7.0" />
+      <Sphere fx:id="sensorAlto4" layoutX="1292.0" layoutY="153.0" radius="7.0" />
+      <Sphere fx:id="sensorBaixo4" layoutX="1332.0" layoutY="315.0" radius="7.0" />
+      <CheckBox fx:id="chkSensores" layoutX="560.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#nivel" text="Teste de sensores">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+      <Label alignment="CENTER" layoutX="59.0" layoutY="317.0" prefHeight="109.0" prefWidth="396.0" styleClass="labelGradient" stylesheets="@../css/style.css" textFill="#6000fc">
+         <font>
+            <Font name="DSEG7 Classic-Bold" size="75.0" />
+         </font>
+      </Label>
+      <Label layoutX="73.0" layoutY="333.0" text="0000.00" textFill="#03c60d">
+         <font>
+            <Font name="DSEG7 Classic-Bold" size="75.0" />
          </font>
       </Label>
    </children>
