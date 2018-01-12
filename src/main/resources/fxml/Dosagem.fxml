@@ -8,13 +8,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="920.0" prefWidth="1712.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="829.0" fitWidth="1159.0" layoutX="452.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="836.0" fitWidth="1182.0" layoutX="526.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/sinotico.png" />
          </image>
@@ -50,6 +51,62 @@
       <Label layoutX="14.0" layoutY="14.0" text="Ciclo de dosagem">
          <font>
             <Font size="35.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSilo1" alignment="CENTER" layoutX="815.0" layoutY="101.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="128.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label fx:id="lblSilo2" alignment="CENTER" layoutX="978.0" layoutY="101.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="128.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label fx:id="lblSilo3" alignment="CENTER" layoutX="1133.0" layoutY="101.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="128.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label fx:id="lblSilo4" alignment="CENTER" layoutX="1292.0" layoutY="101.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="128.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Circle fill="WHITE" layoutX="879.0" layoutY="182.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="WHITE" layoutX="1042.0" layoutY="182.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="WHITE" layoutX="1197.0" layoutY="182.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="WHITE" layoutX="1356.0" layoutY="182.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label layoutX="874.0" layoutY="169.0" text="1">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="1037.0" layoutY="169.0" text="2">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="1192.0" layoutY="169.0" text="3">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="1351.0" layoutY="169.0" text="4">
+         <font>
+            <Font size="18.0" />
          </font>
       </Label>
    </children>
