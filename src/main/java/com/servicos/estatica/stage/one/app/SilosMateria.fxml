@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="151.0" minWidth="600.0" prefHeight="151.0" prefWidth="600.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.SilosMateriaController">
+<AnchorPane minHeight="151.0" minWidth="600.0" prefHeight="151.0" prefWidth="600.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.SilosMateriaController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="Informe um nome para a matéria-prima:">
          <font>
@@ -31,7 +31,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ComboBox fx:id="comboMateria" layoutX="14.0" layoutY="58.0" prefHeight="30.0" prefWidth="570.0" promptText="Selecione uma matéria-prima" styleClass="combo-font" stylesheets="@../css/style.css" />
+      <ComboBox fx:id="comboMateria" layoutX="14.0" layoutY="58.0" prefHeight="30.0" prefWidth="570.0" promptText="Selecione uma matéria-prima" styleClass="combo-font" stylesheets="@../style/style.css" />
       <CheckBox fx:id="chkVazio" layoutX="437.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#toggleVazio" text="Marcar como vazio">
          <font>
             <Font size="14.0" />

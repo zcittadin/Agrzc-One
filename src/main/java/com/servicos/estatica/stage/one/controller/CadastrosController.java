@@ -170,7 +170,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			Stage stage;
 			Parent root;
 			stage = new Stage();
-			URL url = getClass().getResource("/fxml/CadMateria.fxml");
+			URL url = getClass().getResource("/com/servicos/estatica/stage/one/app/CadMateria.fxml");
 			FXMLLoader fxmlloader = new FXMLLoader();
 			fxmlloader.setLocation(url);
 			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -193,7 +193,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			Stage stage;
 			Parent root;
 			stage = new Stage();
-			URL url = getClass().getResource("/fxml/CadMateria.fxml");
+			URL url = getClass().getResource("/com/servicos/estatica/stage/one/app/CadMateria.fxml");
 			FXMLLoader fxmlloader = new FXMLLoader();
 			fxmlloader.setLocation(url);
 			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -218,7 +218,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			Stage stage;
 			Parent root;
 			stage = new Stage();
-			URL url = getClass().getResource("/fxml/CadFormulas.fxml");
+			URL url = getClass().getResource("/com/servicos/estatica/stage/one/app/CadFormulas.fxml");
 			FXMLLoader fxmlloader = new FXMLLoader();
 			fxmlloader.setLocation(url);
 			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -242,7 +242,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			Stage stage;
 			Parent root;
 			stage = new Stage();
-			URL url = getClass().getResource("/fxml/CadFormulas.fxml");
+			URL url = getClass().getResource("/com/servicos/estatica/stage/one/app/CadFormulas.fxml");
 			FXMLLoader fxmlloader = new FXMLLoader();
 			fxmlloader.setLocation(url);
 			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -292,7 +292,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 								Materia mat = getTableView().getItems().get(getIndex());
 								editMateria(mat);
 							});
-							btn.setStyle("-fx-graphic: url('/icons/Modify.png');");
+							btn.setStyle("-fx-graphic: url('/com/servicos/estatica/stage/one/style/Modify.png');");
 							btn.setCursor(Cursor.HAND);
 							setGraphic(btn);
 							setText(null);
@@ -355,7 +355,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 									new Thread(exclusionTask).start();
 								}
 							});
-							btn.setStyle("-fx-graphic: url('/icons/Trash.png');");
+							btn.setStyle("-fx-graphic: url('/com/servicos/estatica/stage/one/style/Trash.png');");
 							btn.setCursor(Cursor.HAND);
 							setGraphic(btn);
 							setText(null);
@@ -409,7 +409,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 								Formula f = getTableView().getItems().get(getIndex());
 								editFormula(f);
 							});
-							btn.setStyle("-fx-graphic: url('/icons/Modify.png');");
+							btn.setStyle("-fx-graphic: url('/com/servicos/estatica/stage/one/style/Modify.png');");
 							btn.setCursor(Cursor.HAND);
 							setGraphic(btn);
 							setText(null);
@@ -470,7 +470,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 									new Thread(exclusionTask).start();
 								}
 							});
-							btn.setStyle("-fx-graphic: url('/icons/Trash.png');");
+							btn.setStyle("-fx-graphic: url('/com/servicos/estatica/stage/one/style/Trash.png');");
 							btn.setCursor(Cursor.HAND);
 							setGraphic(btn);
 							setText(null);

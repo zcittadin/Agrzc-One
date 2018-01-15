@@ -8,31 +8,31 @@
 }
 
 .btAdd {
-  -fx-graphic: url('../icons/Add.png');
+  -fx-graphic: url('Add.png');
 }
 
 .btOk {
-  -fx-graphic: url('../icons/Ok.png');
+  -fx-graphic: url('Ok.png');
 }
 
 .btCancel {
-  -fx-graphic: url('../icons/Cancel.png');
+  -fx-graphic: url('Cancel.png');
 }
 
 .btBack {
-  -fx-graphic: url('../icons/Back.png');
+  -fx-graphic: url('Back.png');
 }
 
 .btSave {
-  -fx-graphic: url('../icons/Save.png');
+  -fx-graphic: url('Save.png');
 }
 
 .btUseFormula {
-  -fx-graphic: url('../icons/basket_put.png');
+  -fx-graphic: url('basket_put.png');
 }
 
 .btExit {
-  -fx-graphic: url('../icons/Exit.png');
+  -fx-graphic: url('Exit.png');
 }
 
 .combo-font {

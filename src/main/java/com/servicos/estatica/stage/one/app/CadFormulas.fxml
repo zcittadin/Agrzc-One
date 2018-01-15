@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="827.0" prefWidth="762.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.CadastroFormulaController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="827.0" prefWidth="762.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.CadastroFormulaController">
    <children>
       <HBox prefHeight="445.0" prefWidth="653.0">
          <children>
@@ -82,7 +82,7 @@
                                     <Insets left="30.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <ComboBox fx:id="comboMateria" disable="true" prefHeight="25.0" prefWidth="469.0" promptText="Selecione..." styleClass="combo-font" stylesheets="@../css/style.css">
+                              <ComboBox fx:id="comboMateria" disable="true" prefHeight="25.0" prefWidth="469.0" promptText="Selecione..." styleClass="combo-font" stylesheets="@../style/style.css">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -152,7 +152,7 @@
                               </ProgressIndicator>
                               <HBox prefHeight="82.0" prefWidth="763.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#saveFormula" styleClass="btSave" stylesheets="@../css/style.css" text="Salvar">
+                                    <Button mnemonicParsing="false" onAction="#saveFormula" styleClass="btSave" stylesheets="@../style/style.css" text="Salvar">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -163,7 +163,7 @@
                                           <Insets left="300.0" top="30.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancel" styleClass="btCancel" stylesheets="@../css/style.css" text="Cancelar">
+                                    <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancel" styleClass="btCancel" stylesheets="@../style/style.css" text="Cancelar">
                                        <font>
                                           <Font size="14.0" />
                                        </font>

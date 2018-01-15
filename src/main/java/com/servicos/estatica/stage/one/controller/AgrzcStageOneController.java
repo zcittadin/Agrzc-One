@@ -31,23 +31,26 @@ import javafx.util.Duration;
 public class AgrzcStageOneController implements Initializable {
 
 	public static String screenDosagemID = "DOSAGEM";
-	public static String screenDosagemFile = "/fxml/Dosagem.fxml";
+	public static String screenDosagemFile = "/com/servicos/estatica/stage/one/app/Dosagem.fxml";
 	public static String screenMistura1ID = "MISTURA1";
-	public static String screenMistura1File = "/fxml/Mistura1.fxml";
+	public static String screenMistura1File = "/com/servicos/estatica/stage/one/app/Mistura1.fxml";
 	public static String screenMoagemID = "MOAGEM";
-	public static String screenMoagemFile = "/fxml/Moagem.fxml";
+	public static String screenMoagemFile = "/com/servicos/estatica/stage/one/app/Moagem.fxml";
 	public static String screenMistura2ID = "MISTURA2";
-	public static String screenMistura2File = "/fxml/Mistura2.fxml";
+	public static String screenMistura2File = "/com/servicos/estatica/stage/one/app/Mistura2.fxml";
 	public static String screenCadastrosID = "CADASTROS";
-	public static String screenCadastrosFile = "/fxml/Cadastros.fxml";
+	public static String screenCadastrosFile = "/com/servicos/estatica/stage/one/app/Cadastros.fxml";
 	public static String screenCadastroFormulasID = "CADASTROS_FORMULAS";
-	public static String screenCadastroFormulasFile = "/fxml/CadFormulas.fxml";
+	public static String screenCadastroFormulasFile = "/com/servicos/estatica/stage/one/app/CadFormulas.fxml";
+	public static String screenEstocagemID = "ESTOCAGEM";
+	public static String screenEstocagemFile = "/com/servicos/estatica/stage/one/app/Estocagem.fxml";
 
 	private CadastrosController cadastrosController = new CadastrosController();
 	private DosagemController dosagemController = new DosagemController();
 	private Mistura1Controller mistura1Controller = new Mistura1Controller();
 	private Mistura2Controller mistura2Controller = new Mistura2Controller();
 	private MoagemController moagemController = new MoagemController();
+	private EstocagemController estocagemController = new EstocagemController();
 
 	@FXML
 	private Pane centralPane;
@@ -74,6 +77,7 @@ public class AgrzcStageOneController implements Initializable {
 		mainContainer.loadScreenAndController(screenMoagemID, screenMoagemFile, moagemController);
 		mainContainer.loadScreenAndController(screenMistura2ID, screenMistura2File, mistura2Controller);
 		mainContainer.loadScreenAndController(screenCadastrosID, screenCadastrosFile, cadastrosController);
+		mainContainer.loadScreenAndController(screenEstocagemID, screenEstocagemFile, estocagemController);
 		mainContainer.setScreen(screenDosagemID);
 		centralPane.getChildren().addAll(mainContainer);
 
@@ -112,6 +116,11 @@ public class AgrzcStageOneController implements Initializable {
 	}
 
 	@FXML
+	private void openEstocagem() {
+		mainContainer.setScreen(screenEstocagemID);
+	}
+
+	@FXML
 	private void exit() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmar encerramento");
@@ -127,7 +136,7 @@ public class AgrzcStageOneController implements Initializable {
 		Stage stage;
 		Parent root;
 		stage = new Stage();
-		root = FXMLLoader.load(getClass().getResource("/fxml/ClienteInfo.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/stage/one/app/ClienteInfo.fxml"));
 		stage.setScene(new Scene(root));
 		stage.setTitle("Informações sobre o cliente");
 		stage.initModality(Modality.APPLICATION_MODAL);
@@ -141,7 +150,7 @@ public class AgrzcStageOneController implements Initializable {
 		Stage stage;
 		Parent root;
 		stage = new Stage();
-		root = FXMLLoader.load(getClass().getResource("/fxml/EstaticaInfo.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/stage/one/app/EstaticaInfo.fxml"));
 		stage.setScene(new Scene(root));
 		stage.setTitle("Informações sobre o fabricante");
 		stage.initModality(Modality.APPLICATION_MODAL);

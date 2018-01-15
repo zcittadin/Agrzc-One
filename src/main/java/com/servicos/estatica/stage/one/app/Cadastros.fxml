@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="920.0" prefWidth="1712.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="920.0" prefWidth="1712.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Separator orientation="VERTICAL" prefHeight="920.0" />
       <Label layoutX="10.0" layoutY="10.0" text="Gerenciamento de matéria-prima e formulações">
@@ -32,7 +31,6 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <ProgressIndicator fx:id="progMaterias" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false" />
       <TableView fx:id="tblMateria" layoutX="53.0" layoutY="123.0" prefHeight="775.0" prefWidth="592.0">
         <columns>
           <TableColumn fx:id="colNomeMateria" prefWidth="418.9999694824219" resizable="false" text="Nome da matéria-prima" />
@@ -61,6 +59,7 @@
             <TableColumn fx:id="colExcluirFormula" prefWidth="94.0" resizable="false" text="Excluir" />
         </columns>
       </TableView>
-      <ProgressIndicator fx:id="progFormulas" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false" />
+      <ProgressIndicator fx:id="progFormulas" layoutX="966.0" layoutY="431.0" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false" />
+      <ProgressIndicator fx:id="progMaterias" layoutX="141.0" layoutY="430.0" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false" />
    </children>
 </AnchorPane>

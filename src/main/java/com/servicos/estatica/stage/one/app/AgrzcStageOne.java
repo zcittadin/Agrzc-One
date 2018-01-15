@@ -20,7 +20,7 @@ public class AgrzcStageOne extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/AgrzcStageOne.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/stage/one/app/AgrzcStageOne.fxml"));
 		stage.setScene(new Scene(root));
 		stage.setTitle("Agrozacca");
 		stage.setMaximized(true);
