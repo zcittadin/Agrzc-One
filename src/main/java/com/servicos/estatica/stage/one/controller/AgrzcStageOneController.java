@@ -42,12 +42,15 @@ public class AgrzcStageOneController implements Initializable {
 	public static String screenCadastrosFile = "/com/servicos/estatica/stage/one/app/Cadastros.fxml";
 	public static String screenCadastroFormulasID = "CADASTROS_FORMULAS";
 	public static String screenCadastroFormulasFile = "/com/servicos/estatica/stage/one/app/CadFormulas.fxml";
+	public static String screenEstocagemID = "ESTOCAGEM";
+	public static String screenEstocagemFile = "/com/servicos/estatica/stage/one/app/Estocagem.fxml";
 
 	private CadastrosController cadastrosController = new CadastrosController();
 	private DosagemController dosagemController = new DosagemController();
 	private Mistura1Controller mistura1Controller = new Mistura1Controller();
 	private Mistura2Controller mistura2Controller = new Mistura2Controller();
 	private MoagemController moagemController = new MoagemController();
+	private EstocagemController estocagemController = new EstocagemController();
 
 	@FXML
 	private Pane centralPane;
@@ -74,6 +77,7 @@ public class AgrzcStageOneController implements Initializable {
 		mainContainer.loadScreenAndController(screenMoagemID, screenMoagemFile, moagemController);
 		mainContainer.loadScreenAndController(screenMistura2ID, screenMistura2File, mistura2Controller);
 		mainContainer.loadScreenAndController(screenCadastrosID, screenCadastrosFile, cadastrosController);
+		mainContainer.loadScreenAndController(screenEstocagemID, screenEstocagemFile, estocagemController);
 		mainContainer.setScreen(screenDosagemID);
 		centralPane.getChildren().addAll(mainContainer);
 
@@ -109,6 +113,11 @@ public class AgrzcStageOneController implements Initializable {
 	@FXML
 	private void openCadastros() {
 		mainContainer.setScreen(screenCadastrosID);
+	}
+
+	@FXML
+	private void openEstocagem() {
+		mainContainer.setScreen(screenEstocagemID);
 	}
 
 	@FXML
