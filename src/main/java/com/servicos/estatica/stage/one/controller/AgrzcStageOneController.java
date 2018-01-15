@@ -31,17 +31,17 @@ import javafx.util.Duration;
 public class AgrzcStageOneController implements Initializable {
 
 	public static String screenDosagemID = "DOSAGEM";
-	public static String screenDosagemFile = "/fxml/Dosagem.fxml";
+	public static String screenDosagemFile = "/com/servicos/estatica/stage/one/app/Dosagem.fxml";
 	public static String screenMistura1ID = "MISTURA1";
-	public static String screenMistura1File = "/fxml/Mistura1.fxml";
+	public static String screenMistura1File = "/com/servicos/estatica/stage/one/app/Mistura1.fxml";
 	public static String screenMoagemID = "MOAGEM";
-	public static String screenMoagemFile = "/fxml/Moagem.fxml";
+	public static String screenMoagemFile = "/com/servicos/estatica/stage/one/app/Moagem.fxml";
 	public static String screenMistura2ID = "MISTURA2";
-	public static String screenMistura2File = "/fxml/Mistura2.fxml";
+	public static String screenMistura2File = "/com/servicos/estatica/stage/one/app/Mistura2.fxml";
 	public static String screenCadastrosID = "CADASTROS";
-	public static String screenCadastrosFile = "/fxml/Cadastros.fxml";
+	public static String screenCadastrosFile = "/com/servicos/estatica/stage/one/app/Cadastros.fxml";
 	public static String screenCadastroFormulasID = "CADASTROS_FORMULAS";
-	public static String screenCadastroFormulasFile = "/fxml/CadFormulas.fxml";
+	public static String screenCadastroFormulasFile = "/com/servicos/estatica/stage/one/app/CadFormulas.fxml";
 
 	private CadastrosController cadastrosController = new CadastrosController();
 	private DosagemController dosagemController = new DosagemController();
@@ -127,7 +127,7 @@ public class AgrzcStageOneController implements Initializable {
 		Stage stage;
 		Parent root;
 		stage = new Stage();
-		root = FXMLLoader.load(getClass().getResource("/fxml/ClienteInfo.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/stage/one/app/ClienteInfo.fxml"));
 		stage.setScene(new Scene(root));
 		stage.setTitle("Informações sobre o cliente");
 		stage.initModality(Modality.APPLICATION_MODAL);
@@ -141,7 +141,7 @@ public class AgrzcStageOneController implements Initializable {
 		Stage stage;
 		Parent root;
 		stage = new Stage();
-		root = FXMLLoader.load(getClass().getResource("/fxml/EstaticaInfo.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/stage/one/app/EstaticaInfo.fxml"));
 		stage.setScene(new Scene(root));
 		stage.setTitle("Informações sobre o fabricante");
 		stage.initModality(Modality.APPLICATION_MODAL);

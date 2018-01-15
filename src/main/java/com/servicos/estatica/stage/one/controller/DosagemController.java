@@ -97,6 +97,55 @@ public class DosagemController implements Initializable, ControlledScreen {
 		myController = screenPage;
 	}
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		rectForm.setFill(Color.TRANSPARENT);
+		tooltipSilo1.setStyle(TOOLTIP_CSS);
+		tooltipSilo2.setStyle(TOOLTIP_CSS);
+		tooltipSilo3.setStyle(TOOLTIP_CSS);
+		tooltipSilo4.setStyle(TOOLTIP_CSS);
+		Tooltip.install(lblSilo1, tooltipSilo1);
+		Tooltip.install(lblSilo2, tooltipSilo2);
+		Tooltip.install(lblSilo3, tooltipSilo3);
+		Tooltip.install(lblSilo4, tooltipSilo4);
+		populateComboFormulas();
+		verifySilosStatus();
+		initColors();
+	}
+
+	@FXML
+	private void editMateria(Event event) {
+		Silo silo = null;
+		if (event.toString().contains("lblSilo1"))
+			silo = siloDAO.findBySilo("Silo 1");
+		if (event.toString().contains("lblSilo2"))
+			silo = siloDAO.findBySilo("Silo 2");
+		if (event.toString().contains("lblSilo3"))
+			silo = siloDAO.findBySilo("Silo 3");
+		if (event.toString().contains("lblSilo4"))
+			silo = siloDAO.findBySilo("Silo 4");
+		try {
+			Stage stage;
+			Parent root;
+			stage = new Stage();
+			URL url = getClass().getResource("/com/servicos/estatica/stage/one/app/SilosMateria.fxml");
+			FXMLLoader fxmlloader = new FXMLLoader();
+			fxmlloader.setLocation(url);
+			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
+			root = (Parent) fxmlloader.load(url.openStream());
+			stage.setScene(new Scene(root));
+			((SilosMateriaController) fxmlloader.getController()).setContext(silo);
+			stage.setTitle("Gerenciar matéria-prima");
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(comboFormulas.getScene().getWindow());
+			stage.setResizable(Boolean.FALSE);
+			stage.showAndWait();
+			verifySilosStatus();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@FXML
 	private void nivel() {
 		if (chkSensores.isSelected()) {
@@ -117,55 +166,6 @@ public class DosagemController implements Initializable, ControlledScreen {
 			sensorBaixo2.setMaterial(grayMaterial);
 			sensorBaixo3.setMaterial(grayMaterial);
 			sensorBaixo4.setMaterial(grayMaterial);
-		}
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		rectForm.setFill(Color.TRANSPARENT);
-		tooltipSilo1.setStyle(TOOLTIP_CSS);
-		tooltipSilo2.setStyle(TOOLTIP_CSS);
-		tooltipSilo3.setStyle(TOOLTIP_CSS);
-		tooltipSilo4.setStyle(TOOLTIP_CSS);
-		Tooltip.install(lblSilo1, tooltipSilo1);
-		Tooltip.install(lblSilo2, tooltipSilo2);
-		Tooltip.install(lblSilo3, tooltipSilo3);
-		Tooltip.install(lblSilo4, tooltipSilo4);
-		populateComboFormulas();
-		verifySilosStatus();
-		initColors();
-	}
-
-	@FXML
-	private void editMateria(Event ev) {
-		Silo silo = null;
-		if (ev.toString().contains("lblSilo1"))
-			silo = siloDAO.findBySilo("Silo 1");
-		if (ev.toString().contains("lblSilo2"))
-			silo = siloDAO.findBySilo("Silo 2");
-		if (ev.toString().contains("lblSilo3"))
-			silo = siloDAO.findBySilo("Silo 3");
-		if (ev.toString().contains("lblSilo4"))
-			silo = siloDAO.findBySilo("Silo 4");
-		try {
-			Stage stage;
-			Parent root;
-			stage = new Stage();
-			URL url = getClass().getResource("/fxml/SilosMateria.fxml");
-			FXMLLoader fxmlloader = new FXMLLoader();
-			fxmlloader.setLocation(url);
-			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
-			root = (Parent) fxmlloader.load(url.openStream());
-			stage.setScene(new Scene(root));
-			((SilosMateriaController) fxmlloader.getController()).setContext(silo);
-			stage.setTitle("Gerenciar matéria-prima");
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.initOwner(comboFormulas.getScene().getWindow());
-			stage.setResizable(Boolean.FALSE);
-			stage.showAndWait();
-			verifySilosStatus();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 

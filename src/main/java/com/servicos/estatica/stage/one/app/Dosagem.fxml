@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Sphere?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="920.0" prefWidth="1712.0" styleClass="mainGradient" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="920.0" prefWidth="1712.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="836.0" fitWidth="1182.0" layoutX="526.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -25,7 +25,7 @@
       <Separator orientation="VERTICAL" prefHeight="920.0" />
       <Separator layoutX="520.0" orientation="VERTICAL" prefHeight="920.0" />
       <Rectangle fx:id="rectForm" arcHeight="20.0" arcWidth="20.0" fill="#fffb00" height="296.0" layoutX="48.0" layoutY="144.0" stroke="#ff5722" strokeType="INSIDE" width="418.0" />
-      <ComboBox fx:id="comboFormulas" layoutX="59.0" layoutY="182.0" prefHeight="25.0" prefWidth="396.0" promptText="Selecione uma formulação para iniciar a dosagem" styleClass="combo-font" stylesheets="@../css/style.css" />
+      <ComboBox fx:id="comboFormulas" layoutX="59.0" layoutY="182.0" prefHeight="25.0" prefWidth="396.0" promptText="Selecione uma formulação para iniciar a dosagem" styleClass="combo-font" stylesheets="@../style/style.css" />
       <Button layoutX="172.0" layoutY="227.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="btUseFormula" stylesheets="@../css/style.css" text="Iniciar dosagem">
          <font>
             <Font size="14.0" />
@@ -119,7 +119,7 @@
             <Font size="16.0" />
          </font>
       </CheckBox>
-      <Label alignment="CENTER" layoutX="59.0" layoutY="317.0" prefHeight="109.0" prefWidth="396.0" styleClass="labelGradient" stylesheets="@../css/style.css" textFill="#6000fc">
+      <Label alignment="CENTER" layoutX="59.0" layoutY="317.0" prefHeight="109.0" prefWidth="396.0" styleClass="labelGradient" stylesheets="@../style/style.css" textFill="#6000fc">
          <font>
             <Font name="DSEG7 Classic-Bold" size="75.0" />
          </font>
