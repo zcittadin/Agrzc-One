@@ -1,5 +1,5 @@
 .mainGradient {
-	-fx-background-color: linear-gradient(to bottom, #ffff88 0.0%,#ffff42 94.0%);
+	-fx-background-color: linear-gradient(to bottom, #1e5799 0%,#2989d8 23%,#2989d8 23%,#207cca 63%,#207cca 74%,#7db9e8 100%); 
 }
 
 .labelGradient {
@@ -33,6 +33,10 @@
 
 .btExit {
   -fx-graphic: url('Exit.png');
+}
+
+.btDescargaBalanca {
+  -fx-graphic: url('basket_go.png');
 }
 
 .combo-font {

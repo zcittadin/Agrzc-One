@@ -7,7 +7,7 @@ import com.servicos.estatica.stage.one.app.ControlledScreen;
 
 import javafx.fxml.Initializable;
 
-public class Mistura2Controller implements Initializable, ControlledScreen {
+public class ProcessamentoController implements Initializable, ControlledScreen {
 
 	ScreensController myController;
 
@@ -22,4 +22,5 @@ public class Mistura2Controller implements Initializable, ControlledScreen {
 		// TODO Auto-generated method stub
 
 	}
+
 }

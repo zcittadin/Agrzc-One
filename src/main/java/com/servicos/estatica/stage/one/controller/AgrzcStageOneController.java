@@ -5,13 +5,18 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.ghgande.j2mod.modbus.Modbus;
+import com.servicos.estatica.stage.one.modbus.ModbusTCPService;
 import com.servicos.estatica.stage.one.shared.CadastroProperty;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,12 +37,8 @@ public class AgrzcStageOneController implements Initializable {
 
 	public static String screenDosagemID = "DOSAGEM";
 	public static String screenDosagemFile = "/com/servicos/estatica/stage/one/app/Dosagem.fxml";
-	public static String screenMistura1ID = "MISTURA1";
-	public static String screenMistura1File = "/com/servicos/estatica/stage/one/app/Mistura1.fxml";
-	public static String screenMoagemID = "MOAGEM";
-	public static String screenMoagemFile = "/com/servicos/estatica/stage/one/app/Moagem.fxml";
-	public static String screenMistura2ID = "MISTURA2";
-	public static String screenMistura2File = "/com/servicos/estatica/stage/one/app/Mistura2.fxml";
+	public static String screenProcessamentoID = "PROCESSAMENTO";
+	public static String screenProcessamentoFile = "/com/servicos/estatica/stage/one/app/Processamento.fxml";
 	public static String screenCadastrosID = "CADASTROS";
 	public static String screenCadastrosFile = "/com/servicos/estatica/stage/one/app/Cadastros.fxml";
 	public static String screenCadastroFormulasID = "CADASTROS_FORMULAS";
@@ -47,10 +48,14 @@ public class AgrzcStageOneController implements Initializable {
 
 	private CadastrosController cadastrosController = new CadastrosController();
 	private DosagemController dosagemController = new DosagemController();
-	private Mistura1Controller mistura1Controller = new Mistura1Controller();
-	private Mistura2Controller mistura2Controller = new Mistura2Controller();
-	private MoagemController moagemController = new MoagemController();
+	private ProcessamentoController processamentoController = new ProcessamentoController();
 	private EstocagemController estocagemController = new EstocagemController();
+
+	private static ModbusTCPService modbusService = new ModbusTCPService();
+	private static Timeline scanIO;
+	private static final String IP = "192.168.1.25";
+	protected static final int PORT = Modbus.DEFAULT_PORT;
+	private static int slot = 0;
 
 	@FXML
 	private Pane centralPane;
@@ -73,9 +78,7 @@ public class AgrzcStageOneController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		mainContainer.loadScreenAndController(screenDosagemID, screenDosagemFile, dosagemController);
-		mainContainer.loadScreenAndController(screenMistura1ID, screenMistura1File, mistura1Controller);
-		mainContainer.loadScreenAndController(screenMoagemID, screenMoagemFile, moagemController);
-		mainContainer.loadScreenAndController(screenMistura2ID, screenMistura2File, mistura2Controller);
+		mainContainer.loadScreenAndController(screenProcessamentoID, screenProcessamentoFile, processamentoController);
 		mainContainer.loadScreenAndController(screenCadastrosID, screenCadastrosFile, cadastrosController);
 		mainContainer.loadScreenAndController(screenEstocagemID, screenEstocagemFile, estocagemController);
 		mainContainer.setScreen(screenDosagemID);
@@ -87,7 +90,23 @@ public class AgrzcStageOneController implements Initializable {
 		Tooltip.install(imgEstatica, tooltipEstatica);
 		initListeners();
 		configAnimations();
+		//modbusService.setConnectionParams(IP, PORT);
+		//initModbusScan();
 		labelTransition.play();
+	}
+
+	private void initModbusScan() {
+		scanIO = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				readMultiplePoints(slot);
+				slot++;
+				if (slot == 6)
+					slot = 0;
+			}
+		}));
+		scanIO.setCycleCount(Timeline.INDEFINITE);
+		scanIO.play();
 	}
 
 	@FXML
@@ -96,18 +115,8 @@ public class AgrzcStageOneController implements Initializable {
 	}
 
 	@FXML
-	private void openMistura1() {
-		mainContainer.setScreen(screenMistura1ID);
-	}
-
-	@FXML
 	private void openMoagem() {
-		mainContainer.setScreen(screenMoagemID);
-	}
-
-	@FXML
-	private void openMistura2() {
-		mainContainer.setScreen(screenMistura2ID);
+		mainContainer.setScreen(screenProcessamentoID);
 	}
 
 	@FXML
@@ -175,6 +184,36 @@ public class AgrzcStageOneController implements Initializable {
 		labelTransition.setToValue(1.0);
 		labelTransition.setCycleCount(Timeline.INDEFINITE);
 		labelTransition.setAutoReverse(Boolean.TRUE);
+	}
+
+	private void readMultiplePoints(int slot) {
+		Boolean[] points = new Boolean[0];
+		switch (slot) {
+		case 0:
+			points = modbusService.readMultiplePoints(0, 24);
+
+			break;
+		case 1:
+			points = modbusService.readMultiplePoints(24, 16);
+
+			break;
+		case 2:
+			points = modbusService.readMultiplePoints(40, 16);
+
+			break;
+		case 3:
+			points = modbusService.readMultiplePoints(100, 16);
+
+			break;
+		case 4:
+			points = modbusService.readMultiplePoints(116, 16);
+
+			break;
+		case 5:
+			points = modbusService.readMultiplePoints(132, 16);
+
+			break;
+		}
 	}
 
 }

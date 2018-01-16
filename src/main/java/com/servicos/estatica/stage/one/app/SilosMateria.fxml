@@ -10,9 +10,9 @@
 
 <AnchorPane minHeight="151.0" minWidth="600.0" prefHeight="151.0" prefWidth="600.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.SilosMateriaController">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" text="Informe um nome para a matéria-prima:">
+      <Label layoutX="14.0" layoutY="14.0" text="Informe um nome para a matéria-prima:" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <Button fx:id="btOk" layoutX="201.0" layoutY="107.0" mnemonicParsing="false" onAction="#saveSilo" prefHeight="30.0" prefWidth="99.0" styleClass="btOk" stylesheets="@../css/style.css" text="Ok">
@@ -32,9 +32,9 @@
          </cursor>
       </Button>
       <ComboBox fx:id="comboMateria" layoutX="14.0" layoutY="58.0" prefHeight="30.0" prefWidth="570.0" promptText="Selecione uma matéria-prima" styleClass="combo-font" stylesheets="@../style/style.css" />
-      <CheckBox fx:id="chkVazio" layoutX="437.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#toggleVazio" text="Marcar como vazio">
+      <CheckBox fx:id="chkVazio" layoutX="423.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#toggleVazio" prefHeight="27.0" prefWidth="159.0" text="Marcar como vazio" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </CheckBox>
    </children>

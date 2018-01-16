@@ -7,6 +7,7 @@ import com.ghgande.j2mod.modbus.msg.ReadMultipleRegistersRequest;
 import com.ghgande.j2mod.modbus.msg.ReadMultipleRegistersResponse;
 import com.ghgande.j2mod.modbus.msg.WriteSingleRegisterRequest;
 import com.ghgande.j2mod.modbus.net.TCPMasterConnection;
+import com.ghgande.j2mod.modbus.procimg.Register;
 import com.ghgande.j2mod.modbus.procimg.SimpleRegister;
 
 public class ModbusTCPService {
@@ -72,6 +73,37 @@ public class ModbusTCPService {
 			ex.printStackTrace();
 		}
 		return false;
+	}
+	
+	public Boolean[] readMultiplePoints(int ref, int qtd) {
+		Boolean[] results = null;
+		try {
+			con.connect();
+			trans = new ModbusTCPTransaction(con);
+			inputReq = new ReadMultipleRegistersRequest(ref, qtd);
+			inputReq.setUnitID(1);
+			trans.setRequest(inputReq);
+			trans.execute();
+
+			Register[] regs = inputRes.getRegisters();
+			if (regs.length > 0)
+				results = new Boolean[regs.length];
+			else
+				return new Boolean[0];
+			
+			for (int i = 0; i < regs.length; i++) {
+				Integer value = inputRes.getRegisterValue(i);
+				if (value == 1)
+					results[i] = true;
+				else
+					results[i] = false;
+			}
+
+			con.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return results;
 	}
 
 	public void writeRegisterRequest(Integer regRef, Integer value) {
