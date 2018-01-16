@@ -25,9 +25,9 @@
                      <children>
                         <VBox prefHeight="98.0" prefWidth="527.0">
                            <children>
-                              <Label text="Nome da formulação:">
+                              <Label text="Nome da formulação:" textFill="WHITE">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="System Bold" size="14.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets left="30.0" top="20.0" />
@@ -45,20 +45,20 @@
                         </VBox>
                         <VBox prefHeight="93.0" prefWidth="236.0">
                            <children>
-                              <Label text="Total (Kg):">
+                              <Label text="Total (Kg):" textFill="WHITE">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="System Bold" size="14.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets left="10.0" top="20.0" />
                                  </VBox.margin>
                               </Label>
-                              <Label fx:id="lblTotal" text="000.00" textFill="#6000fc">
+                              <Label fx:id="lblTotal" text="000.00" textFill="#effa00">
                                  <VBox.margin>
                                     <Insets left="50.0" />
                                  </VBox.margin>
                                  <font>
-                                    <Font size="40.0" />
+                                    <Font size="48.0" />
                                  </font>
                               </Label>
                            </children>
@@ -74,9 +74,9 @@
                      <children>
                         <VBox prefHeight="100.0" prefWidth="530.0">
                            <children>
-                              <Label text="Matéria-prima:">
+                              <Label text="Matéria-prima:" textFill="WHITE">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="System Bold" size="14.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets left="30.0" top="10.0" />
@@ -105,9 +105,9 @@
                         </VBox>
                         <VBox prefHeight="100.0" prefWidth="232.0">
                            <children>
-                              <Label text="Quantidade (Kg):">
+                              <Label text="Quantidade (Kg):" textFill="WHITE">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="System Bold" size="14.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets top="10.0" />

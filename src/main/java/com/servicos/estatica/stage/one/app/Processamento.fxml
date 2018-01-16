@@ -8,9 +8,14 @@
 <AnchorPane prefHeight="920.0" prefWidth="1712.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Separator orientation="VERTICAL" prefHeight="920.0" />
-      <ImageView fitHeight="858.0" fitWidth="1160.0" layoutX="276.0" layoutY="31.0" pickOnBounds="true">
+      <ImageView fitHeight="451.0" fitWidth="1025.0" layoutX="209.0" layoutY="14.0" pickOnBounds="true">
          <image>
-            <Image url="@../img/Mistura_2.png" />
+            <Image url="@../img/Mistura1_Moagem.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="431.0" fitWidth="1053.0" layoutX="402.0" layoutY="463.0" pickOnBounds="true">
+         <image>
+            <Image url="@../img/Mistura2_Estocagem.png" />
          </image>
       </ImageView>
    </children>
