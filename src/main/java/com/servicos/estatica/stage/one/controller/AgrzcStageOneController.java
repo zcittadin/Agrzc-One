@@ -7,6 +7,11 @@ import java.util.ResourceBundle;
 
 import com.ghgande.j2mod.modbus.Modbus;
 import com.servicos.estatica.stage.one.listeners.input.Input0;
+import com.servicos.estatica.stage.one.listeners.input.Input1;
+import com.servicos.estatica.stage.one.listeners.input.Input2;
+import com.servicos.estatica.stage.one.listeners.output.Output0;
+import com.servicos.estatica.stage.one.listeners.output.Output3;
+import com.servicos.estatica.stage.one.listeners.output.Output4;
 import com.servicos.estatica.stage.one.modbus.ModbusTCPService;
 import com.servicos.estatica.stage.one.shared.CadastroProperty;
 
@@ -56,7 +61,7 @@ public class AgrzcStageOneController implements Initializable {
 	protected static final int PORT = Modbus.DEFAULT_PORT;
 	private static int slot = 0;
 
-	//private static Input0 input0 = new Input0();
+	// private static Input0 input0 = new Input0();
 
 	@FXML
 	private Pane centralPane;
@@ -173,6 +178,7 @@ public class AgrzcStageOneController implements Initializable {
 			}
 		});
 
+		// INPUT CANAL 0
 		for (int i = 0; i < Input0.points; i++) {
 			Input0.getListeners().add(new SimpleBooleanProperty());
 		}
@@ -181,6 +187,71 @@ public class AgrzcStageOneController implements Initializable {
 				@Override
 				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 					dosagemController.updateIOPoints(Input0.getListeners().indexOf(listener), newValue);
+				}
+			});
+		});
+
+		// INPUT CANAL 1
+		for (int i = 0; i < Input1.points; i++) {
+			Input1.getListeners().add(new SimpleBooleanProperty());
+		}
+		Input1.getListeners().forEach(listener -> {
+			listener.addListener(new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					dosagemController.updateIOPoints(Input1.getListeners().indexOf(listener), newValue);
+				}
+			});
+		});
+
+		// INPUT CANAL 2
+		for (int i = 0; i < Input2.points; i++) {
+			Input2.getListeners().add(new SimpleBooleanProperty());
+		}
+		Input2.getListeners().forEach(listener -> {
+			listener.addListener(new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					dosagemController.updateIOPoints(Input2.getListeners().indexOf(listener), newValue);
+				}
+			});
+		});
+
+		// OUTPUT CANAL 0
+		for (int i = 0; i < Output0.points; i++) {
+			Output0.getListeners().add(new SimpleBooleanProperty());
+		}
+		Output0.getListeners().forEach(listener -> {
+			listener.addListener(new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					//dosagemController.updateIOPoints(Output0.getListeners().indexOf(listener), newValue);
+				}
+			});
+		});
+
+		// OUTPUT CANAL 3
+		for (int i = 0; i < Output3.points; i++) {
+			Output3.getListeners().add(new SimpleBooleanProperty());
+		}
+		Output3.getListeners().forEach(listener -> {
+			listener.addListener(new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					//dosagemController.updateIOPoints(Output3.getListeners().indexOf(listener), newValue);
+				}
+			});
+		});
+
+		// OUTPUT CANAL 4
+		for (int i = 0; i < Output4.points; i++) {
+			Output4.getListeners().add(new SimpleBooleanProperty());
+		}
+		Output4.getListeners().forEach(listener -> {
+			listener.addListener(new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					//dosagemController.updateIOPoints(Output4.getListeners().indexOf(listener), newValue);
 				}
 			});
 		});
@@ -199,31 +270,39 @@ public class AgrzcStageOneController implements Initializable {
 		switch (slot) {
 		case 0:
 			points = modbusService.readMultiplePoints(0, 24);
-
 			for (int i = 0; i < points.length; i++) {
 				Input0.getListeners().get(i).setValue(points[i]);
 			}
-
 			break;
 		case 1:
 			points = modbusService.readMultiplePoints(24, 16);
-
+			for (int i = 0; i < points.length; i++) {
+				Input1.getListeners().get(i).setValue(points[i]);
+			}
 			break;
 		case 2:
 			points = modbusService.readMultiplePoints(40, 16);
-
+			for (int i = 0; i < points.length; i++) {
+				Input2.getListeners().get(i).setValue(points[i]);
+			}
 			break;
 		case 3:
 			points = modbusService.readMultiplePoints(100, 16);
-
+			for (int i = 0; i < points.length; i++) {
+				Output0.getListeners().get(i).setValue(points[i]);
+			}
 			break;
 		case 4:
 			points = modbusService.readMultiplePoints(116, 16);
-
+			for (int i = 0; i < points.length; i++) {
+				Output3.getListeners().get(i).setValue(points[i]);
+			}
 			break;
 		case 5:
 			points = modbusService.readMultiplePoints(132, 16);
-
+			for (int i = 0; i < points.length; i++) {
+				Output4.getListeners().get(i).setValue(points[i]);
+			}
 			break;
 		}
 	}
