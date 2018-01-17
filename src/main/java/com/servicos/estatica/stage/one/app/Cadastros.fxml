@@ -59,7 +59,7 @@
             <TableColumn fx:id="colExcluirFormula" prefWidth="94.0" resizable="false" text="Excluir" />
         </columns>
       </TableView>
-      <ProgressIndicator fx:id="progFormulas" layoutX="966.0" layoutY="431.0" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false" />
-      <ProgressIndicator fx:id="progMaterias" layoutX="141.0" layoutY="430.0" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #ff5722;" visible="false" />
+      <ProgressIndicator fx:id="progFormulas" layoutX="966.0" layoutY="431.0" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #002257;" visible="false" />
+      <ProgressIndicator fx:id="progMaterias" layoutX="141.0" layoutY="430.0" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #002257;" visible="false" />
    </children>
 </AnchorPane>

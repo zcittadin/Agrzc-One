@@ -111,7 +111,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 	private final PhongMaterial greenMaterial = new PhongMaterial();
 	private final PhongMaterial grayMaterial = new PhongMaterial();
 
-	private static Map<Integer, Sphere> canal_0 = new HashMap<>();
+	private static Map<Integer, Sphere> input_0 = new HashMap<>();
 
 	private Formula selectedFormula;
 
@@ -156,14 +156,14 @@ public class DosagemController implements Initializable, ControlledScreen {
 	}
 
 	private void initIOPoints() {
-		canal_0.put(0, sensorBaixo1);
-		canal_0.put(1, sensorAlto1);
-		canal_0.put(2, sensorBaixo2);
-		canal_0.put(3, sensorAlto2);
-		canal_0.put(4, sensorBaixo3);
-		canal_0.put(5, sensorAlto3);
-		canal_0.put(6, sensorBaixo4);
-		canal_0.put(7, sensorAlto4);
+		input_0.put(0, sensorBaixo1);
+		input_0.put(1, sensorAlto1);
+		input_0.put(2, sensorBaixo2);
+		input_0.put(3, sensorAlto2);
+		input_0.put(4, sensorBaixo3);
+		input_0.put(5, sensorAlto3);
+		input_0.put(6, sensorBaixo4);
+		input_0.put(7, sensorAlto4);
 
 	}
 
@@ -252,7 +252,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 	}
 
 	public void updateIOPoints(int point, Boolean b) {
-		Sphere sph = canal_0.get(point);
+		Sphere sph = input_0.get(point);
 		if (sph == null)
 			return;
 		if (b)
