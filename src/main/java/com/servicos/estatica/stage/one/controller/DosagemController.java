@@ -40,27 +40,50 @@ import javafx.stage.Stage;
 
 public class DosagemController implements Initializable, ControlledScreen {
 
-	@FXML private Rectangle rectForm;
-	@FXML private ComboBox<Formula> comboFormulas;
-	@FXML private Label lblSilo1;
-	@FXML private Label lblSilo2;
-	@FXML private Label lblSilo3;
-	@FXML private Label lblSilo4;
-	@FXML private Label lblSilo5;
-	@FXML private Label lblSilo6;
-	@FXML private Label lblSilo7;
-	@FXML private Label lblSilo8;
-	@FXML private Label lblSilo9;
-	@FXML private Label lblSilo10;
-	@FXML private Sphere sensorAlto1;
-	@FXML private Sphere sensorAlto2;
-	@FXML private Sphere sensorAlto3;
-	@FXML private Sphere sensorAlto4;
-	@FXML private Sphere sensorBaixo1;
-	@FXML private Sphere sensorBaixo2;
-	@FXML private Sphere sensorBaixo3;
-	@FXML private Sphere sensorBaixo4;
-	@FXML private CheckBox chkSensores;
+	@FXML
+	private Rectangle rectForm;
+	@FXML
+	private ComboBox<Formula> comboFormulas;
+	@FXML
+	private Label lblSilo1;
+	@FXML
+	private Label lblSilo2;
+	@FXML
+	private Label lblSilo3;
+	@FXML
+	private Label lblSilo4;
+	@FXML
+	private Label lblSilo5;
+	@FXML
+	private Label lblSilo6;
+	@FXML
+	private Label lblSilo7;
+	@FXML
+	private Label lblSilo8;
+	@FXML
+	private Label lblSilo9;
+	@FXML
+	private Label lblSilo10;
+	@FXML
+	private Label lblBalanca;
+	@FXML
+	private Sphere sensorAlto1;
+	@FXML
+	private Sphere sensorAlto2;
+	@FXML
+	private Sphere sensorAlto3;
+	@FXML
+	private Sphere sensorAlto4;
+	@FXML
+	private Sphere sensorBaixo1;
+	@FXML
+	private Sphere sensorBaixo2;
+	@FXML
+	private Sphere sensorBaixo3;
+	@FXML
+	private Sphere sensorBaixo4;
+	@FXML
+	private CheckBox chkSensores;
 
 	private static FormulaDAO formulaDAO = new FormulaDAO();
 	private static SiloDAO siloDAO = new SiloDAO();
@@ -81,6 +104,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 	private Tooltip tooltipSilo8 = new Tooltip(TOOLTIP_MSG_VAZIO);
 	private Tooltip tooltipSilo9 = new Tooltip(TOOLTIP_MSG_VAZIO);
 	private Tooltip tooltipSilo10 = new Tooltip(TOOLTIP_MSG_VAZIO);
+	private Tooltip tooltipBalanca = new Tooltip("Peso atual");
 
 	private final PhongMaterial greenMaterial = new PhongMaterial();
 	private final PhongMaterial grayMaterial = new PhongMaterial();
@@ -107,6 +131,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 		tooltipSilo8.setStyle(TOOLTIP_CSS);
 		tooltipSilo9.setStyle(TOOLTIP_CSS);
 		tooltipSilo10.setStyle(TOOLTIP_CSS);
+		tooltipBalanca.setStyle(TOOLTIP_CSS);
 		Tooltip.install(lblSilo1, tooltipSilo1);
 		Tooltip.install(lblSilo2, tooltipSilo2);
 		Tooltip.install(lblSilo3, tooltipSilo3);
@@ -117,6 +142,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 		Tooltip.install(lblSilo8, tooltipSilo8);
 		Tooltip.install(lblSilo9, tooltipSilo9);
 		Tooltip.install(lblSilo10, tooltipSilo10);
+		Tooltip.install(lblBalanca, tooltipBalanca);
 		populateComboFormulas();
 		verifySilosStatus();
 		initColors();

@@ -5,9 +5,19 @@ import java.util.ResourceBundle;
 
 import com.servicos.estatica.stage.one.app.ControlledScreen;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 
 public class ProcessamentoController implements Initializable, ControlledScreen {
+
+	@FXML
+	private Label lblBalanca;
+
+	private Tooltip tooltipBalanca = new Tooltip("Peso atual");
+
+	private static String TOOLTIP_CSS = "-fx-font-size: 12pt; -fx-font-weight: bold; -fx-font-style: normal; -fx-background-color: green;";
 
 	ScreensController myController;
 
@@ -19,7 +29,9 @@ public class ProcessamentoController implements Initializable, ControlledScreen 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+
+		tooltipBalanca.setStyle(TOOLTIP_CSS);
+		Tooltip.install(lblBalanca, tooltipBalanca);
 
 	}
 

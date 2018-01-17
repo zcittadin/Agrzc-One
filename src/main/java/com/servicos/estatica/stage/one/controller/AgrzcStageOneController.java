@@ -43,13 +43,10 @@ public class AgrzcStageOneController implements Initializable {
 	public static String screenCadastrosFile = "/com/servicos/estatica/stage/one/app/Cadastros.fxml";
 	public static String screenCadastroFormulasID = "CADASTROS_FORMULAS";
 	public static String screenCadastroFormulasFile = "/com/servicos/estatica/stage/one/app/CadFormulas.fxml";
-	public static String screenEstocagemID = "ESTOCAGEM";
-	public static String screenEstocagemFile = "/com/servicos/estatica/stage/one/app/Estocagem.fxml";
 
 	private CadastrosController cadastrosController = new CadastrosController();
 	private DosagemController dosagemController = new DosagemController();
 	private ProcessamentoController processamentoController = new ProcessamentoController();
-	private EstocagemController estocagemController = new EstocagemController();
 
 	private static ModbusTCPService modbusService = new ModbusTCPService();
 	private static Timeline scanIO;
@@ -80,7 +77,6 @@ public class AgrzcStageOneController implements Initializable {
 		mainContainer.loadScreenAndController(screenDosagemID, screenDosagemFile, dosagemController);
 		mainContainer.loadScreenAndController(screenProcessamentoID, screenProcessamentoFile, processamentoController);
 		mainContainer.loadScreenAndController(screenCadastrosID, screenCadastrosFile, cadastrosController);
-		mainContainer.loadScreenAndController(screenEstocagemID, screenEstocagemFile, estocagemController);
 		mainContainer.setScreen(screenDosagemID);
 		centralPane.getChildren().addAll(mainContainer);
 
@@ -90,8 +86,8 @@ public class AgrzcStageOneController implements Initializable {
 		Tooltip.install(imgEstatica, tooltipEstatica);
 		initListeners();
 		configAnimations();
-		//modbusService.setConnectionParams(IP, PORT);
-		//initModbusScan();
+		// modbusService.setConnectionParams(IP, PORT);
+		// initModbusScan();
 		labelTransition.play();
 	}
 
@@ -115,18 +111,13 @@ public class AgrzcStageOneController implements Initializable {
 	}
 
 	@FXML
-	private void openMoagem() {
+	private void openProcessamento() {
 		mainContainer.setScreen(screenProcessamentoID);
 	}
 
 	@FXML
 	private void openCadastros() {
 		mainContainer.setScreen(screenCadastrosID);
-	}
-
-	@FXML
-	private void openEstocagem() {
-		mainContainer.setScreen(screenEstocagemID);
 	}
 
 	@FXML
