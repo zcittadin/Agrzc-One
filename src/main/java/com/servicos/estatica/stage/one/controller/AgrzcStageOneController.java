@@ -97,7 +97,7 @@ public class AgrzcStageOneController implements Initializable {
 	}
 
 	private void initModbusScan() {
-		scanIO = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
+		scanIO = new Timeline(new KeyFrame(Duration.millis(500), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				readMultiplePoints(slot);

@@ -3,7 +3,9 @@ package com.servicos.estatica.stage.one.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.stage.one.app.ControlledScreen;
@@ -109,6 +111,8 @@ public class DosagemController implements Initializable, ControlledScreen {
 	private final PhongMaterial greenMaterial = new PhongMaterial();
 	private final PhongMaterial grayMaterial = new PhongMaterial();
 
+	private static Map<Integer, Sphere> canal_0 = new HashMap<>();
+
 	private Formula selectedFormula;
 
 	ScreensController myController;
@@ -120,6 +124,9 @@ public class DosagemController implements Initializable, ControlledScreen {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
+		initIOPoints();
+
 		rectForm.setFill(Color.TRANSPARENT);
 		tooltipSilo1.setStyle(TOOLTIP_CSS);
 		tooltipSilo2.setStyle(TOOLTIP_CSS);
@@ -146,6 +153,18 @@ public class DosagemController implements Initializable, ControlledScreen {
 		populateComboFormulas();
 		verifySilosStatus();
 		initColors();
+	}
+
+	private void initIOPoints() {
+		canal_0.put(0, sensorBaixo1);
+		canal_0.put(1, sensorAlto1);
+		canal_0.put(2, sensorBaixo2);
+		canal_0.put(3, sensorAlto2);
+		canal_0.put(4, sensorBaixo3);
+		canal_0.put(5, sensorAlto3);
+		canal_0.put(6, sensorBaixo4);
+		canal_0.put(7, sensorAlto4);
+
 	}
 
 	@FXML
@@ -231,9 +250,15 @@ public class DosagemController implements Initializable, ControlledScreen {
 			sensorBaixo4.setMaterial(grayMaterial);
 		}
 	}
-	
+
 	public void updateIOPoints(int point, Boolean b) {
-		System.out.println(point + " " + b);
+		Sphere sph = canal_0.get(point);
+		if (sph == null)
+			return;
+		if (b)
+			sph.setMaterial(greenMaterial);
+		else
+			sph.setMaterial(grayMaterial);
 	}
 
 	public void populateComboFormulas() {

@@ -11,12 +11,6 @@ public class Input0 {
 
 	private static List<SimpleBooleanProperty> listeners = new ArrayList<>();
 
-	/*public Input0() {
-		for (int i = 0; i < this.points; i++) {
-			this.listeners.add(new SimpleBooleanProperty());
-		}
-	}*/
-
 	public static List<SimpleBooleanProperty> getListeners() {
 		return listeners;
 	}
