@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.ghgande.j2mod.modbus.Modbus;
+import com.servicos.estatica.stage.one.listeners.input.Input0;
 import com.servicos.estatica.stage.one.modbus.ModbusTCPService;
 import com.servicos.estatica.stage.one.shared.CadastroProperty;
 
@@ -13,6 +14,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -53,6 +55,8 @@ public class AgrzcStageOneController implements Initializable {
 	private static final String IP = "192.168.1.25";
 	protected static final int PORT = Modbus.DEFAULT_PORT;
 	private static int slot = 0;
+
+	//private static Input0 input0 = new Input0();
 
 	@FXML
 	private Pane centralPane;
@@ -168,6 +172,18 @@ public class AgrzcStageOneController implements Initializable {
 				dosagemController.populateComboFormulas();
 			}
 		});
+
+		for (int i = 0; i < Input0.points; i++) {
+			Input0.getListeners().add(new SimpleBooleanProperty());
+		}
+		Input0.getListeners().forEach(listener -> {
+			listener.addListener(new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					dosagemController.updateIOPoints(Input0.getListeners().indexOf(listener), newValue);
+				}
+			});
+		});
 	}
 
 	private void configAnimations() {
@@ -184,15 +200,14 @@ public class AgrzcStageOneController implements Initializable {
 		case 0:
 			points = modbusService.readMultiplePoints(0, 24);
 
-			System.out.println("Slot 0:");
 			for (int i = 0; i < points.length; i++) {
-				System.out.println("I0." + i + ": " + points[i]);
+				Input0.getListeners().get(i).setValue(points[i]);
 			}
 
 			break;
 		case 1:
 			points = modbusService.readMultiplePoints(24, 16);
-			
+
 			break;
 		case 2:
 			points = modbusService.readMultiplePoints(40, 16);
@@ -200,11 +215,6 @@ public class AgrzcStageOneController implements Initializable {
 			break;
 		case 3:
 			points = modbusService.readMultiplePoints(100, 16);
-			
-			System.out.println("Slot 3:");
-			for (int i = 0; i < points.length; i++) {
-				System.out.println("Q0." + i + ": " + points[i]);
-			}
 
 			break;
 		case 4:

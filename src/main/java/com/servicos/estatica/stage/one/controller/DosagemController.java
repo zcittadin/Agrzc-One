@@ -231,6 +231,10 @@ public class DosagemController implements Initializable, ControlledScreen {
 			sensorBaixo4.setMaterial(grayMaterial);
 		}
 	}
+	
+	public void updateIOPoints(int point, Boolean b) {
+		System.out.println(point + " " + b);
+	}
 
 	public void populateComboFormulas() {
 		formulas = FXCollections.observableList((List<Formula>) formulaDAO.findFormulas());
