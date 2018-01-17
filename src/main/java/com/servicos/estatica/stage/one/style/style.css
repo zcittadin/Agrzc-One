@@ -39,6 +39,18 @@
   -fx-graphic: url('basket_go.png');
 }
 
+.btProcessamento {
+  -fx-graphic: url('gear.png');
+}
+
+.btDosagem {
+  -fx-graphic: url('dropper.png');
+}
+
+.btFormulacao {
+  -fx-graphic: url('chemistry.png');
+}
+
 .combo-font {
 	-fx-font: 14px "Regular";
 }

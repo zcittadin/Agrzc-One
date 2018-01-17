@@ -301,7 +301,7 @@ public class CadastroFormulaController implements Initializable {
 								calculaTotal();
 								comboMateria.requestFocus();
 							});
-							btn.setStyle("-fx-graphic: url('/icons/Trash.png');");
+							btn.setStyle("-fx-graphic: url('/com/servicos/estatica/stage/one/style/Trash.png');");
 							btn.setCursor(Cursor.HAND);
 							setGraphic(btn);
 							setText(null);

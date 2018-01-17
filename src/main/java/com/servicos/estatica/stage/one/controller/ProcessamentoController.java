@@ -9,11 +9,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import javafx.scene.shape.Line;
 
 public class ProcessamentoController implements Initializable, ControlledScreen {
 
 	@FXML
 	private Label lblBalanca;
+	@FXML
+	private Line divLine;
 
 	private Tooltip tooltipBalanca = new Tooltip("Peso atual");
 
@@ -30,6 +33,7 @@ public class ProcessamentoController implements Initializable, ControlledScreen 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		divLine.getStrokeDashArray().addAll(2d, 5d);
 		tooltipBalanca.setStyle(TOOLTIP_CSS);
 		Tooltip.install(lblBalanca, tooltipBalanca);
 

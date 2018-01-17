@@ -30,7 +30,7 @@ public class ClienteInfoController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		imgCliente.setImage(new Image("/img/agrozacca.png"));
+		imgCliente.setImage(new Image("/com/servicos/estatica/stage/one/img/agrozacca.png"));
 		rectMoldura.setFill(Color.TRANSPARENT);
 	}
 

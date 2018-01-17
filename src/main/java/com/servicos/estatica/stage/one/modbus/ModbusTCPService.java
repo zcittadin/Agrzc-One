@@ -84,6 +84,7 @@ public class ModbusTCPService {
 			inputReq.setUnitID(1);
 			trans.setRequest(inputReq);
 			trans.execute();
+			inputRes = (ReadMultipleRegistersResponse) trans.getResponse();
 
 			Register[] regs = inputRes.getRegisters();
 			if (regs.length > 0)

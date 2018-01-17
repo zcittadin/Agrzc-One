@@ -30,7 +30,7 @@ public class EstaticaInfoController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		imgEstatica.setImage(new Image("/img/logotipo.jpg"));
+		imgEstatica.setImage(new Image("/com/servicos/estatica/stage/one/img/logotipo.jpg"));
 		rectMoldura.setFill(Color.TRANSPARENT);
 	}
 

@@ -6,17 +6,19 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="920.0" prefWidth="1712.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Line fx:id="divLine" endX="1712.0" fill="WHITE" layoutY="472.0" startX="3.0" stroke="WHITE" strokeWidth="2.0" />
       <Separator orientation="VERTICAL" prefHeight="920.0" />
       <ImageView fitHeight="451.0" fitWidth="1025.0" layoutX="209.0" layoutY="14.0" pickOnBounds="true">
          <image>
             <Image url="@../img/Mistura1_Moagem.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="431.0" fitWidth="1053.0" layoutX="402.0" layoutY="463.0" pickOnBounds="true">
+      <ImageView fitHeight="431.0" fitWidth="1053.0" layoutX="393.0" layoutY="463.0" pickOnBounds="true">
          <image>
             <Image url="@../img/Mistura2_Estocagem.png" />
          </image>
@@ -61,12 +63,12 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="880.0" layoutY="544.0" prefHeight="55.0" prefWidth="163.0" styleClass="labelGradient" stylesheets="@../style/style.css" textFill="#6000fc">
+      <Label alignment="CENTER" layoutX="872.0" layoutY="544.0" prefHeight="55.0" prefWidth="163.0" styleClass="labelGradient" stylesheets="@../style/style.css" textFill="#6000fc">
          <font>
             <Font name="DSEG7 Classic-Bold" size="27.0" />
          </font>
       </Label>
-      <Label fx:id="lblBalanca" layoutX="894.0" layoutY="558.0" text="0000.00" textFill="#03c60d">
+      <Label fx:id="lblBalanca" layoutX="886.0" layoutY="558.0" text="0000.00" textFill="#03c60d">
          <font>
             <Font name="DSEG7 Classic-Bold" size="27.0" />
          </font>

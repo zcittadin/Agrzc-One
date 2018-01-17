@@ -65,7 +65,7 @@ public class AgrzcStageOneController implements Initializable {
 
 	private static FadeTransition labelTransition;
 
-	private static String TOOLTIP_CSS = "-fx-font-size: 8pt; -fx-font-weight: bold; -fx-font-style: normal; ";
+	private static String TOOLTIP_CSS = "-fx-font-size: 12pt; -fx-font-weight: bold; -fx-font-style: normal; -fx-background-color: green;";
 	private Tooltip tooltipCliente = new Tooltip("Informações sobre o cliente");
 	private Tooltip tooltipEstatica = new Tooltip("Informações sobre o fabricante");
 
@@ -86,8 +86,9 @@ public class AgrzcStageOneController implements Initializable {
 		Tooltip.install(imgEstatica, tooltipEstatica);
 		initListeners();
 		configAnimations();
-		// modbusService.setConnectionParams(IP, PORT);
-		// initModbusScan();
+		modbusService.setConnectionParams(IP, PORT);
+		System.out.println("Conectado ao " + IP);
+		initModbusScan();
 		labelTransition.play();
 	}
 
@@ -183,10 +184,15 @@ public class AgrzcStageOneController implements Initializable {
 		case 0:
 			points = modbusService.readMultiplePoints(0, 24);
 
+			System.out.println("Slot 0:");
+			for (int i = 0; i < points.length; i++) {
+				System.out.println("I0." + i + ": " + points[i]);
+			}
+
 			break;
 		case 1:
 			points = modbusService.readMultiplePoints(24, 16);
-
+			
 			break;
 		case 2:
 			points = modbusService.readMultiplePoints(40, 16);
@@ -194,6 +200,11 @@ public class AgrzcStageOneController implements Initializable {
 			break;
 		case 3:
 			points = modbusService.readMultiplePoints(100, 16);
+			
+			System.out.println("Slot 3:");
+			for (int i = 0; i < points.length; i++) {
+				System.out.println("Q0." + i + ": " + points[i]);
+			}
 
 			break;
 		case 4:

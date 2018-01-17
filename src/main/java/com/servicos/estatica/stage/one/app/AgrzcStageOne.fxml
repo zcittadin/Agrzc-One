@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="950.0" prefWidth="1920.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.AgrzcStageOneController">
+<AnchorPane prefHeight="950.0" prefWidth="1920.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.AgrzcStageOneController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1028.0" prefWidth="1920.0" styleClass="mainGradient" stylesheets="@../css/style.css">
          <top>
@@ -49,7 +49,7 @@
             <AnchorPane prefHeight="950.0" prefWidth="220.0" BorderPane.alignment="CENTER">
                <children>
                   <Clock dateVisible="true" layoutX="10.0" layoutY="14.0" lcdDesign="BLUE" prefHeight="83.0" prefWidth="180.0" running="true" secondsVisible="true" skinType="LCD" />
-                  <Button layoutY="141.0" mnemonicParsing="false" onAction="#openDosagem" prefHeight="54.0" prefWidth="214.0" text="Dosagem">
+                  <Button layoutY="134.0" mnemonicParsing="false" onAction="#openDosagem" prefHeight="62.0" prefWidth="214.0" styleClass="btDosagem" stylesheets="@../style/style.css" text="Dosagem">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -57,15 +57,15 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutY="197.0" mnemonicParsing="false" onAction="#openProcessamento" prefHeight="54.0" prefWidth="214.0" text="Processamento">
+                  <Button layoutY="197.0" mnemonicParsing="false" onAction="#openProcessamento" prefHeight="62.0" prefWidth="214.0" styleClass="btProcessamento" stylesheets="@../style/style.css" text="Processamento">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="19.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutY="253.0" mnemonicParsing="false" onAction="#openCadastros" prefHeight="54.0" prefWidth="214.0" text="Formulações">
+                  <Button layoutY="260.0" mnemonicParsing="false" onAction="#openCadastros" prefHeight="62.0" prefWidth="214.0" styleClass="btFormulacao" stylesheets="@../style/style.css" text="Formulações">
                      <font>
                         <Font size="20.0" />
                      </font>
