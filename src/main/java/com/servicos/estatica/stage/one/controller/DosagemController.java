@@ -57,6 +57,14 @@ public class DosagemController implements Initializable, ControlledScreen {
 	@FXML
 	private Label lblSilo6;
 	@FXML
+	private Label lblSilo7;
+	@FXML
+	private Label lblSilo8;
+	@FXML
+	private Label lblSilo9;
+	@FXML
+	private Label lblSilo10;
+	@FXML
 	private Sphere sensorAlto1;
 	@FXML
 	private Sphere sensorAlto2;
@@ -90,6 +98,10 @@ public class DosagemController implements Initializable, ControlledScreen {
 	private Tooltip tooltipSilo4 = new Tooltip(TOOLTIP_MSG_VAZIO);
 	private Tooltip tooltipSilo5 = new Tooltip(TOOLTIP_MSG_VAZIO);
 	private Tooltip tooltipSilo6 = new Tooltip(TOOLTIP_MSG_VAZIO);
+	private Tooltip tooltipSilo7 = new Tooltip(TOOLTIP_MSG_VAZIO);
+	private Tooltip tooltipSilo8 = new Tooltip(TOOLTIP_MSG_VAZIO);
+	private Tooltip tooltipSilo9 = new Tooltip(TOOLTIP_MSG_VAZIO);
+	private Tooltip tooltipSilo10 = new Tooltip(TOOLTIP_MSG_VAZIO);
 
 	private final PhongMaterial greenMaterial = new PhongMaterial();
 	private final PhongMaterial grayMaterial = new PhongMaterial();
@@ -112,12 +124,20 @@ public class DosagemController implements Initializable, ControlledScreen {
 		tooltipSilo4.setStyle(TOOLTIP_CSS);
 		tooltipSilo5.setStyle(TOOLTIP_CSS);
 		tooltipSilo6.setStyle(TOOLTIP_CSS);
+		tooltipSilo7.setStyle(TOOLTIP_CSS);
+		tooltipSilo8.setStyle(TOOLTIP_CSS);
+		tooltipSilo9.setStyle(TOOLTIP_CSS);
+		tooltipSilo10.setStyle(TOOLTIP_CSS);
 		Tooltip.install(lblSilo1, tooltipSilo1);
 		Tooltip.install(lblSilo2, tooltipSilo2);
 		Tooltip.install(lblSilo3, tooltipSilo3);
 		Tooltip.install(lblSilo4, tooltipSilo4);
 		Tooltip.install(lblSilo5, tooltipSilo5);
 		Tooltip.install(lblSilo6, tooltipSilo6);
+		Tooltip.install(lblSilo7, tooltipSilo7);
+		Tooltip.install(lblSilo8, tooltipSilo8);
+		Tooltip.install(lblSilo9, tooltipSilo9);
+		Tooltip.install(lblSilo10, tooltipSilo10);
 		populateComboFormulas();
 		verifySilosStatus();
 		initColors();
@@ -138,6 +158,14 @@ public class DosagemController implements Initializable, ControlledScreen {
 			silo = siloDAO.findBySilo("Silo 5");
 		if (event.toString().contains("lblSilo6"))
 			silo = siloDAO.findBySilo("Silo 6");
+		if (event.toString().contains("lblSilo7"))
+			silo = siloDAO.findBySilo("Silo 7");
+		if (event.toString().contains("lblSilo8"))
+			silo = siloDAO.findBySilo("Silo 8");
+		if (event.toString().contains("lblSilo9"))
+			silo = siloDAO.findBySilo("Silo 9");
+		if (event.toString().contains("lblSilo10"))
+			silo = siloDAO.findBySilo("Silo 10");
 		try {
 			Stage stage;
 			Parent root;
@@ -157,6 +185,22 @@ public class DosagemController implements Initializable, ControlledScreen {
 			verifySilosStatus();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	private void startDosagem() {
+		if (selectedFormula == null) {
+			AlertUtil.makeWarning("Atenção", "Selecione uma formulação para iniciar a dosagem.");
+			return;
+		}
+	}
+
+	@FXML
+	private void startDescarga() {
+		if (selectedFormula == null) {
+			AlertUtil.makeWarning("Atenção", "Não há nenhuma carga na balança.");
+			return;
 		}
 	}
 
@@ -259,6 +303,42 @@ public class DosagemController implements Initializable, ControlledScreen {
 						} else {
 							lblSilo6.setText("Vazio");
 							tooltipSilo6.setText(TOOLTIP_MSG_VAZIO);
+						}
+						break;
+					case "Silo 7":
+						if (s.getMateria() != null) {
+							lblSilo7.setText(s.getMateria().getNomeMateria());
+							tooltipSilo7.setText(s.getMateria().getNomeMateria());
+						} else {
+							lblSilo7.setText("Vazio");
+							tooltipSilo7.setText(TOOLTIP_MSG_VAZIO);
+						}
+						break;
+					case "Silo 8":
+						if (s.getMateria() != null) {
+							lblSilo8.setText(s.getMateria().getNomeMateria());
+							tooltipSilo8.setText(s.getMateria().getNomeMateria());
+						} else {
+							lblSilo8.setText("Vazio");
+							tooltipSilo8.setText(TOOLTIP_MSG_VAZIO);
+						}
+						break;
+					case "Silo 9":
+						if (s.getMateria() != null) {
+							lblSilo9.setText(s.getMateria().getNomeMateria());
+							tooltipSilo9.setText(s.getMateria().getNomeMateria());
+						} else {
+							lblSilo9.setText("Vazio");
+							tooltipSilo9.setText(TOOLTIP_MSG_VAZIO);
+						}
+						break;
+					case "Silo 10":
+						if (s.getMateria() != null) {
+							lblSilo10.setText(s.getMateria().getNomeMateria());
+							tooltipSilo10.setText(s.getMateria().getNomeMateria());
+						} else {
+							lblSilo10.setText("Vazio");
+							tooltipSilo10.setText(TOOLTIP_MSG_VAZIO);
 						}
 						break;
 					}
