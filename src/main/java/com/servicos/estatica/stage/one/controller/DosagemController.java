@@ -40,48 +40,27 @@ import javafx.stage.Stage;
 
 public class DosagemController implements Initializable, ControlledScreen {
 
-	@FXML
-	private Rectangle rectForm;
-	@FXML
-	private ComboBox<Formula> comboFormulas;
-	@FXML
-	private Label lblSilo1;
-	@FXML
-	private Label lblSilo2;
-	@FXML
-	private Label lblSilo3;
-	@FXML
-	private Label lblSilo4;
-	@FXML
-	private Label lblSilo5;
-	@FXML
-	private Label lblSilo6;
-	@FXML
-	private Label lblSilo7;
-	@FXML
-	private Label lblSilo8;
-	@FXML
-	private Label lblSilo9;
-	@FXML
-	private Label lblSilo10;
-	@FXML
-	private Sphere sensorAlto1;
-	@FXML
-	private Sphere sensorAlto2;
-	@FXML
-	private Sphere sensorAlto3;
-	@FXML
-	private Sphere sensorAlto4;
-	@FXML
-	private Sphere sensorBaixo1;
-	@FXML
-	private Sphere sensorBaixo2;
-	@FXML
-	private Sphere sensorBaixo3;
-	@FXML
-	private Sphere sensorBaixo4;
-	@FXML
-	private CheckBox chkSensores;
+	@FXML private Rectangle rectForm;
+	@FXML private ComboBox<Formula> comboFormulas;
+	@FXML private Label lblSilo1;
+	@FXML private Label lblSilo2;
+	@FXML private Label lblSilo3;
+	@FXML private Label lblSilo4;
+	@FXML private Label lblSilo5;
+	@FXML private Label lblSilo6;
+	@FXML private Label lblSilo7;
+	@FXML private Label lblSilo8;
+	@FXML private Label lblSilo9;
+	@FXML private Label lblSilo10;
+	@FXML private Sphere sensorAlto1;
+	@FXML private Sphere sensorAlto2;
+	@FXML private Sphere sensorAlto3;
+	@FXML private Sphere sensorAlto4;
+	@FXML private Sphere sensorBaixo1;
+	@FXML private Sphere sensorBaixo2;
+	@FXML private Sphere sensorBaixo3;
+	@FXML private Sphere sensorBaixo4;
+	@FXML private CheckBox chkSensores;
 
 	private static FormulaDAO formulaDAO = new FormulaDAO();
 	private static SiloDAO siloDAO = new SiloDAO();
