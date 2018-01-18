@@ -139,54 +139,10 @@ public class DosagemController implements Initializable, ControlledScreen {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		initIOPoints();
-
-		rectForm.setFill(Color.TRANSPARENT);
-		tooltipSilo1.setStyle(TOOLTIP_CSS);
-		tooltipSilo2.setStyle(TOOLTIP_CSS);
-		tooltipSilo3.setStyle(TOOLTIP_CSS);
-		tooltipSilo4.setStyle(TOOLTIP_CSS);
-		tooltipSilo5.setStyle(TOOLTIP_CSS);
-		tooltipSilo6.setStyle(TOOLTIP_CSS);
-		tooltipSilo7.setStyle(TOOLTIP_CSS);
-		tooltipSilo8.setStyle(TOOLTIP_CSS);
-		tooltipSilo9.setStyle(TOOLTIP_CSS);
-		tooltipSilo10.setStyle(TOOLTIP_CSS);
-		tooltipBalanca.setStyle(TOOLTIP_CSS);
-		Tooltip.install(lblSilo1, tooltipSilo1);
-		Tooltip.install(lblSilo2, tooltipSilo2);
-		Tooltip.install(lblSilo3, tooltipSilo3);
-		Tooltip.install(lblSilo4, tooltipSilo4);
-		Tooltip.install(lblSilo5, tooltipSilo5);
-		Tooltip.install(lblSilo6, tooltipSilo6);
-		Tooltip.install(lblSilo7, tooltipSilo7);
-		Tooltip.install(lblSilo8, tooltipSilo8);
-		Tooltip.install(lblSilo9, tooltipSilo9);
-		Tooltip.install(lblSilo10, tooltipSilo10);
-		Tooltip.install(lblBalanca, tooltipBalanca);
+		initComponents();
 		populateComboFormulas();
 		verifySilosStatus();
 		initColors();
-	}
-
-	private void initIOPoints() {
-		input_0.put(0, I0_00);
-		input_0.put(1, I0_01);
-		input_0.put(2, I0_02);
-		input_0.put(3, I0_03);
-		input_0.put(4, I0_04);
-		input_0.put(5, I0_05);
-		input_0.put(6, I0_06);
-		input_0.put(7, I0_07);
-		input_0.put(8, null);
-		input_0.put(9, I0_09);
-		input_0.put(10, null);
-		input_0.put(11, I0_11);
-
-		input_1.put(4, I1_04);
-		input_1.put(5, I1_05);
-		input_1.put(6, I1_06);
-		input_1.put(7, I1_07);
-
 	}
 
 	@FXML
@@ -401,6 +357,53 @@ public class DosagemController implements Initializable, ControlledScreen {
 			}
 		});
 		new Thread(searchTask).start();
+	}
+	
+	private void initIOPoints() {
+		input_0.put(0, I0_00);
+		input_0.put(1, I0_01);
+		input_0.put(2, I0_02);
+		input_0.put(3, I0_03);
+		input_0.put(4, I0_04);
+		input_0.put(5, I0_05);
+		input_0.put(6, I0_06);
+		input_0.put(7, I0_07);
+		input_0.put(8, null);
+		input_0.put(9, I0_09);
+		input_0.put(10, null);
+		input_0.put(11, I0_11);
+
+		input_1.put(4, I1_04);
+		input_1.put(5, I1_05);
+		input_1.put(6, I1_06);
+		input_1.put(7, I1_07);
+
+	}
+
+	private void initComponents() {
+		rectForm.setFill(Color.TRANSPARENT);
+		tooltipSilo1.setStyle(TOOLTIP_CSS);
+		tooltipSilo2.setStyle(TOOLTIP_CSS);
+		tooltipSilo3.setStyle(TOOLTIP_CSS);
+		tooltipSilo4.setStyle(TOOLTIP_CSS);
+		tooltipSilo5.setStyle(TOOLTIP_CSS);
+		tooltipSilo6.setStyle(TOOLTIP_CSS);
+		tooltipSilo7.setStyle(TOOLTIP_CSS);
+		tooltipSilo8.setStyle(TOOLTIP_CSS);
+		tooltipSilo9.setStyle(TOOLTIP_CSS);
+		tooltipSilo10.setStyle(TOOLTIP_CSS);
+		tooltipBalanca.setStyle(TOOLTIP_CSS);
+		Tooltip.install(lblSilo1, tooltipSilo1);
+		Tooltip.install(lblSilo2, tooltipSilo2);
+		Tooltip.install(lblSilo3, tooltipSilo3);
+		Tooltip.install(lblSilo4, tooltipSilo4);
+		Tooltip.install(lblSilo5, tooltipSilo5);
+		Tooltip.install(lblSilo6, tooltipSilo6);
+		Tooltip.install(lblSilo7, tooltipSilo7);
+		Tooltip.install(lblSilo8, tooltipSilo8);
+		Tooltip.install(lblSilo9, tooltipSilo9);
+		Tooltip.install(lblSilo10, tooltipSilo10);
+		Tooltip.install(lblBalanca, tooltipBalanca);
 	}
 
 	private void initColors() {

@@ -83,8 +83,8 @@ public class ProcessamentoController implements Initializable, ControlledScreen 
 		Sphere sph = null;
 		if (channel == 0)
 			sph = input_0.get(point);
-		//if (channel == 1)
-			//sph = input_1.get(point);
+		// if (channel == 1)
+		// sph = input_1.get(point);
 		sph = input_0.get(point);
 		if (sph == null)
 			return;
@@ -93,7 +93,7 @@ public class ProcessamentoController implements Initializable, ControlledScreen 
 		else
 			sph.setMaterial(grayMaterial);
 	}
-	
+
 	private void initColors() {
 		grayMaterial.setDiffuseColor(Color.DARKGRAY);
 		grayMaterial.setSpecularColor(Color.GREY);
