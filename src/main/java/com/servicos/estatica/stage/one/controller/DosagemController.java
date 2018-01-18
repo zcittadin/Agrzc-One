@@ -3,6 +3,7 @@ package com.servicos.estatica.stage.one.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +11,10 @@ import java.util.ResourceBundle;
 
 import com.servicos.estatica.stage.one.app.ControlledScreen;
 import com.servicos.estatica.stage.one.dao.FormulaDAO;
+import com.servicos.estatica.stage.one.dao.HistoricoDAO;
 import com.servicos.estatica.stage.one.dao.SiloDAO;
 import com.servicos.estatica.stage.one.model.Formula;
+import com.servicos.estatica.stage.one.model.Historico;
 import com.servicos.estatica.stage.one.model.Silo;
 import com.servicos.estatica.stage.one.util.AlertUtil;
 
@@ -101,6 +104,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 
 	private static FormulaDAO formulaDAO = new FormulaDAO();
 	private static SiloDAO siloDAO = new SiloDAO();
+	private static HistoricoDAO historicoDAO = new HistoricoDAO();
 
 	private static List<Silo> silos = new ArrayList<Silo>();
 	private static ObservableList<Formula> formulas = FXCollections.observableArrayList();
@@ -196,6 +200,9 @@ public class DosagemController implements Initializable, ControlledScreen {
 			AlertUtil.makeWarning("Atenção", "Selecione uma formulação para iniciar a dosagem.");
 			return;
 		}
+
+		Historico h = new Historico(null, new Date(), selectedFormula);
+		historicoDAO.saveHistorico(h);
 	}
 
 	@FXML
@@ -358,7 +365,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 		});
 		new Thread(searchTask).start();
 	}
-	
+
 	private void initIOPoints() {
 		input_0.put(0, I0_00);
 		input_0.put(1, I0_01);
