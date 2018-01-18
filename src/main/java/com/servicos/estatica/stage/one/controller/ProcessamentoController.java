@@ -79,8 +79,13 @@ public class ProcessamentoController implements Initializable, ControlledScreen 
 		input_0.put(23, I0_23);
 	}
 
-	public void updateIOPoints(int point, Boolean b) {
-		Sphere sph = input_0.get(point);
+	public void updateIOPoints(int channel, int point, Boolean b) {
+		Sphere sph = null;
+		if (channel == 0)
+			sph = input_0.get(point);
+		//if (channel == 1)
+			//sph = input_1.get(point);
+		sph = input_0.get(point);
 		if (sph == null)
 			return;
 		if (b)

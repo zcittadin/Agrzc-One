@@ -118,12 +118,13 @@ public class DosagemController implements Initializable, ControlledScreen {
 	private Tooltip tooltipSilo8 = new Tooltip(TOOLTIP_MSG_VAZIO);
 	private Tooltip tooltipSilo9 = new Tooltip(TOOLTIP_MSG_VAZIO);
 	private Tooltip tooltipSilo10 = new Tooltip(TOOLTIP_MSG_VAZIO);
-	private Tooltip tooltipBalanca = new Tooltip("Peso atual");
+	private Tooltip tooltipBalanca = new Tooltip("Peso atual (Kg)");
 
 	private final PhongMaterial greenMaterial = new PhongMaterial();
 	private final PhongMaterial grayMaterial = new PhongMaterial();
 
 	private static Map<Integer, Sphere> input_0 = new HashMap<>();
+	private static Map<Integer, Sphere> input_1 = new HashMap<>();
 
 	private Formula selectedFormula;
 
@@ -180,6 +181,11 @@ public class DosagemController implements Initializable, ControlledScreen {
 		input_0.put(9, I0_09);
 		input_0.put(10, null);
 		input_0.put(11, I0_11);
+
+		input_1.put(4, I1_04);
+		input_1.put(5, I1_05);
+		input_1.put(6, I1_06);
+		input_1.put(7, I1_07);
 
 	}
 
@@ -244,14 +250,29 @@ public class DosagemController implements Initializable, ControlledScreen {
 		}
 	}
 
-	public void updateIOPoints(int point, Boolean b) {
-		Sphere sph = input_0.get(point);
+	public void updateIOPoints(int channel, int point, Boolean b) {
+		Sphere sph = null;
+		if (channel == 0)
+			sph = input_0.get(point);
+		if (channel == 1)
+			sph = input_1.get(point);
 		if (sph == null)
 			return;
 		if (b)
 			sph.setMaterial(greenMaterial);
 		else
 			sph.setMaterial(grayMaterial);
+	}
+
+	public void updateBalanca(Integer value) {
+		String strValue = value.toString();
+		if (strValue.length() < 2)
+			strValue = "0".concat(strValue);
+		if (strValue.length() < 3)
+			strValue = "0".concat(strValue);
+		if (strValue.length() < 4)
+			strValue = "0".concat(strValue);
+		lblBalanca.setText(strValue);
 	}
 
 	public void populateComboFormulas() {

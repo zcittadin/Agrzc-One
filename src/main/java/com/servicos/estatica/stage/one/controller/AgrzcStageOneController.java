@@ -102,12 +102,12 @@ public class AgrzcStageOneController implements Initializable {
 	}
 
 	private void initModbusScan() {
-		scanIO = new Timeline(new KeyFrame(Duration.millis(500), new EventHandler<ActionEvent>() {
+		scanIO = new Timeline(new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				readMultiplePoints(slot);
 				slot++;
-				if (slot == 6)
+				if (slot == 7)
 					slot = 0;
 			}
 		}));
@@ -186,8 +186,8 @@ public class AgrzcStageOneController implements Initializable {
 			listener.addListener(new ChangeListener<Boolean>() {
 				@Override
 				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-					dosagemController.updateIOPoints(Input0.getListeners().indexOf(listener), newValue);
-					processamentoController.updateIOPoints(Input0.getListeners().indexOf(listener), newValue);
+					dosagemController.updateIOPoints(0, Input0.getListeners().indexOf(listener), newValue);
+					processamentoController.updateIOPoints(0, Input0.getListeners().indexOf(listener), newValue);
 				}
 			});
 		});
@@ -200,7 +200,7 @@ public class AgrzcStageOneController implements Initializable {
 			listener.addListener(new ChangeListener<Boolean>() {
 				@Override
 				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-					dosagemController.updateIOPoints(Input1.getListeners().indexOf(listener), newValue);
+					dosagemController.updateIOPoints(1, Input1.getListeners().indexOf(listener), newValue);
 				}
 			});
 		});
@@ -213,7 +213,7 @@ public class AgrzcStageOneController implements Initializable {
 			listener.addListener(new ChangeListener<Boolean>() {
 				@Override
 				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-					dosagemController.updateIOPoints(Input2.getListeners().indexOf(listener), newValue);
+					dosagemController.updateIOPoints(2, Input2.getListeners().indexOf(listener), newValue);
 				}
 			});
 		});
@@ -226,7 +226,8 @@ public class AgrzcStageOneController implements Initializable {
 			listener.addListener(new ChangeListener<Boolean>() {
 				@Override
 				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-					//dosagemController.updateIOPoints(Output0.getListeners().indexOf(listener), newValue);
+					// dosagemController.updateIOPoints(Output0.getListeners().indexOf(listener),
+					// newValue);
 				}
 			});
 		});
@@ -239,7 +240,8 @@ public class AgrzcStageOneController implements Initializable {
 			listener.addListener(new ChangeListener<Boolean>() {
 				@Override
 				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-					//dosagemController.updateIOPoints(Output3.getListeners().indexOf(listener), newValue);
+					// dosagemController.updateIOPoints(Output3.getListeners().indexOf(listener),
+					// newValue);
 				}
 			});
 		});
@@ -252,7 +254,8 @@ public class AgrzcStageOneController implements Initializable {
 			listener.addListener(new ChangeListener<Boolean>() {
 				@Override
 				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-					//dosagemController.updateIOPoints(Output4.getListeners().indexOf(listener), newValue);
+					// dosagemController.updateIOPoints(Output4.getListeners().indexOf(listener),
+					// newValue);
 				}
 			});
 		});
@@ -303,6 +306,15 @@ public class AgrzcStageOneController implements Initializable {
 			points = modbusService.readMultiplePoints(132, 16);
 			for (int i = 0; i < points.length; i++) {
 				Output4.getListeners().get(i).setValue(points[i]);
+			}
+			break;
+		case 6:
+			Integer[] values = modbusService.readMultipleRegisterRequest(926, 2);
+			if (values.length > 0) {
+				dosagemController.updateBalanca(values[0]);
+				for (int i = 0; i < values.length; i++) {
+					//System.out.println(values[i]);
+				}
 			}
 			break;
 		}

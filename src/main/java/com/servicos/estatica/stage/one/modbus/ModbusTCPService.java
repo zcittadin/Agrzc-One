@@ -55,6 +55,34 @@ public class ModbusTCPService {
 		return null;
 	}
 
+	public Integer[] readMultipleRegisterRequest(Integer addr, Integer qtd) {
+		Integer[] results = null;
+		try {
+			con.connect();
+			req = new ReadMultipleRegistersRequest(addr, qtd);
+			trans = new ModbusTCPTransaction(con);
+			req.setUnitID(1);
+			trans.setRequest(req);
+			trans.execute();
+			res = (ReadMultipleRegistersResponse) trans.getResponse();
+
+			Register[] regs = res.getRegisters();
+			con.close();
+
+			if (regs.length > 0) {
+				results = new Integer[regs.length];
+				for (int i = 0; i < regs.length; i++) {
+					results[i] = res.getRegisterValue(i);
+				}
+				return results;
+			} else
+				return new Integer[0];
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
 	public Boolean readSlaveInput() {
 		try {
 			con.connect();
@@ -74,7 +102,7 @@ public class ModbusTCPService {
 		}
 		return false;
 	}
-	
+
 	public Boolean[] readMultiplePoints(int ref, int qtd) {
 		Boolean[] results = null;
 		try {
@@ -91,7 +119,7 @@ public class ModbusTCPService {
 				results = new Boolean[regs.length];
 			else
 				return new Boolean[0];
-			
+
 			for (int i = 0; i < regs.length; i++) {
 				Integer value = inputRes.getRegisterValue(i);
 				if (value == 1)
