@@ -21,6 +21,7 @@ import com.servicos.estatica.stage.one.shared.CadastroProperty;
 import com.servicos.estatica.stage.one.util.AlertUtil;
 import com.servicos.estatica.stage.one.util.Toast;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -37,13 +38,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -51,8 +51,6 @@ import javafx.util.Callback;
 @SuppressWarnings("rawtypes")
 public class CadastrosController implements Initializable, ControlledScreen {
 
-	@FXML
-	private Rectangle rectForm;
 	@FXML
 	private TableView tblMateria;
 	@FXML
@@ -91,6 +89,10 @@ public class CadastrosController implements Initializable, ControlledScreen {
 	private Button btAddMateria;
 	@FXML
 	private Button btAddFormula;
+	@FXML
+	private Button btSearch;
+	@FXML
+	private ComboBox<Formula> comboFormula;
 
 	private static ObservableList<Materia> materias = FXCollections.observableArrayList();
 	private static ObservableList<Formula> formulas = FXCollections.observableArrayList();
@@ -112,7 +114,6 @@ public class CadastrosController implements Initializable, ControlledScreen {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		rectForm.setFill(Color.TRANSPARENT);
 		prepareTables();
 		findMaterias();
 		findFormulas();
@@ -163,6 +164,12 @@ public class CadastrosController implements Initializable, ControlledScreen {
 				progFormulas.setVisible(true);
 				tblFormula.setDisable(true);
 				formulas = FXCollections.observableList((List<Formula>) formulaDAO.findFormulas());
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						comboFormula.setItems(formulas);
+					}
+				});
 				return null;
 			}
 		};
@@ -352,9 +359,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		new Thread(saveTask).start();
 	}
 
-	@SuppressWarnings("unchecked")
 	private void prepareTables() {
-
 		prepareTblMateria();
 		prepareTblFormula();
 		prepareTblHistorico();

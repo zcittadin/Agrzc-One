@@ -51,6 +51,10 @@
   -fx-graphic: url('chemistry.png');
 }
 
+.btSearch {
+  -fx-graphic: url('Zoom.png');
+}
+
 .combo-font {
 	-fx-font: 14px "Regular";
 }
