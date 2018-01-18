@@ -13,7 +13,9 @@ import com.servicos.estatica.stage.one.listeners.output.Output0;
 import com.servicos.estatica.stage.one.listeners.output.Output3;
 import com.servicos.estatica.stage.one.listeners.output.Output4;
 import com.servicos.estatica.stage.one.modbus.ModbusTCPService;
+import com.servicos.estatica.stage.one.model.Formula;
 import com.servicos.estatica.stage.one.shared.CadastroProperty;
+import com.servicos.estatica.stage.one.shared.HistoricoProperty;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -178,6 +180,13 @@ public class AgrzcStageOneController implements Initializable {
 			}
 		});
 
+		HistoricoProperty.selectedFormulaProperty().addListener(new ChangeListener<Formula>() {
+			@Override
+			public void changed(ObservableValue<? extends Formula> observable, Formula oldValue, Formula newValue) {
+				cadastrosController.saveHistorico(newValue);
+			}
+		});
+
 		// INPUT CANAL 0
 		for (int i = 0; i < Input0.POINTS; i++) {
 			Input0.getListeners().add(new SimpleBooleanProperty());
@@ -313,7 +322,7 @@ public class AgrzcStageOneController implements Initializable {
 			if (values.length > 0) {
 				dosagemController.updateBalanca(values[0]);
 				for (int i = 0; i < values.length; i++) {
-					//System.out.println(values[i]);
+					// System.out.println(values[i]);
 				}
 			}
 			break;

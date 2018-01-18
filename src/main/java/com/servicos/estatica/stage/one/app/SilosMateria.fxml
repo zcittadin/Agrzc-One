@@ -15,7 +15,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="btOk" layoutX="201.0" layoutY="107.0" mnemonicParsing="false" onAction="#saveSilo" prefHeight="30.0" prefWidth="99.0" styleClass="btOk" stylesheets="@../css/style.css" text="Ok">
+      <Button fx:id="btOk" layoutX="201.0" layoutY="107.0" mnemonicParsing="false" onAction="#saveSilo" prefHeight="30.0" prefWidth="99.0" styleClass="btOk" stylesheets="@../style/style.css" text="Ok">
          <font>
             <Font size="14.0" />
          </font>
@@ -23,7 +23,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btCancel" layoutX="310.0" layoutY="107.0" mnemonicParsing="false" onAction="#cancel" prefHeight="30.0" prefWidth="99.0" styleClass="btCancel" stylesheets="@../css/style.css" text="Cancela">
+      <Button fx:id="btCancel" layoutX="310.0" layoutY="107.0" mnemonicParsing="false" onAction="#cancel" prefHeight="30.0" prefWidth="99.0" styleClass="btCancel" stylesheets="@../style/style.css" text="Cancela">
          <font>
             <Font size="14.0" />
          </font>

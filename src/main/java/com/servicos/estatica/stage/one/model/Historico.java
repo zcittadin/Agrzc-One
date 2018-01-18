@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "historico")
 public class Historico implements Serializable {
 
-	private static final long serialVersionUID = 5840133604390338734L;
+	private static final long serialVersionUID = -1126739251959920059L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +25,8 @@ public class Historico implements Serializable {
 	private Long id;
 	@Column(name = "data")
 	private Date data;
+	@Column(name = "peso")
+	private Double peso;
 	@OneToOne(orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_formula")
 	private Formula formula;
@@ -33,9 +35,10 @@ public class Historico implements Serializable {
 
 	}
 
-	public Historico(Long id, Date data, Formula formula) {
+	public Historico(Long id, Date data, Double peso, Formula formula) {
 		this.id = id;
 		this.data = data;
+		this.peso = peso;
 		this.formula = formula;
 	}
 
@@ -55,6 +58,14 @@ public class Historico implements Serializable {
 		this.data = data;
 	}
 
+	public Double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(Double peso) {
+		this.peso = peso;
+	}
+
 	public Formula getFormula() {
 		return formula;
 	}
@@ -65,7 +76,7 @@ public class Historico implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Historico [id=" + id + ", data=" + data + ", formula=" + formula + "]";
+		return "Historico [id=" + id + ", data=" + data + ", peso=" + peso + ", formula=" + formula + "]";
 	}
 
 	@Override

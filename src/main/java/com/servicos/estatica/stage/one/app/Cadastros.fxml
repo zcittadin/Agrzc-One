@@ -8,22 +8,24 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="920.0" prefWidth="1712.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Rectangle fx:id="rectForm" arcHeight="20.0" arcWidth="20.0" fill="#004bff" height="177.0" layoutX="874.0" layoutY="73.0" stroke="#00089a" strokeType="INSIDE" width="750.0" />
       <Separator orientation="VERTICAL" prefHeight="920.0" />
       <Label layoutX="10.0" layoutY="10.0" text="Gerenciamento de matéria-prima e formulações" textFill="WHITE">
          <font>
             <Font size="35.0" />
          </font>
       </Label>
-      <Label layoutX="53.0" layoutY="93.0" text="Matérias-prima disponíveis" textFill="WHITE">
+      <Label layoutX="53.0" layoutY="73.0" text="Matérias-prima disponíveis" textFill="WHITE">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Button fx:id="btAddMateria" layoutX="480.0" layoutY="93.0" mnemonicParsing="false" onAction="#addMateria" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova matéria-prima">
+      <Button fx:id="btAddMateria" layoutX="630.0" layoutY="73.0" mnemonicParsing="false" onAction="#addMateria" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova matéria-prima">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -31,19 +33,19 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <TableView fx:id="tblMateria" layoutX="53.0" layoutY="123.0" prefHeight="775.0" prefWidth="592.0">
+      <TableView fx:id="tblMateria" layoutX="45.0" layoutY="103.0" prefHeight="368.0" prefWidth="750.0">
         <columns>
-          <TableColumn fx:id="colNomeMateria" prefWidth="418.9999694824219" resizable="false" text="Nome da matéria-prima" />
+          <TableColumn fx:id="colNomeMateria" prefWidth="578.0" resizable="false" text="Nome da matéria-prima" />
             <TableColumn fx:id="colEditarMateria" prefWidth="85.0" resizable="false" text="Editar" />
-            <TableColumn fx:id="colExcluirMateria" prefWidth="86.0" resizable="false" text="Excluir" />
+            <TableColumn fx:id="colExcluirMateria" prefWidth="85.0" resizable="false" text="Excluir" />
         </columns>
       </TableView>
-      <Label layoutX="692.0" layoutY="93.0" text="Formulações disponíveis" textFill="WHITE">
+      <Label layoutX="45.0" layoutY="500.0" text="Formulações disponíveis" textFill="WHITE">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Button fx:id="btAddFormula" layoutX="1511.0" layoutY="93.0" mnemonicParsing="false" onAction="#addFormula" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova formulação">
+      <Button fx:id="btAddFormula" layoutX="630.0" layoutY="501.0" mnemonicParsing="false" onAction="#addFormula" prefHeight="30.0" prefWidth="165.0" styleClass="btAdd" stylesheets="@../css/style.css" text="Nova formulação">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -51,15 +53,29 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <TableView fx:id="tblFormula" layoutX="692.0" layoutY="123.0" prefHeight="775.0" prefWidth="966.0">
+      <TableView fx:id="tblFormula" layoutX="45.0" layoutY="531.0" prefHeight="375.0" prefWidth="750.0">
         <columns>
-          <TableColumn fx:id="colNomeFormula" prefWidth="571.0" resizable="false" text="Nome da formulação" />
-          <TableColumn fx:id="colPesoFormula" prefWidth="198.0" resizable="false" text="Peso total (Kg)" />
-            <TableColumn fx:id="colEditarFormula" prefWidth="101.0" resizable="false" text="Editar" />
-            <TableColumn fx:id="colExcluirFormula" prefWidth="94.0" resizable="false" text="Excluir" />
+          <TableColumn fx:id="colNomeFormula" prefWidth="447.0000305175781" resizable="false" text="Nome da formulação" />
+          <TableColumn fx:id="colPesoFormula" prefWidth="130.0" resizable="false" text="Peso total (Kg)" />
+            <TableColumn fx:id="colEditarFormula" prefWidth="85.0" resizable="false" text="Editar" />
+            <TableColumn fx:id="colExcluirFormula" prefWidth="85.0" resizable="false" text="Excluir" />
         </columns>
       </TableView>
-      <ProgressIndicator fx:id="progFormulas" layoutX="966.0" layoutY="431.0" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #002257;" visible="false" />
-      <ProgressIndicator fx:id="progMaterias" layoutX="141.0" layoutY="430.0" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #002257;" visible="false" />
+      <ProgressIndicator fx:id="progFormulas" layoutX="209.0" layoutY="649.0" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #002257;" visible="false" />
+      <ProgressIndicator fx:id="progMaterias" layoutX="211.0" layoutY="220.0" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #002257;" visible="false" />
+      <TableView fx:id="tblHist" layoutX="874.0" layoutY="233.0" prefHeight="674.0" prefWidth="750.0">
+         <columns>
+            <TableColumn fx:id="colDataHist" prefWidth="149.0" resizable="false" text="Data/hora" />
+            <TableColumn fx:id="colFormulaHist" prefWidth="339.0" resizable="false" text="Formulação" />
+            <TableColumn fx:id="colPesoHist" prefWidth="174.0" resizable="false" text="Peso total (Kg)" />
+            <TableColumn fx:id="colExcluirHist" prefWidth="86.0" resizable="false" text="Excluir" />
+         </columns>
+      </TableView>
+      <Label layoutX="890.0" layoutY="83.0" text="Consultar histórico de produção:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <ProgressIndicator fx:id="progHist" layoutX="1039.0" layoutY="499.0" prefHeight="164.0" prefWidth="419.0" style="-fx-progress-color: #002257;" visible="false" />
    </children>
 </AnchorPane>

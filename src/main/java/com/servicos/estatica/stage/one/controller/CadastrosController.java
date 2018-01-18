@@ -2,15 +2,19 @@ package com.servicos.estatica.stage.one.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.stage.one.app.ControlledScreen;
 import com.servicos.estatica.stage.one.dao.FormulaDAO;
+import com.servicos.estatica.stage.one.dao.HistoricoDAO;
 import com.servicos.estatica.stage.one.dao.MateriaDAO;
 import com.servicos.estatica.stage.one.dao.QuantidadeDAO;
 import com.servicos.estatica.stage.one.model.Formula;
+import com.servicos.estatica.stage.one.model.Historico;
 import com.servicos.estatica.stage.one.model.Materia;
 import com.servicos.estatica.stage.one.model.Quantidade;
 import com.servicos.estatica.stage.one.shared.CadastroProperty;
@@ -38,6 +42,8 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -46,6 +52,8 @@ import javafx.util.Callback;
 public class CadastrosController implements Initializable, ControlledScreen {
 
 	@FXML
+	private Rectangle rectForm;
+	@FXML
 	private TableView tblMateria;
 	@FXML
 	private TableColumn colNomeMateria;
@@ -53,8 +61,6 @@ public class CadastrosController implements Initializable, ControlledScreen {
 	private TableColumn colEditarMateria;
 	@FXML
 	private TableColumn colExcluirMateria;
-	@FXML
-	private ProgressIndicator progMaterias;
 	@FXML
 	private TableView tblFormula;
 	@FXML
@@ -66,7 +72,21 @@ public class CadastrosController implements Initializable, ControlledScreen {
 	@FXML
 	private TableColumn colExcluirFormula;
 	@FXML
+	private TableView tblHist;
+	@FXML
+	private TableColumn colDataHist;
+	@FXML
+	private TableColumn colFormulaHist;
+	@FXML
+	private TableColumn colPesoHist;
+	@FXML
+	private TableColumn colExcluirHist;
+	@FXML
+	private ProgressIndicator progMaterias;
+	@FXML
 	private ProgressIndicator progFormulas;
+	@FXML
+	private ProgressIndicator progHist;
 	@FXML
 	private Button btAddMateria;
 	@FXML
@@ -74,12 +94,14 @@ public class CadastrosController implements Initializable, ControlledScreen {
 
 	private static ObservableList<Materia> materias = FXCollections.observableArrayList();
 	private static ObservableList<Formula> formulas = FXCollections.observableArrayList();
+	private static ObservableList<Historico> historico = FXCollections.observableArrayList();
 
 	private static Double pesoToRecalc;
 
 	private static MateriaDAO materiaDAO = new MateriaDAO();
 	private static FormulaDAO formulaDAO = new FormulaDAO();
 	private static QuantidadeDAO quantidadeDAO = new QuantidadeDAO();
+	private static HistoricoDAO historicoDAO = new HistoricoDAO();
 
 	ScreensController myController;
 
@@ -90,9 +112,11 @@ public class CadastrosController implements Initializable, ControlledScreen {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		rectForm.setFill(Color.TRANSPARENT);
 		prepareTables();
 		findMaterias();
 		findFormulas();
+		findHistorico();
 	}
 
 	private void findMaterias() {
@@ -159,6 +183,44 @@ public class CadastrosController implements Initializable, ControlledScreen {
 				progFormulas.setVisible(false);
 				tblFormula.setDisable(false);
 				AlertUtil.makeError("Erro", "Ocorreu uma falha ao consultar as formulações existentes.");
+			}
+		});
+		new Thread(searchTask).start();
+	}
+
+	private void findHistorico() {
+		Task<Void> searchTask = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				progHist.setVisible(true);
+				tblHist.setDisable(true);
+				// btAddMateria.setDisable(true);
+				// btAddFormula.setDisable(true);
+				historico = FXCollections.observableList((List<Historico>) historicoDAO.findHistorico());
+				return null;
+			}
+		};
+
+		searchTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+				progHist.setVisible(false);
+				tblHist.setDisable(false);
+				// btAddMateria.setDisable(false);
+				// btAddFormula.setDisable(false);
+				tblHist.setItems(historico);
+				tblFormula.refresh();
+			}
+		});
+		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+				progHist.setVisible(false);
+				tblHist.setDisable(false);
+				// btAddMateria.setDisable(false);
+				// btAddFormula.setDisable(false);
+				AlertUtil.makeError("Erro", "Ocorreu uma falha ao consultar o histórico de produção.");
 			}
 		});
 		new Thread(searchTask).start();
@@ -261,8 +323,58 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		}
 	}
 
+	public void saveHistorico(Formula formula) {
+		progFormulas.setVisible(true);
+		Task<Void> saveTask = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				historicoDAO.saveHistorico(new Historico(null, new Date(), formula.getPesoTotal(), formula));
+				return null;
+			}
+		};
+
+		saveTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+				progFormulas.setVisible(false);
+				findHistorico();
+				tblHist.refresh();
+			}
+		});
+
+		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+				progFormulas.setVisible(false);
+				AlertUtil.makeError("Erro", "Ocorreu uma falha ao gravar o histórico.");
+			}
+		});
+		new Thread(saveTask).start();
+	}
+
 	@SuppressWarnings("unchecked")
 	private void prepareTables() {
+
+		prepareTblMateria();
+		prepareTblFormula();
+		prepareTblHistorico();
+	}
+
+	private void calculaTotais() {
+		List<Formula> formulas = formulaDAO.findFormulas();
+		formulas.forEach(frm -> {
+			List<Quantidade> quantidades = quantidadeDAO.findByFormula(frm);
+			pesoToRecalc = new Double(0);
+			quantidades.forEach(qtd -> {
+				pesoToRecalc += qtd.getPeso();
+			});
+			frm.setPesoTotal(pesoToRecalc);
+			formulaDAO.updateFormula(frm);
+		});
+	}
+
+	@SuppressWarnings("unchecked")
+	private void prepareTblMateria() {
 
 		colNomeMateria.setCellValueFactory(
 				new Callback<TableColumn.CellDataFeatures<Materia, String>, ObservableValue<String>>() {
@@ -370,7 +482,10 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		colNomeMateria.setStyle("-fx-alignment: CENTER;");
 		colEditarMateria.setStyle("-fx-alignment: CENTER;");
 		colExcluirMateria.setStyle("-fx-alignment: CENTER;");
+	}
 
+	@SuppressWarnings("unchecked")
+	private void prepareTblFormula() {
 		colNomeFormula.setCellValueFactory(
 				new Callback<TableColumn.CellDataFeatures<Formula, String>, ObservableValue<String>>() {
 					public ObservableValue<String> call(CellDataFeatures<Formula, String> cell) {
@@ -454,7 +569,8 @@ public class CadastrosController implements Initializable, ControlledScreen {
 													"Formulação removida com sucesso.");
 											formulas.remove(f);
 											tblFormula.refresh();
-											CadastroProperty.cadastroFormulaProperty().set((!CadastroProperty.getFormulaChanged()));
+											CadastroProperty.cadastroFormulaProperty()
+													.set((!CadastroProperty.getFormulaChanged()));
 											CadastroProperty.setFormulaChanged(!CadastroProperty.getFormulaChanged());
 										}
 									});
@@ -488,17 +604,99 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		colExcluirFormula.setStyle("-fx-alignment: CENTER;");
 	}
 
-	private void calculaTotais() {
-		List<Formula> formulas = formulaDAO.findFormulas();
-		formulas.forEach(frm -> {
-			List<Quantidade> quantidades = quantidadeDAO.findByFormula(frm);
-			pesoToRecalc = new Double(0);
-			quantidades.forEach(qtd -> {
-				pesoToRecalc += qtd.getPeso();
-			});
-			frm.setPesoTotal(pesoToRecalc);
-			formulaDAO.updateFormula(frm);
-		});
+	@SuppressWarnings("unchecked")
+	private void prepareTblHistorico() {
+		colDataHist.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Historico, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(CellDataFeatures<Historico, String> cell) {
+						final Historico h = cell.getValue();
+						final SimpleObjectProperty<String> simpleObject;
+						simpleObject = new SimpleObjectProperty<String>(
+								new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss").format(h.getData()));
+						return simpleObject;
+					}
+				});
+		colFormulaHist.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Historico, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(CellDataFeatures<Historico, String> cell) {
+						final Historico h = cell.getValue();
+						final SimpleObjectProperty<String> simpleObject = new SimpleObjectProperty<String>(
+								h.getFormula().getNomeFormula());
+						return simpleObject;
+					}
+				});
+		colPesoHist.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Historico, Double>, ObservableValue<Double>>() {
+					public ObservableValue<Double> call(CellDataFeatures<Historico, Double> cell) {
+						final Historico h = cell.getValue();
+						final SimpleObjectProperty<Double> simpleObject = new SimpleObjectProperty<Double>(h.getPeso());
+						return simpleObject;
+					}
+				});
+
+		Callback<TableColumn<Historico, String>, TableCell<Historico, String>> cellExcluirHistoricoFactory = new Callback<TableColumn<Historico, String>, TableCell<Historico, String>>() {
+			@Override
+			public TableCell call(final TableColumn<Historico, String> param) {
+				final TableCell<Historico, String> cell = new TableCell<Historico, String>() {
+
+					final Button btn = new Button();
+
+					@Override
+					public void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						} else {
+							btn.setOnAction(event -> {
+								Optional<ButtonType> result = AlertUtil.makeConfirm("Confirmar exclusão",
+										"Tem certeza que deseja excluir este registro do histórico de produção?");
+								if (result.get() == ButtonType.OK) {
+									Historico h = getTableView().getItems().get(getIndex());
+									Task<Void> exclusionTask = new Task<Void>() {
+										@Override
+										protected Void call() throws Exception {
+											historicoDAO.removeHistorico(h);
+											return null;
+										}
+									};
+									exclusionTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+										@Override
+										public void handle(WorkerStateEvent arg0) {
+											Toast.makeToast((Stage) tblMateria.getScene().getWindow(),
+													"Registro histórico removido com sucesso.");
+											historico.remove(h);
+											tblHist.refresh();
+										}
+									});
+									exclusionTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+										@Override
+										public void handle(WorkerStateEvent arg0) {
+											AlertUtil.makeError("Erro",
+													"Ocorreu uma falha ao tentar remover o registro selecionado.");
+											tblHist.setItems(historico);
+											tblHist.refresh();
+										}
+									});
+									new Thread(exclusionTask).start();
+								}
+							});
+							btn.setStyle("-fx-graphic: url('/com/servicos/estatica/stage/one/style/Trash.png');");
+							btn.setCursor(Cursor.HAND);
+							setGraphic(btn);
+							setText(null);
+						}
+					}
+				};
+				return cell;
+			}
+		};
+		colExcluirHist.setCellFactory(cellExcluirHistoricoFactory);
+
+		colDataHist.setStyle("-fx-alignment: CENTER;");
+		colFormulaHist.setStyle("-fx-alignment: CENTER;");
+		colPesoHist.setStyle("-fx-alignment: CENTER;");
+		colExcluirHist.setStyle("-fx-alignment: CENTER;");
 	}
 
 }
