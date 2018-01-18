@@ -85,6 +85,18 @@ public class DosagemController implements Initializable, ControlledScreen {
 	@FXML
 	private Sphere sensorBaixo4;
 	@FXML
+	private Sphere sensorAlto5;
+	@FXML
+	private Sphere sensorAlto6;
+	@FXML
+	private Sphere sensorAlto7;
+	@FXML
+	private Sphere sensorAlto8;
+	@FXML
+	private Sphere sensorAlto9;
+	@FXML
+	private Sphere sensorAlto10;
+	@FXML
 	private CheckBox chkSensores;
 
 	private static FormulaDAO formulaDAO = new FormulaDAO();
@@ -164,6 +176,10 @@ public class DosagemController implements Initializable, ControlledScreen {
 		input_0.put(5, sensorAlto3);
 		input_0.put(6, sensorBaixo4);
 		input_0.put(7, sensorAlto4);
+		input_0.put(8, null);
+		input_0.put(9, sensorAlto5);
+		input_0.put(10, null);
+		input_0.put(11, sensorAlto6);
 
 	}
 

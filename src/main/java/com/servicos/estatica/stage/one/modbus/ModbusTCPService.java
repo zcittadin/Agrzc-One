@@ -38,10 +38,10 @@ public class ModbusTCPService {
 		}
 	}
 
-	public Integer callTCPModbus() {
+	public Integer readSingleRegisterRequest(Integer addr) {
 		try {
 			con.connect();
-			req = new ReadMultipleRegistersRequest(ref, count);
+			req = new ReadMultipleRegistersRequest(addr, 1);
 			trans = new ModbusTCPTransaction(con);
 			req.setUnitID(1);
 			trans.setRequest(req);

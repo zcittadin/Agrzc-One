@@ -179,7 +179,7 @@ public class AgrzcStageOneController implements Initializable {
 		});
 
 		// INPUT CANAL 0
-		for (int i = 0; i < Input0.points; i++) {
+		for (int i = 0; i < Input0.POINTS; i++) {
 			Input0.getListeners().add(new SimpleBooleanProperty());
 		}
 		Input0.getListeners().forEach(listener -> {
@@ -187,6 +187,7 @@ public class AgrzcStageOneController implements Initializable {
 				@Override
 				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 					dosagemController.updateIOPoints(Input0.getListeners().indexOf(listener), newValue);
+					processamentoController.updateIOPoints(Input0.getListeners().indexOf(listener), newValue);
 				}
 			});
 		});

@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 public class Input0 {
 
-	public static int points = 24;
+	public static int POINTS = 24;
 
 	private static List<SimpleBooleanProperty> listeners = new ArrayList<>();
 

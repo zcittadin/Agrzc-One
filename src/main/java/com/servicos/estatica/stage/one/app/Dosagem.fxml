@@ -137,8 +137,12 @@
             <Image url="@../img/Silos_parede.png" />
          </image>
       </ImageView>
-      <Sphere fx:id="sensorAlto41" layoutX="1168.0" layoutY="208.0" radius="7.0" />
-      <Sphere fx:id="sensorAlto411" layoutX="1358.0" layoutY="208.0" radius="7.0" />
+      <Sphere fx:id="sensorAlto5" layoutX="1168.0" layoutY="208.0" radius="7.0" />
+      <Sphere fx:id="sensorAlto6" layoutX="1358.0" layoutY="208.0" radius="7.0" />
+      <Sphere fx:id="sensorAlto7" layoutX="157.0" layoutY="317.0" radius="7.0" />
+      <Sphere fx:id="sensorAlto8" layoutX="309.0" layoutY="317.0" radius="7.0" />
+      <Sphere fx:id="sensorAlto9" layoutX="112.0" layoutY="240.0" radius="7.0" />
+      <Sphere fx:id="sensorAlto10" layoutX="261.0" layoutY="240.0" radius="7.0" />
       <Circle fill="WHITE" layoutX="1258.0" layoutY="231.0" radius="23.0" stroke="#6000fc" strokeType="INSIDE" />
       <Label layoutX="1253.0" layoutY="218.0" text="5" textFill="#6000fc">
          <font>
