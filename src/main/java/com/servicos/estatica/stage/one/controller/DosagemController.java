@@ -69,33 +69,33 @@ public class DosagemController implements Initializable, ControlledScreen {
 	@FXML
 	private Label lblBalanca;
 	@FXML
-	private Sphere sensorAlto1;
+	private Sphere I0_00;
 	@FXML
-	private Sphere sensorAlto2;
+	private Sphere I0_01;
 	@FXML
-	private Sphere sensorAlto3;
+	private Sphere I0_02;
 	@FXML
-	private Sphere sensorAlto4;
+	private Sphere I0_03;
 	@FXML
-	private Sphere sensorBaixo1;
+	private Sphere I0_04;
 	@FXML
-	private Sphere sensorBaixo2;
+	private Sphere I0_05;
 	@FXML
-	private Sphere sensorBaixo3;
+	private Sphere I0_06;
 	@FXML
-	private Sphere sensorBaixo4;
+	private Sphere I0_07;
 	@FXML
-	private Sphere sensorAlto5;
+	private Sphere I0_09;
 	@FXML
-	private Sphere sensorAlto6;
+	private Sphere I0_11;
 	@FXML
-	private Sphere sensorAlto7;
+	private Sphere I1_04;
 	@FXML
-	private Sphere sensorAlto8;
+	private Sphere I1_05;
 	@FXML
-	private Sphere sensorAlto9;
+	private Sphere I1_06;
 	@FXML
-	private Sphere sensorAlto10;
+	private Sphere I1_07;
 	@FXML
 	private CheckBox chkSensores;
 
@@ -168,18 +168,18 @@ public class DosagemController implements Initializable, ControlledScreen {
 	}
 
 	private void initIOPoints() {
-		input_0.put(0, sensorBaixo1);
-		input_0.put(1, sensorAlto1);
-		input_0.put(2, sensorBaixo2);
-		input_0.put(3, sensorAlto2);
-		input_0.put(4, sensorBaixo3);
-		input_0.put(5, sensorAlto3);
-		input_0.put(6, sensorBaixo4);
-		input_0.put(7, sensorAlto4);
+		input_0.put(0, I0_00);
+		input_0.put(1, I0_01);
+		input_0.put(2, I0_02);
+		input_0.put(3, I0_03);
+		input_0.put(4, I0_04);
+		input_0.put(5, I0_05);
+		input_0.put(6, I0_06);
+		input_0.put(7, I0_07);
 		input_0.put(8, null);
-		input_0.put(9, sensorAlto5);
+		input_0.put(9, I0_09);
 		input_0.put(10, null);
-		input_0.put(11, sensorAlto6);
+		input_0.put(11, I0_11);
 
 	}
 
@@ -241,29 +241,6 @@ public class DosagemController implements Initializable, ControlledScreen {
 		if (selectedFormula == null) {
 			AlertUtil.makeWarning("Atenção", "Não há nenhuma carga na balança.");
 			return;
-		}
-	}
-
-	@FXML
-	private void nivel() {
-		if (chkSensores.isSelected()) {
-			sensorAlto1.setMaterial(greenMaterial);
-			sensorAlto2.setMaterial(greenMaterial);
-			sensorAlto3.setMaterial(greenMaterial);
-			sensorAlto4.setMaterial(greenMaterial);
-			sensorBaixo1.setMaterial(greenMaterial);
-			sensorBaixo2.setMaterial(greenMaterial);
-			sensorBaixo3.setMaterial(greenMaterial);
-			sensorBaixo4.setMaterial(greenMaterial);
-		} else {
-			sensorAlto1.setMaterial(grayMaterial);
-			sensorAlto2.setMaterial(grayMaterial);
-			sensorAlto3.setMaterial(grayMaterial);
-			sensorAlto4.setMaterial(grayMaterial);
-			sensorBaixo1.setMaterial(grayMaterial);
-			sensorBaixo2.setMaterial(grayMaterial);
-			sensorBaixo3.setMaterial(grayMaterial);
-			sensorBaixo4.setMaterial(grayMaterial);
 		}
 	}
 
