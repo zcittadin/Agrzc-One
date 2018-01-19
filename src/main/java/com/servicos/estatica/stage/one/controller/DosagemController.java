@@ -14,6 +14,7 @@ import com.servicos.estatica.stage.one.dao.SiloDAO;
 import com.servicos.estatica.stage.one.model.Formula;
 import com.servicos.estatica.stage.one.model.Silo;
 import com.servicos.estatica.stage.one.shared.HistoricoProperty;
+import com.servicos.estatica.stage.one.shared.StatusLabelProperty;
 import com.servicos.estatica.stage.one.util.AlertUtil;
 
 import javafx.beans.value.ChangeListener;
@@ -197,6 +198,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 			AlertUtil.makeWarning("Atenção", "Selecione uma formulação para iniciar a dosagem.");
 			return;
 		}
+		StatusLabelProperty.setStatusLabel("Em ciclo de dosagem");
 	}
 
 	@FXML
@@ -206,6 +208,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 			return;
 		}
 		HistoricoProperty.selectedFormulaProperty().set(selectedFormula);
+		StatusLabelProperty.setStatusLabel("Em processo de descarga");
 		// Historico h = new Historico(null, new Date(), selectedFormula.getPesoTotal(),
 		// selectedFormula);
 		// historicoDAO.saveHistorico(h);

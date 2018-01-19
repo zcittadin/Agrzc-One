@@ -16,6 +16,7 @@ import com.servicos.estatica.stage.one.modbus.ModbusTCPService;
 import com.servicos.estatica.stage.one.model.Formula;
 import com.servicos.estatica.stage.one.shared.CadastroProperty;
 import com.servicos.estatica.stage.one.shared.HistoricoProperty;
+import com.servicos.estatica.stage.one.shared.StatusLabelProperty;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -184,6 +185,13 @@ public class AgrzcStageOneController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends Formula> observable, Formula oldValue, Formula newValue) {
 				cadastrosController.saveHistorico(newValue);
+			}
+		});
+
+		StatusLabelProperty.statusLabelProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				lblInfo.setText(newValue);
 			}
 		});
 

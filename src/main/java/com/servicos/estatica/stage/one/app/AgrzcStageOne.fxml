@@ -34,7 +34,7 @@
                      </cursor>
                   </ImageView>
                   <Label layoutX="438.0" layoutY="3.0" prefHeight="102.0" prefWidth="1075.0" styleClass="labelGradient" stylesheets="@../style/style.css" />
-                  <Label fx:id="lblInfo" layoutX="705.0" layoutY="16.0" text="Sistema em espera" textFill="#2fff00">
+                  <Label fx:id="lblInfo" alignment="CENTER" layoutX="463.0" layoutY="16.0" prefHeight="69.0" prefWidth="1025.0" text="Sistema em espera" textFill="#2fff00">
                      <font>
                         <Font name="Dot Matrix" size="62.0" />
                      </font>
