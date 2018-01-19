@@ -23,7 +23,7 @@ public class Historico implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	@Column(name = "data")
+	@Column(name = "dataHist")
 	private Date data;
 	@Column(name = "peso")
 	private Double peso;

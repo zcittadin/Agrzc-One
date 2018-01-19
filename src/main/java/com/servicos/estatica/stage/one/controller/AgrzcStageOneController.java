@@ -98,7 +98,7 @@ public class AgrzcStageOneController implements Initializable {
 		initListeners();
 		configAnimations();
 		modbusService.setConnectionParams(IP, PORT);
-		System.out.println("Conectado ao " + IP);
+		System.out.println("Conectado ao IP " + IP);
 		initModbusScan();
 		labelTransition.play();
 	}
@@ -318,7 +318,7 @@ public class AgrzcStageOneController implements Initializable {
 			}
 			break;
 		case 6:
-			Integer[] values = modbusService.readMultipleRegisterRequest(926, 2);
+			Integer[] values = modbusService.readMultipleRegisterRequest(946, 2);
 			if (values.length > 0) {
 				dosagemController.updateBalanca(values[0]);
 				for (int i = 0; i < values.length; i++) {

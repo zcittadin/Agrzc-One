@@ -49,14 +49,6 @@
             <Font size="35.0" />
          </font>
       </Label>
-      <Label fx:id="lblSilo1" alignment="CENTER" layoutX="656.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
-         <font>
-            <Font size="16.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Label>
       <Label fx:id="lblSilo2" alignment="CENTER" layoutX="780.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
          <font>
             <Font size="16.0" />
@@ -231,6 +223,14 @@
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
+      </Label>
+      <Label fx:id="lblSilo1" alignment="CENTER" layoutX="656.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
    </children>
 </AnchorPane>

@@ -55,6 +55,10 @@
   -fx-graphic: url('Zoom.png');
 }
 
+.btClear {
+  -fx-graphic: url('broom.png');
+}
+
 .combo-font {
 	-fx-font: 14px "Regular";
 }

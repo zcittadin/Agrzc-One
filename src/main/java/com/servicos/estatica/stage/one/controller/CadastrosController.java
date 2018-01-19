@@ -39,6 +39,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -92,7 +93,13 @@ public class CadastrosController implements Initializable, ControlledScreen {
 	@FXML
 	private Button btSearch;
 	@FXML
+	private Button btClear;
+	@FXML
 	private ComboBox<Formula> comboFormula;
+	@FXML
+	private DatePicker dtpInicio;
+	@FXML
+	private DatePicker dtpFinal;
 
 	private static ObservableList<Materia> materias = FXCollections.observableArrayList();
 	private static ObservableList<Formula> formulas = FXCollections.observableArrayList();
@@ -118,6 +125,69 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		findMaterias();
 		findFormulas();
 		findHistorico();
+	}
+
+	@SuppressWarnings("unchecked")
+	@FXML
+	private void consultar() {
+		progHist.setVisible(true);
+		btSearch.setDisable(true);
+		btClear.setDisable(true);
+		comboFormula.setDisable(true);
+		tblHist.setDisable(true);
+		dtpInicio.setDisable(true);
+		dtpFinal.setDisable(true);
+
+		Task<Void> searchTask = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				historico = FXCollections.observableList((List<Historico>) historicoDAO.findByFilter(
+						comboFormula.getValue() == null ? null : comboFormula.getValue(),
+						dtpInicio.getValue() == null || "".trim().equals(dtpInicio.getEditor().getText()) ? null
+								: dtpInicio.getValue().toString(),
+						dtpFinal.getValue() == null || "".trim().equals(dtpFinal.getEditor().getText()) ? null
+								: dtpFinal.getValue().toString()));
+				return null;
+			}
+		};
+		searchTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+				tblHist.setItems(historico);
+				tblHist.refresh();
+				progHist.setVisible(false);
+				btSearch.setDisable(false);
+				btClear.setDisable(false);
+				comboFormula.setDisable(false);
+				tblHist.setDisable(false);
+				dtpInicio.setDisable(false);
+				dtpFinal.setDisable(false);
+			}
+		});
+		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+				progHist.setVisible(false);
+				progHist.setVisible(false);
+				btSearch.setDisable(false);
+				btClear.setDisable(false);
+				comboFormula.setDisable(false);
+				tblHist.setDisable(false);
+				dtpInicio.setDisable(false);
+				dtpFinal.setDisable(false);
+				AlertUtil.makeError("Erro", "Ocorreu uma falha ao consultar o histórico de produção.");
+			}
+		});
+		new Thread(searchTask).start();
+
+	}
+
+	@FXML
+	private void clearFields() {
+		dtpInicio.getEditor().clear();
+		dtpFinal.getEditor().clear();
+		comboFormula.setItems(null);
+		comboFormula.setItems(formulas);
 	}
 
 	private void findMaterias() {
