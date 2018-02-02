@@ -64,8 +64,6 @@ public class AgrzcStageOneController implements Initializable {
 	protected static final int PORT = Modbus.DEFAULT_PORT;
 	private static int slot = 0;
 
-	// private static Input0 input0 = new Input0();
-
 	@FXML
 	private Pane centralPane;
 	@FXML
@@ -98,9 +96,9 @@ public class AgrzcStageOneController implements Initializable {
 		Tooltip.install(imgEstatica, tooltipEstatica);
 		initListeners();
 		configAnimations();
-		modbusService.setConnectionParams(IP, PORT);
-		System.out.println("Conectado ao IP " + IP);
-		initModbusScan();
+		//modbusService.setConnectionParams(IP, PORT);
+		//System.out.println("Conectado ao IP " + IP);
+		//initModbusScan();
 		labelTransition.play();
 	}
 

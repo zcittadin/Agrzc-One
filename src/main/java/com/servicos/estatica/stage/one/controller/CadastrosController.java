@@ -152,7 +152,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		};
 		searchTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			@Override
-			public void handle(WorkerStateEvent arg0) {
+			public void handle(WorkerStateEvent workerStateEvent) {
 				tblHist.setItems(historico);
 				tblHist.refresh();
 				progHist.setVisible(false);
@@ -166,7 +166,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		});
 		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
-			public void handle(WorkerStateEvent arg0) {
+			public void handle(WorkerStateEvent workerStateEvent) {
 				progHist.setVisible(false);
 				progHist.setVisible(false);
 				btSearch.setDisable(false);
@@ -206,7 +206,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		searchTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			@SuppressWarnings("unchecked")
 			@Override
-			public void handle(WorkerStateEvent arg0) {
+			public void handle(WorkerStateEvent workerStateEvent) {
 				progMaterias.setVisible(false);
 				tblMateria.setDisable(false);
 				btAddMateria.setDisable(false);
@@ -216,7 +216,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		});
 		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
-			public void handle(WorkerStateEvent arg0) {
+			public void handle(WorkerStateEvent workerStateEvent) {
 				progMaterias.setVisible(false);
 				tblMateria.setDisable(false);
 				btAddMateria.setDisable(false);
@@ -247,7 +247,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		searchTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			@SuppressWarnings("unchecked")
 			@Override
-			public void handle(WorkerStateEvent arg0) {
+			public void handle(WorkerStateEvent workerStateEvent) {
 				progFormulas.setVisible(false);
 				tblFormula.setDisable(false);
 				tblFormula.setItems(formulas);
@@ -256,7 +256,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		});
 		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
-			public void handle(WorkerStateEvent arg0) {
+			public void handle(WorkerStateEvent workerStateEvent) {
 				progFormulas.setVisible(false);
 				tblFormula.setDisable(false);
 				AlertUtil.makeError("Erro", "Ocorreu uma falha ao consultar as formulações existentes.");
@@ -281,7 +281,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		searchTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			@SuppressWarnings("unchecked")
 			@Override
-			public void handle(WorkerStateEvent arg0) {
+			public void handle(WorkerStateEvent workerStateEvent) {
 				progHist.setVisible(false);
 				tblHist.setDisable(false);
 				// btAddMateria.setDisable(false);
@@ -292,7 +292,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		});
 		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
-			public void handle(WorkerStateEvent arg0) {
+			public void handle(WorkerStateEvent workerStateEvent) {
 				progHist.setVisible(false);
 				tblHist.setDisable(false);
 				// btAddMateria.setDisable(false);
@@ -327,7 +327,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		}
 	}
 
-	private void editMateria(Materia mat) {
+	private void editMateria(Materia materia) {
 		try {
 			Stage stage;
 			Parent root;
@@ -338,7 +338,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
 			root = (Parent) fxmlloader.load(url.openStream());
 			stage.setScene(new Scene(root));
-			((CadastroMateriaController) fxmlloader.getController()).setContext(mat, tblMateria.getScene());
+			((CadastroMateriaController) fxmlloader.getController()).setContext(materia, tblMateria.getScene());
 			stage.setTitle("Gerenciar matéria-prima");
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(tblMateria.getScene().getWindow());
@@ -376,7 +376,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 		}
 	}
 
-	private void editFormula(Formula f) {
+	private void editFormula(Formula formula) {
 		try {
 			Stage stage;
 			Parent root;
@@ -387,7 +387,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
 			root = (Parent) fxmlloader.load(url.openStream());
 			stage.setScene(new Scene(root));
-			((CadastroFormulaController) fxmlloader.getController()).setContext(f, tblFormula.getScene());
+			((CadastroFormulaController) fxmlloader.getController()).setContext(formula, tblFormula.getScene());
 			stage.setTitle("Gerenciar formulação");
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(tblFormula.getScene().getWindow());
@@ -412,7 +412,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 
 		saveTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			@Override
-			public void handle(WorkerStateEvent arg0) {
+			public void handle(WorkerStateEvent workerStateEvent) {
 				progFormulas.setVisible(false);
 				findHistorico();
 				tblHist.refresh();
@@ -421,7 +421,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 
 		saveTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
-			public void handle(WorkerStateEvent arg0) {
+			public void handle(WorkerStateEvent workerStateEvent) {
 				progFormulas.setVisible(false);
 				AlertUtil.makeError("Erro", "Ocorreu uma falha ao gravar o histórico.");
 			}
@@ -461,97 +461,101 @@ public class CadastrosController implements Initializable, ControlledScreen {
 					}
 				});
 
-		Callback<TableColumn<Materia, String>, TableCell<Materia, String>> cellEditarFactory = new Callback<TableColumn<Materia, String>, TableCell<Materia, String>>() {
-			@Override
-			public TableCell call(final TableColumn<Materia, String> param) {
-				final TableCell<Materia, String> cell = new TableCell<Materia, String>() {
-
-					final Button btn = new Button();
-
+		Callback<TableColumn<Materia, String>, TableCell<Materia, String>> cellEditarFactory = //
+				new Callback<TableColumn<Materia, String>, TableCell<Materia, String>>() {
 					@Override
-					public void updateItem(String item, boolean empty) {
-						super.updateItem(item, empty);
-						if (empty) {
-							setGraphic(null);
-							setText(null);
-						} else {
-							btn.setOnAction(event -> {
-								Materia mat = getTableView().getItems().get(getIndex());
-								editMateria(mat);
-							});
-							btn.setStyle("-fx-graphic: url('/com/servicos/estatica/stage/one/style/Modify.png');");
-							btn.setCursor(Cursor.HAND);
-							setGraphic(btn);
-							setText(null);
-						}
+					public TableCell call(final TableColumn<Materia, String> param) {
+						final TableCell<Materia, String> cell = new TableCell<Materia, String>() {
+
+							final Button btn = new Button();
+
+							@Override
+							public void updateItem(String item, boolean empty) {
+								super.updateItem(item, empty);
+								if (empty) {
+									setGraphic(null);
+									setText(null);
+								} else {
+									btn.setOnAction(event -> {
+										Materia mat = getTableView().getItems().get(getIndex());
+										editMateria(mat);
+									});
+									btn.setStyle(
+											"-fx-graphic: url('/com/servicos/estatica/stage/one/style/Modify.png');");
+									btn.setCursor(Cursor.HAND);
+									setGraphic(btn);
+									setText(null);
+								}
+							}
+						};
+						return cell;
 					}
 				};
-				return cell;
-			}
-		};
 		colEditarMateria.setCellFactory(cellEditarFactory);
 
-		Callback<TableColumn<Materia, String>, TableCell<Materia, String>> cellExcluirFactory = new Callback<TableColumn<Materia, String>, TableCell<Materia, String>>() {
-			@Override
-			public TableCell call(final TableColumn<Materia, String> param) {
-				final TableCell<Materia, String> cell = new TableCell<Materia, String>() {
-
-					final Button btn = new Button();
-
+		Callback<TableColumn<Materia, String>, TableCell<Materia, String>> cellExcluirFactory = //
+				new Callback<TableColumn<Materia, String>, TableCell<Materia, String>>() {
 					@Override
-					public void updateItem(String item, boolean empty) {
-						super.updateItem(item, empty);
-						if (empty) {
-							setGraphic(null);
-							setText(null);
-						} else {
-							btn.setOnAction(event -> {
-								Optional<ButtonType> result = AlertUtil.makeConfirm("Confirmar exclusão",
-										"Podem haver formulações que estejam utilizando esta matéria-prima. Tem certeza que deseja excluir?.");
-								if (result.get() == ButtonType.OK) {
-									Materia mat = getTableView().getItems().get(getIndex());
-									Task<Void> exclusionTask = new Task<Void>() {
-										@Override
-										protected Void call() throws Exception {
-											materiaDAO.removeMateria(mat);
-											materias.remove(mat);
-											tblMateria.refresh();
-											return null;
-										}
-									};
-									exclusionTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-										@Override
-										public void handle(WorkerStateEvent arg0) {
-											Toast.makeToast((Stage) tblMateria.getScene().getWindow(),
-													"Matéria-prima removida com sucesso.");
-											materias.remove(mat);
-											tblMateria.refresh();
-											calculaTotais();
-											findFormulas();
+					public TableCell call(final TableColumn<Materia, String> param) {
+						final TableCell<Materia, String> cell = new TableCell<Materia, String>() {
+
+							final Button btn = new Button();
+
+							@Override
+							public void updateItem(String item, boolean empty) {
+								super.updateItem(item, empty);
+								if (empty) {
+									setGraphic(null);
+									setText(null);
+								} else {
+									btn.setOnAction(event -> {
+										Optional<ButtonType> result = AlertUtil.makeConfirm("Confirmar exclusão",
+												"Podem haver formulações que estejam utilizando esta matéria-prima. Tem certeza que deseja excluir?.");
+										if (result.get() == ButtonType.OK) {
+											Materia mat = getTableView().getItems().get(getIndex());
+											Task<Void> exclusionTask = new Task<Void>() {
+												@Override
+												protected Void call() throws Exception {
+													materiaDAO.removeMateria(mat);
+													materias.remove(mat);
+													tblMateria.refresh();
+													return null;
+												}
+											};
+											exclusionTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+												@Override
+												public void handle(WorkerStateEvent arg0) {
+													Toast.makeToast((Stage) tblMateria.getScene().getWindow(),
+															"Matéria-prima removida com sucesso.");
+													materias.remove(mat);
+													tblMateria.refresh();
+													calculaTotais();
+													findFormulas();
+												}
+											});
+											exclusionTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+												@Override
+												public void handle(WorkerStateEvent arg0) {
+													AlertUtil.makeError("Erro",
+															"Ocorreu uma falha ao tentar remover a matéria-prima selecionada.");
+													tblMateria.setItems(materias);
+													tblMateria.refresh();
+												}
+											});
+											new Thread(exclusionTask).start();
 										}
 									});
-									exclusionTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
-										@Override
-										public void handle(WorkerStateEvent arg0) {
-											AlertUtil.makeError("Erro",
-													"Ocorreu uma falha ao tentar remover a matéria-prima selecionada.");
-											tblMateria.setItems(materias);
-											tblMateria.refresh();
-										}
-									});
-									new Thread(exclusionTask).start();
+									btn.setStyle(
+											"-fx-graphic: url('/com/servicos/estatica/stage/one/style/Trash.png');");
+									btn.setCursor(Cursor.HAND);
+									setGraphic(btn);
+									setText(null);
 								}
-							});
-							btn.setStyle("-fx-graphic: url('/com/servicos/estatica/stage/one/style/Trash.png');");
-							btn.setCursor(Cursor.HAND);
-							setGraphic(btn);
-							setText(null);
-						}
+							}
+						};
+						return cell;
 					}
 				};
-				return cell;
-			}
-		};
 		colExcluirMateria.setCellFactory(cellExcluirFactory);
 
 		colNomeMateria.setStyle("-fx-alignment: CENTER;");
@@ -581,96 +585,101 @@ public class CadastrosController implements Initializable, ControlledScreen {
 					}
 				});
 
-		Callback<TableColumn<Formula, String>, TableCell<Formula, String>> cellEditarFormulaFactory = new Callback<TableColumn<Formula, String>, TableCell<Formula, String>>() {
-			@Override
-			public TableCell call(final TableColumn<Formula, String> param) {
-				final TableCell<Formula, String> cell = new TableCell<Formula, String>() {
-
-					final Button btn = new Button();
-
+		Callback<TableColumn<Formula, String>, TableCell<Formula, String>> cellEditarFormulaFactory = //
+				new Callback<TableColumn<Formula, String>, TableCell<Formula, String>>() {
 					@Override
-					public void updateItem(String item, boolean empty) {
-						super.updateItem(item, empty);
-						if (empty) {
-							setGraphic(null);
-							setText(null);
-						} else {
-							btn.setOnAction(event -> {
-								Formula f = getTableView().getItems().get(getIndex());
-								editFormula(f);
-							});
-							btn.setStyle("-fx-graphic: url('/com/servicos/estatica/stage/one/style/Modify.png');");
-							btn.setCursor(Cursor.HAND);
-							setGraphic(btn);
-							setText(null);
-						}
+					public TableCell call(final TableColumn<Formula, String> param) {
+						final TableCell<Formula, String> cell = new TableCell<Formula, String>() {
+
+							final Button btn = new Button();
+
+							@Override
+							public void updateItem(String item, boolean empty) {
+								super.updateItem(item, empty);
+								if (empty) {
+									setGraphic(null);
+									setText(null);
+								} else {
+									btn.setOnAction(event -> {
+										Formula f = getTableView().getItems().get(getIndex());
+										editFormula(f);
+									});
+									btn.setStyle(
+											"-fx-graphic: url('/com/servicos/estatica/stage/one/style/Modify.png');");
+									btn.setCursor(Cursor.HAND);
+									setGraphic(btn);
+									setText(null);
+								}
+							}
+						};
+						return cell;
 					}
 				};
-				return cell;
-			}
-		};
 		colEditarFormula.setCellFactory(cellEditarFormulaFactory);
 
-		Callback<TableColumn<Formula, String>, TableCell<Formula, String>> cellExcluirFormulaFactory = new Callback<TableColumn<Formula, String>, TableCell<Formula, String>>() {
-			@Override
-			public TableCell call(final TableColumn<Formula, String> param) {
-				final TableCell<Formula, String> cell = new TableCell<Formula, String>() {
-
-					final Button btn = new Button();
-
+		Callback<TableColumn<Formula, String>, TableCell<Formula, String>> cellExcluirFormulaFactory = //
+				new Callback<TableColumn<Formula, String>, TableCell<Formula, String>>() {
 					@Override
-					public void updateItem(String item, boolean empty) {
-						super.updateItem(item, empty);
-						if (empty) {
-							setGraphic(null);
-							setText(null);
-						} else {
-							btn.setOnAction(event -> {
-								Optional<ButtonType> result = AlertUtil.makeConfirm("Confirmar exclusão",
-										"Tem certeza que deseja excluir esta formulação?.");
-								if (result.get() == ButtonType.OK) {
-									Formula f = getTableView().getItems().get(getIndex());
-									Task<Void> exclusionTask = new Task<Void>() {
-										@Override
-										protected Void call() throws Exception {
-											formulaDAO.removeFormula(f);
-											return null;
-										}
-									};
-									exclusionTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-										@Override
-										public void handle(WorkerStateEvent arg0) {
-											Toast.makeToast((Stage) tblMateria.getScene().getWindow(),
-													"Formulação removida com sucesso.");
-											formulas.remove(f);
-											tblFormula.refresh();
-											CadastroProperty.cadastroFormulaProperty()
-													.set((!CadastroProperty.getFormulaChanged()));
-											CadastroProperty.setFormulaChanged(!CadastroProperty.getFormulaChanged());
+					public TableCell call(final TableColumn<Formula, String> param) {
+						final TableCell<Formula, String> cell = new TableCell<Formula, String>() {
+
+							final Button btn = new Button();
+
+							@Override
+							public void updateItem(String item, boolean empty) {
+								super.updateItem(item, empty);
+								if (empty) {
+									setGraphic(null);
+									setText(null);
+								} else {
+									btn.setOnAction(event -> {
+										Optional<ButtonType> result = AlertUtil.makeConfirm("Confirmar exclusão",
+												"Tem certeza que deseja excluir esta formulação?.");
+										if (result.get() == ButtonType.OK) {
+											Formula f = getTableView().getItems().get(getIndex());
+											Task<Void> exclusionTask = new Task<Void>() {
+												@Override
+												protected Void call() throws Exception {
+													formulaDAO.removeFormula(f);
+													return null;
+												}
+											};
+											exclusionTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+												@Override
+												public void handle(WorkerStateEvent arg0) {
+													Toast.makeToast((Stage) tblMateria.getScene().getWindow(),
+															"Formulação removida com sucesso.");
+													formulas.remove(f);
+													tblFormula.refresh();
+													CadastroProperty.cadastroFormulaProperty()
+															.set((!CadastroProperty.getFormulaChanged()));
+													CadastroProperty
+															.setFormulaChanged(!CadastroProperty.getFormulaChanged());
+												}
+											});
+											exclusionTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+												@Override
+												public void handle(WorkerStateEvent arg0) {
+													AlertUtil.makeError("Erro",
+															"Ocorreu uma falha ao tentar remover a formulação selecionada.");
+													tblFormula.setItems(materias);
+													tblFormula.refresh();
+												}
+											});
+											new Thread(exclusionTask).start();
 										}
 									});
-									exclusionTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
-										@Override
-										public void handle(WorkerStateEvent arg0) {
-											AlertUtil.makeError("Erro",
-													"Ocorreu uma falha ao tentar remover a formulação selecionada.");
-											tblFormula.setItems(materias);
-											tblFormula.refresh();
-										}
-									});
-									new Thread(exclusionTask).start();
+									btn.setStyle(
+											"-fx-graphic: url('/com/servicos/estatica/stage/one/style/Trash.png');");
+									btn.setCursor(Cursor.HAND);
+									setGraphic(btn);
+									setText(null);
 								}
-							});
-							btn.setStyle("-fx-graphic: url('/com/servicos/estatica/stage/one/style/Trash.png');");
-							btn.setCursor(Cursor.HAND);
-							setGraphic(btn);
-							setText(null);
-						}
+							}
+						};
+						return cell;
 					}
 				};
-				return cell;
-			}
-		};
 		colExcluirFormula.setCellFactory(cellExcluirFormulaFactory);
 
 		colNomeFormula.setStyle("-fx-alignment: CENTER;");
@@ -709,63 +718,65 @@ public class CadastrosController implements Initializable, ControlledScreen {
 					}
 				});
 
-		Callback<TableColumn<Historico, String>, TableCell<Historico, String>> cellExcluirHistoricoFactory = new Callback<TableColumn<Historico, String>, TableCell<Historico, String>>() {
-			@Override
-			public TableCell call(final TableColumn<Historico, String> param) {
-				final TableCell<Historico, String> cell = new TableCell<Historico, String>() {
-
-					final Button btn = new Button();
-
+		Callback<TableColumn<Historico, String>, TableCell<Historico, String>> cellExcluirHistoricoFactory = //
+				new Callback<TableColumn<Historico, String>, TableCell<Historico, String>>() {
 					@Override
-					public void updateItem(String item, boolean empty) {
-						super.updateItem(item, empty);
-						if (empty) {
-							setGraphic(null);
-							setText(null);
-						} else {
-							btn.setOnAction(event -> {
-								Optional<ButtonType> result = AlertUtil.makeConfirm("Confirmar exclusão",
-										"Tem certeza que deseja excluir este registro do histórico de produção?");
-								if (result.get() == ButtonType.OK) {
-									Historico h = getTableView().getItems().get(getIndex());
-									Task<Void> exclusionTask = new Task<Void>() {
-										@Override
-										protected Void call() throws Exception {
-											historicoDAO.removeHistorico(h);
-											return null;
-										}
-									};
-									exclusionTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-										@Override
-										public void handle(WorkerStateEvent arg0) {
-											Toast.makeToast((Stage) tblMateria.getScene().getWindow(),
-													"Registro histórico removido com sucesso.");
-											historico.remove(h);
-											tblHist.refresh();
+					public TableCell call(final TableColumn<Historico, String> param) {
+						final TableCell<Historico, String> cell = new TableCell<Historico, String>() {
+
+							final Button btn = new Button();
+
+							@Override
+							public void updateItem(String item, boolean empty) {
+								super.updateItem(item, empty);
+								if (empty) {
+									setGraphic(null);
+									setText(null);
+								} else {
+									btn.setOnAction(event -> {
+										Optional<ButtonType> result = AlertUtil.makeConfirm("Confirmar exclusão",
+												"Tem certeza que deseja excluir este registro do histórico de produção?");
+										if (result.get() == ButtonType.OK) {
+											Historico h = getTableView().getItems().get(getIndex());
+											Task<Void> exclusionTask = new Task<Void>() {
+												@Override
+												protected Void call() throws Exception {
+													historicoDAO.removeHistorico(h);
+													return null;
+												}
+											};
+											exclusionTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+												@Override
+												public void handle(WorkerStateEvent arg0) {
+													Toast.makeToast((Stage) tblMateria.getScene().getWindow(),
+															"Registro histórico removido com sucesso.");
+													historico.remove(h);
+													tblHist.refresh();
+												}
+											});
+											exclusionTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
+												@Override
+												public void handle(WorkerStateEvent arg0) {
+													AlertUtil.makeError("Erro",
+															"Ocorreu uma falha ao tentar remover o registro selecionado.");
+													tblHist.setItems(historico);
+													tblHist.refresh();
+												}
+											});
+											new Thread(exclusionTask).start();
 										}
 									});
-									exclusionTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
-										@Override
-										public void handle(WorkerStateEvent arg0) {
-											AlertUtil.makeError("Erro",
-													"Ocorreu uma falha ao tentar remover o registro selecionado.");
-											tblHist.setItems(historico);
-											tblHist.refresh();
-										}
-									});
-									new Thread(exclusionTask).start();
+									btn.setStyle(
+											"-fx-graphic: url('/com/servicos/estatica/stage/one/style/Trash.png');");
+									btn.setCursor(Cursor.HAND);
+									setGraphic(btn);
+									setText(null);
 								}
-							});
-							btn.setStyle("-fx-graphic: url('/com/servicos/estatica/stage/one/style/Trash.png');");
-							btn.setCursor(Cursor.HAND);
-							setGraphic(btn);
-							setText(null);
-						}
+							}
+						};
+						return cell;
 					}
 				};
-				return cell;
-			}
-		};
 		colExcluirHist.setCellFactory(cellExcluirHistoricoFactory);
 
 		colDataHist.setStyle("-fx-alignment: CENTER;");
