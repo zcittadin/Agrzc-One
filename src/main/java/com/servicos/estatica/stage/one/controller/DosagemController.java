@@ -11,8 +11,10 @@ import java.util.ResourceBundle;
 import com.servicos.estatica.stage.one.app.ControlledScreen;
 import com.servicos.estatica.stage.one.dao.FormulaDAO;
 import com.servicos.estatica.stage.one.dao.SiloDAO;
+import com.servicos.estatica.stage.one.dto.FormulaDosagemDTO;
 import com.servicos.estatica.stage.one.model.Formula;
 import com.servicos.estatica.stage.one.model.Silo;
+import com.servicos.estatica.stage.one.shared.DosagemProperty;
 import com.servicos.estatica.stage.one.shared.HistoricoProperty;
 import com.servicos.estatica.stage.one.shared.StatusLabelProperty;
 import com.servicos.estatica.stage.one.util.AlertUtil;
@@ -128,6 +130,8 @@ public class DosagemController implements Initializable, ControlledScreen {
 	private static Map<Integer, Sphere> input_0 = new HashMap<>();
 	private static Map<Integer, Sphere> input_1 = new HashMap<>();
 
+	private Boolean startDosagemFlag = false;
+
 	private Formula selectedFormula;
 
 	ScreensController myController;
@@ -192,14 +196,43 @@ public class DosagemController implements Initializable, ControlledScreen {
 		}
 	}
 
+	// TESTES
 	@FXML
 	private void startDosagem() {
 		if (selectedFormula == null) {
 			AlertUtil.makeWarning("Atenção", "Selecione uma formulação para iniciar a dosagem.");
 			return;
 		}
-		StatusLabelProperty.setStatusLabel("Em ciclo de dosagem");
+
+		List<Silo> silos = new ArrayList<>();
+		Task<Void> searchSiloTask = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				selectedFormula.getQuantidades().forEach(qtd -> {
+					Silo silo = siloDAO.findByMateria(qtd.getMateriaQuantidade());
+					silos.add(silo);
+				});
+				return null;
+			}
+		};
+
+		searchSiloTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+				FormulaDosagemDTO dto = new FormulaDosagemDTO(selectedFormula.getPesoTotal(),
+						selectedFormula.getQuantidades(), silos);
+				DosagemProperty.setSelectedFormula(dto);
+				DosagemProperty.setStartFormula(!startDosagemFlag);
+				startDosagemFlag = !startDosagemFlag;
+				StatusLabelProperty.setStatusLabel("Em ciclo de dosagem");
+			}
+		});
+
+		new Thread(searchSiloTask).start();
+
 	}
+
+	// FIM TESTES
 
 	@FXML
 	private void startDescarga() {

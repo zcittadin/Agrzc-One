@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.ghgande.j2mod.modbus.Modbus;
+import com.servicos.estatica.stage.one.dto.FormulaDosagemDTO;
 import com.servicos.estatica.stage.one.listeners.input.Input0;
 import com.servicos.estatica.stage.one.listeners.input.Input1;
 import com.servicos.estatica.stage.one.listeners.input.Input2;
@@ -15,6 +16,7 @@ import com.servicos.estatica.stage.one.listeners.output.Output4;
 import com.servicos.estatica.stage.one.modbus.ModbusTCPService;
 import com.servicos.estatica.stage.one.model.Formula;
 import com.servicos.estatica.stage.one.shared.CadastroProperty;
+import com.servicos.estatica.stage.one.shared.DosagemProperty;
 import com.servicos.estatica.stage.one.shared.HistoricoProperty;
 import com.servicos.estatica.stage.one.shared.StatusLabelProperty;
 
@@ -79,6 +81,15 @@ public class AgrzcStageOneController implements Initializable {
 	private Tooltip tooltipCliente = new Tooltip("Informações sobre o cliente");
 	private Tooltip tooltipEstatica = new Tooltip("Informações sobre o fabricante");
 
+	private static FormulaDosagemDTO formula;
+	private int dosagemIndex = 0;
+
+	private static final int REG_PESO_MATERIA = 202;
+	private static final int REG_PESO_TOTAL_CARGA = 224;
+	private static final int REG_SILO = 230;
+	private static final int REG_QUANTIDADE_MATERIA = 200;
+	private static final int REG_FLAG_FINALIZADO = 220;
+
 	ScreensController mainContainer = new ScreensController();
 
 	@Override
@@ -96,9 +107,9 @@ public class AgrzcStageOneController implements Initializable {
 		Tooltip.install(imgEstatica, tooltipEstatica);
 		initListeners();
 		configAnimations();
-		//modbusService.setConnectionParams(IP, PORT);
-		//System.out.println("Conectado ao IP " + IP);
-		//initModbusScan();
+		modbusService.setConnectionParams(IP, PORT);
+		System.out.println("Conectado ao IP " + IP);
+		initModbusScan();
 		labelTransition.play();
 	}
 
@@ -108,7 +119,7 @@ public class AgrzcStageOneController implements Initializable {
 			public void handle(ActionEvent event) {
 				readMultiplePoints(slot);
 				slot++;
-				if (slot == 7)
+				if (slot == 8)
 					slot = 0;
 			}
 		}));
@@ -183,6 +194,41 @@ public class AgrzcStageOneController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends Formula> observable, Formula oldValue, Formula newValue) {
 				cadastrosController.saveHistorico(newValue);
+			}
+		});
+
+		DosagemProperty.startFormulaProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+				formula = DosagemProperty.getSelectedFormula();
+
+				System.out.println("Peso total: " + formula.getPesoTotal());
+				formula.getQuantidades().forEach(q -> {
+					System.out.println(q.getMateriaQuantidade().getNomeMateria() + ": " + q.getPeso());
+				});
+				formula.getSilos().forEach(s -> {
+					System.out.println(s.getSilo());
+				});
+
+				if (dosagemIndex == 0) {
+					System.out
+							.println(formula.getQuantidades().get(dosagemIndex).getMateriaQuantidade().getNomeMateria()
+									+ ": " + formula.getSilos().get(dosagemIndex).getSilo() + " - "
+									+ formula.getQuantidades().get(dosagemIndex).getPeso());
+					// Peso da materia-prima
+					modbusService.writeRegisterRequest(REG_PESO_MATERIA,
+							formula.getQuantidades().get(dosagemIndex).getPeso().intValue());
+					// Total da carga
+					modbusService.writeRegisterRequest(REG_PESO_TOTAL_CARGA, formula.getPesoTotal().intValue());
+					// Silo
+					modbusService.writeRegisterRequest(REG_SILO,
+							formula.getSilos().get(dosagemIndex).getId().intValue());
+					// Qtde de materias
+					modbusService.writeRegisterRequest(REG_QUANTIDADE_MATERIA, formula.getQuantidades().size());
+					dosagemIndex++;
+				}
+
 			}
 		});
 
@@ -324,12 +370,32 @@ public class AgrzcStageOneController implements Initializable {
 			}
 			break;
 		case 6:
-			Integer[] values = modbusService.readMultipleRegisterRequest(946, 2);
+			Integer[] values = modbusService.readMultipleRegisterRequest(212, 2);
 			if (values.length > 0) {
 				dosagemController.updateBalanca(values[0]);
 				for (int i = 0; i < values.length; i++) {
 					// System.out.println(values[i]);
 				}
+			}
+			break;
+		case 7:
+			Integer[] finalize = modbusService.readMultipleRegisterRequest(220, 1);
+
+			if (finalize[0] > 0 && dosagemIndex < formula.getQuantidades().size()) {
+				System.out.println(formula.getQuantidades().get(dosagemIndex).getMateriaQuantidade().getNomeMateria()
+						+ ": " + formula.getSilos().get(dosagemIndex).getSilo() + " - "
+						+ formula.getQuantidades().get(dosagemIndex).getPeso());
+				modbusService.writeRegisterRequest(REG_PESO_MATERIA,
+						formula.getQuantidades().get(dosagemIndex).getPeso().intValue());
+				modbusService.writeRegisterRequest(REG_SILO, formula.getSilos().get(dosagemIndex).getId().intValue());
+				modbusService.writeRegisterRequest(REG_FLAG_FINALIZADO, 0);
+				dosagemIndex++;
+				return;
+			}
+			if (finalize[0] > 0 && dosagemIndex == formula.getQuantidades().size()) {
+				System.out.println("FIM!");
+				modbusService.writeRegisterRequest(220, 0);
+				dosagemIndex = 0;
 			}
 			break;
 		}

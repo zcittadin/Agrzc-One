@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import org.hibernate.Session;
 
+import com.servicos.estatica.stage.one.model.Materia;
 import com.servicos.estatica.stage.one.model.Silo;
 import com.servicos.estatica.stage.one.util.HibernateUtil;
 
@@ -36,6 +37,16 @@ public class SiloDAO {
 		session.beginTransaction();
 		Query query = session.createQuery("SELECT s FROM Silo s WHERE silo LIKE :silo");
 		query.setParameter("silo", silo);
+		Silo s = (Silo) query.getResultList().get(0);
+		session.close();
+		return s;
+	}
+
+	public Silo findByMateria(Materia materia) {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("SELECT s FROM Silo s WHERE materia LIKE :materia");
+		query.setParameter("materia", materia);
 		Silo s = (Silo) query.getResultList().get(0);
 		session.close();
 		return s;
