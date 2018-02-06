@@ -210,7 +210,11 @@ public class DosagemController implements Initializable, ControlledScreen {
 			protected Void call() throws Exception {
 				selectedFormula.getQuantidades().forEach(qtd -> {
 					Silo silo = siloDAO.findByMateria(qtd.getMateriaQuantidade());
-					silos.add(silo);
+					if (silo == null) {
+						System.out.println("NULO");
+					} else {
+						silos.add(silo);
+					}
 				});
 				return null;
 			}
@@ -219,6 +223,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 		searchSiloTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
+
 				FormulaDosagemDTO dto = new FormulaDosagemDTO(selectedFormula.getPesoTotal(),
 						selectedFormula.getQuantidades(), silos);
 				DosagemProperty.setSelectedFormula(dto);

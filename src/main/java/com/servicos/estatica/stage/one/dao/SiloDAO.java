@@ -42,13 +42,18 @@ public class SiloDAO {
 		return s;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Silo findByMateria(Materia materia) {
 		Session session = HibernateUtil.openSession();
 		session.beginTransaction();
 		Query query = session.createQuery("SELECT s FROM Silo s WHERE materia LIKE :materia");
 		query.setParameter("materia", materia);
-		Silo s = (Silo) query.getResultList().get(0);
+		List<Silo> list = new ArrayList<>();
+		list = query.getResultList();
 		session.close();
+		if (list.size() == 0)
+			return null;
+		Silo s = list.get(0);
 		return s;
 	}
 

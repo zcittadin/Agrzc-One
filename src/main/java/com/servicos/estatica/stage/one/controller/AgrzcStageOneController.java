@@ -200,17 +200,7 @@ public class AgrzcStageOneController implements Initializable {
 		DosagemProperty.startFormulaProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
 				formula = DosagemProperty.getSelectedFormula();
-
-				System.out.println("Peso total: " + formula.getPesoTotal());
-				formula.getQuantidades().forEach(q -> {
-					System.out.println(q.getMateriaQuantidade().getNomeMateria() + ": " + q.getPeso());
-				});
-				formula.getSilos().forEach(s -> {
-					System.out.println(s.getSilo());
-				});
-
 				if (dosagemIndex == 0) {
 					System.out
 							.println(formula.getQuantidades().get(dosagemIndex).getMateriaQuantidade().getNomeMateria()
@@ -380,7 +370,6 @@ public class AgrzcStageOneController implements Initializable {
 			break;
 		case 7:
 			Integer[] finalize = modbusService.readMultipleRegisterRequest(220, 1);
-
 			if (finalize[0] > 0 && dosagemIndex < formula.getQuantidades().size()) {
 				System.out.println(formula.getQuantidades().get(dosagemIndex).getMateriaQuantidade().getNomeMateria()
 						+ ": " + formula.getSilos().get(dosagemIndex).getSilo() + " - "
@@ -394,7 +383,7 @@ public class AgrzcStageOneController implements Initializable {
 			}
 			if (finalize[0] > 0 && dosagemIndex == formula.getQuantidades().size()) {
 				System.out.println("FIM!");
-				modbusService.writeRegisterRequest(220, 0);
+				modbusService.writeRegisterRequest(REG_FLAG_FINALIZADO, 0);
 				dosagemIndex = 0;
 			}
 			break;

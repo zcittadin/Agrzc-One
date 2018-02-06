@@ -232,30 +232,5 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Button fx:id="bt1" layoutX="112.0" layoutY="649.0" mnemonicParsing="false" text="1">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="bt2" layoutX="112.0" layoutY="673.0" mnemonicParsing="false" text="2">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="bt3" layoutX="112.0" layoutY="698.0" mnemonicParsing="false" text="3">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="bt4" layoutX="112.0" layoutY="724.0" mnemonicParsing="false" text="4">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="bt5" layoutX="112.0" layoutY="750.0" mnemonicParsing="false" text="5">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
    </children>
 </AnchorPane>
