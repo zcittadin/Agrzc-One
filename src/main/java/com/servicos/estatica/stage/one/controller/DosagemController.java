@@ -131,6 +131,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 	private static Map<Integer, Sphere> input_1 = new HashMap<>();
 
 	private Boolean startDosagemFlag = false;
+	private Boolean siloVazio = false;
 
 	private Formula selectedFormula;
 
@@ -196,14 +197,13 @@ public class DosagemController implements Initializable, ControlledScreen {
 		}
 	}
 
-	// TESTES
 	@FXML
 	private void startDosagem() {
 		if (selectedFormula == null) {
 			AlertUtil.makeWarning("Atenção", "Selecione uma formulação para iniciar a dosagem.");
 			return;
 		}
-
+		siloVazio = false;
 		List<Silo> silos = new ArrayList<>();
 		Task<Void> searchSiloTask = new Task<Void>() {
 			@Override
@@ -211,7 +211,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 				selectedFormula.getQuantidades().forEach(qtd -> {
 					Silo silo = siloDAO.findByMateria(qtd.getMateriaQuantidade());
 					if (silo == null) {
-						System.out.println("NULO");
+						siloVazio = true;
 					} else {
 						silos.add(silo);
 					}
@@ -219,25 +219,26 @@ public class DosagemController implements Initializable, ControlledScreen {
 				return null;
 			}
 		};
-
 		searchSiloTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-
-				FormulaDosagemDTO dto = new FormulaDosagemDTO(selectedFormula.getPesoTotal(),
-						selectedFormula.getQuantidades(), silos);
-				DosagemProperty.setSelectedFormula(dto);
-				DosagemProperty.setStartFormula(!startDosagemFlag);
-				startDosagemFlag = !startDosagemFlag;
-				StatusLabelProperty.setStatusLabel("Em ciclo de dosagem");
+				if (siloVazio == false) {
+					FormulaDosagemDTO dto = new FormulaDosagemDTO(selectedFormula.getPesoTotal(),
+							selectedFormula.getQuantidades(), silos);
+					DosagemProperty.setSelectedFormula(dto);
+					DosagemProperty.setStartFormula(!startDosagemFlag);
+					startDosagemFlag = !startDosagemFlag;
+					StatusLabelProperty.setStatusLabel("Em ciclo de dosagem");
+				} else {
+					AlertUtil.makeWarning("Atenção",
+							"Uma ou mais matérias-primas que fazem parte da formulação selecionada não consta em nenhum silo.\n"
+									+ "Favor revisar a formulação ou indicar o silo que contém a(s) matéria(s)-prima.");
+				}
 			}
 		});
-
 		new Thread(searchSiloTask).start();
 
 	}
-
-	// FIM TESTES
 
 	@FXML
 	private void startDescarga() {

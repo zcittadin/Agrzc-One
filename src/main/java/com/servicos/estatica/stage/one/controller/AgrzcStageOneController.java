@@ -382,6 +382,7 @@ public class AgrzcStageOneController implements Initializable {
 				return;
 			}
 			if (finalize[0] > 0 && dosagemIndex == formula.getQuantidades().size()) {
+				StatusLabelProperty.setStatusLabel("Dosagem finalizada");
 				System.out.println("FIM!");
 				modbusService.writeRegisterRequest(REG_FLAG_FINALIZADO, 0);
 				dosagemIndex = 0;
