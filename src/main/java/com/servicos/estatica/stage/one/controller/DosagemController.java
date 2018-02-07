@@ -3,6 +3,7 @@ package com.servicos.estatica.stage.one.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,10 +12,13 @@ import java.util.ResourceBundle;
 
 import com.servicos.estatica.stage.one.app.ControlledScreen;
 import com.servicos.estatica.stage.one.dao.FormulaDAO;
+import com.servicos.estatica.stage.one.dao.HistoricoDAO;
 import com.servicos.estatica.stage.one.dao.SiloDAO;
 import com.servicos.estatica.stage.one.dto.FormulaDosagemDTO;
 import com.servicos.estatica.stage.one.model.Formula;
+import com.servicos.estatica.stage.one.model.Historico;
 import com.servicos.estatica.stage.one.model.Silo;
+import com.servicos.estatica.stage.one.shared.ComandosDosagemProperty;
 import com.servicos.estatica.stage.one.shared.DosagemProperty;
 import com.servicos.estatica.stage.one.shared.HistoricoProperty;
 import com.servicos.estatica.stage.one.shared.StatusLabelProperty;
@@ -39,6 +43,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Rectangle;
@@ -104,9 +110,12 @@ public class DosagemController implements Initializable, ControlledScreen {
 	private Sphere I1_07;
 	@FXML
 	private CheckBox chkSensores;
+	@FXML
+	private ImageView switchElevador;
 
 	private static FormulaDAO formulaDAO = new FormulaDAO();
 	private static SiloDAO siloDAO = new SiloDAO();
+	private static HistoricoDAO historicoDAO = new HistoricoDAO();
 
 	private static List<Silo> silos = new ArrayList<Silo>();
 	private static ObservableList<Formula> formulas = FXCollections.observableArrayList();
@@ -134,6 +143,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 
 	private Boolean startDosagemFlag = false;
 	private Boolean cancelaDosagemFlag = false;
+	private Boolean comandoElevador = false;
 	private Boolean siloVazio = false;
 
 	private Formula selectedFormula;
@@ -261,9 +271,20 @@ public class DosagemController implements Initializable, ControlledScreen {
 		}
 		HistoricoProperty.selectedFormulaProperty().set(selectedFormula);
 		StatusLabelProperty.setStatusLabel("Em processo de descarga");
-		// Historico h = new Historico(null, new Date(), selectedFormula.getPesoTotal(),
-		// selectedFormula);
-		// historicoDAO.saveHistorico(h);
+		Historico h = new Historico(null, new Date(), selectedFormula.getPesoTotal(), selectedFormula);
+		historicoDAO.saveHistorico(h);
+	}
+
+	@FXML
+	private void toggleElevador() {
+		if (comandoElevador == false) {
+			comandoElevador = true;
+			switchElevador.setImage(new Image("com/servicos/estatica/stage/one/img/switch_on.png"));
+		} else {
+			comandoElevador = false;
+			switchElevador.setImage(new Image("com/servicos/estatica/stage/one/img/switch_off.png"));
+		}
+		ComandosDosagemProperty.setOnOffElevador(comandoElevador);
 	}
 
 	public void updateIOPoints(int channel, int point, Boolean b) {

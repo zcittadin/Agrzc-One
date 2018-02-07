@@ -16,6 +16,7 @@ import com.servicos.estatica.stage.one.listeners.output.Output4;
 import com.servicos.estatica.stage.one.modbus.ModbusTCPService;
 import com.servicos.estatica.stage.one.model.Formula;
 import com.servicos.estatica.stage.one.shared.CadastroProperty;
+import com.servicos.estatica.stage.one.shared.ComandosDosagemProperty;
 import com.servicos.estatica.stage.one.shared.DosagemProperty;
 import com.servicos.estatica.stage.one.shared.HistoricoProperty;
 import com.servicos.estatica.stage.one.shared.StatusLabelProperty;
@@ -90,6 +91,7 @@ public class AgrzcStageOneController implements Initializable {
 	private static final int REG_QUANTIDADE_MATERIA = 200;
 	private static final int REG_FLAG_FINALIZADO = 220;
 	private static final int REG_BALANCA_1 = 212;
+	private static final int REG_COMANDO_ELEVADOR = 240;
 
 	ScreensController mainContainer = new ScreensController();
 
@@ -195,6 +197,16 @@ public class AgrzcStageOneController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends Formula> observable, Formula oldValue, Formula newValue) {
 				cadastrosController.saveHistorico(newValue);
+			}
+		});
+
+		ComandosDosagemProperty.elevadorProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					modbusService.writeRegisterRequest(REG_COMANDO_ELEVADOR, 1);
+				else
+					modbusService.writeRegisterRequest(REG_COMANDO_ELEVADOR, 0);
 			}
 		});
 
