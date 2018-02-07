@@ -89,6 +89,7 @@ public class AgrzcStageOneController implements Initializable {
 	private static final int REG_SILO = 230;
 	private static final int REG_QUANTIDADE_MATERIA = 200;
 	private static final int REG_FLAG_FINALIZADO = 220;
+	private static final int REG_BALANCA_1 = 212;
 
 	ScreensController mainContainer = new ScreensController();
 
@@ -119,7 +120,7 @@ public class AgrzcStageOneController implements Initializable {
 			public void handle(ActionEvent event) {
 				readMultiplePoints(slot);
 				slot++;
-				if (slot == 8)
+				if (slot == 9)
 					slot = 0;
 			}
 		}));
@@ -197,15 +198,28 @@ public class AgrzcStageOneController implements Initializable {
 			}
 		});
 
+		DosagemProperty.cancelaDosagemProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				System.out.println("CANCELADO");
+				modbusService.writeRegisterRequest(REG_PESO_MATERIA, 0);
+				modbusService.writeRegisterRequest(REG_PESO_TOTAL_CARGA, 0);
+				modbusService.writeRegisterRequest(REG_SILO, 0);
+				modbusService.writeRegisterRequest(REG_QUANTIDADE_MATERIA, 0);
+			}
+		});
+
 		DosagemProperty.startFormulaProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				formula = DosagemProperty.getSelectedFormula();
 				if (dosagemIndex == 0) {
-					System.out
-							.println(formula.getQuantidades().get(dosagemIndex).getMateriaQuantidade().getNomeMateria()
-									+ ": " + formula.getSilos().get(dosagemIndex).getSilo() + " - "
-									+ formula.getQuantidades().get(dosagemIndex).getPeso());
+					/*
+					 * System.out
+					 * .println(formula.getQuantidades().get(dosagemIndex).getMateriaQuantidade().
+					 * getNomeMateria() + ": " + formula.getSilos().get(dosagemIndex).getSilo() +
+					 * " - " + formula.getQuantidades().get(dosagemIndex).getPeso());
+					 */
 					// Peso da materia-prima
 					modbusService.writeRegisterRequest(REG_PESO_MATERIA,
 							formula.getQuantidades().get(dosagemIndex).getPeso().intValue());
@@ -360,16 +374,19 @@ public class AgrzcStageOneController implements Initializable {
 			}
 			break;
 		case 6:
-			Integer[] values = modbusService.readMultipleRegisterRequest(212, 2);
-			if (values.length > 0) {
-				dosagemController.updateBalanca(values[0]);
-				for (int i = 0; i < values.length; i++) {
-					// System.out.println(values[i]);
-				}
+			Integer[] valuesBalanca1 = modbusService.readMultipleRegisterRequest(REG_BALANCA_1, 2);
+			if (valuesBalanca1.length > 0) {
+				dosagemController.updateBalanca1(valuesBalanca1[0]);
 			}
 			break;
 		case 7:
-			Integer[] finalize = modbusService.readMultipleRegisterRequest(220, 1);
+			Integer[] valuesBalanca2 = modbusService.readMultipleRegisterRequest(REG_BALANCA_1, 2);
+			if (valuesBalanca2.length > 0) {
+				processamentoController.updateBalanca2(valuesBalanca2[0]);
+			}
+			break;
+		case 8:
+			Integer[] finalize = modbusService.readMultipleRegisterRequest(REG_FLAG_FINALIZADO, 1);
 			if (finalize[0] > 0 && dosagemIndex < formula.getQuantidades().size()) {
 				System.out.println(formula.getQuantidades().get(dosagemIndex).getMateriaQuantidade().getNomeMateria()
 						+ ": " + formula.getSilos().get(dosagemIndex).getSilo() + " - "

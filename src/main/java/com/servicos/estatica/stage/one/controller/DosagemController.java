@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.servicos.estatica.stage.one.app.ControlledScreen;
@@ -33,6 +34,7 @@ import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -131,6 +133,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 	private static Map<Integer, Sphere> input_1 = new HashMap<>();
 
 	private Boolean startDosagemFlag = false;
+	private Boolean cancelaDosagemFlag = false;
 	private Boolean siloVazio = false;
 
 	private Formula selectedFormula;
@@ -237,7 +240,17 @@ public class DosagemController implements Initializable, ControlledScreen {
 			}
 		});
 		new Thread(searchSiloTask).start();
+	}
 
+	@FXML
+	private void cancelarDosagem() {
+		Optional<ButtonType> result = AlertUtil.makeConfirm("Confirmar cancelamento",
+				"Tem certeza que deseja cancelar o ciclo de dosagem em andamento?");
+		if (result.get() == ButtonType.OK) {
+			DosagemProperty.setCancelaDosagem(!cancelaDosagemFlag);
+			cancelaDosagemFlag = !cancelaDosagemFlag;
+			StatusLabelProperty.setStatusLabel("Sistema em espera");
+		}
 	}
 
 	@FXML
@@ -267,7 +280,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 			sph.setMaterial(grayMaterial);
 	}
 
-	public void updateBalanca(Integer value) {
+	public void updateBalanca1(Integer value) {
 		String strValue = value.toString();
 		if (strValue.length() < 2)
 			strValue = "0".concat(strValue);
@@ -399,7 +412,6 @@ public class DosagemController implements Initializable, ControlledScreen {
 		searchTask.setOnFailed(new EventHandler<WorkerStateEvent>() {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-
 				AlertUtil.makeError("Erro", "Ocorreu uma falha ao consultar as a situação dos silos.");
 			}
 		});

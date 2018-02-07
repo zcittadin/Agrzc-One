@@ -69,7 +69,7 @@
             <Font name="DSEG7 Classic-Bold" size="27.0" />
          </font>
       </Label>
-      <Label fx:id="lblBalanca" layoutX="883.0" layoutY="558.0" text="0000.00" textFill="#03c60d">
+      <Label fx:id="lblBalanca" layoutX="903.0" layoutY="558.0" text="0000" textFill="#03c60d">
          <font>
             <Font name="DSEG7 Classic-Bold" size="27.0" />
          </font>

@@ -29,9 +29,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Rectangle fx:id="rectForm" arcHeight="20.0" arcWidth="20.0" fill="#004bff" height="129.0" layoutX="20.0" layoutY="68.0" stroke="#00089a" strokeType="INSIDE" width="386.0" />
-      <ComboBox fx:id="comboFormulas" layoutX="31.0" layoutY="109.0" prefHeight="30.0" prefWidth="361.0" promptText="Selecione uma formulação para iniciar a dosagem" styleClass="combo-font" stylesheets="@../style/style.css" />
-      <Button layoutX="33.0" layoutY="152.0" mnemonicParsing="false" onAction="#startDosagem" prefHeight="30.0" prefWidth="174.0" styleClass="btUseFormula" stylesheets="@../css/style.css" text="Iniciar dosagem">
+      <Rectangle fx:id="rectForm" arcHeight="20.0" arcWidth="20.0" fill="#004bff" height="153.0" layoutX="20.0" layoutY="58.0" stroke="#00089a" strokeType="INSIDE" width="386.0" />
+      <ComboBox fx:id="comboFormulas" layoutX="33.0" layoutY="99.0" prefHeight="30.0" prefWidth="361.0" promptText="Selecione uma formulação para iniciar a dosagem" styleClass="combo-font" stylesheets="@../style/style.css" />
+      <Button layoutX="35.0" layoutY="137.0" mnemonicParsing="false" onAction="#startDosagem" prefHeight="30.0" prefWidth="174.0" styleClass="btUseFormula" stylesheets="@../css/style.css" text="Iniciar dosagem">
          <font>
             <Font size="14.0" />
          </font>
@@ -39,12 +39,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="36.0" layoutY="78.0" text="Formulação selecionada:" textFill="WHITE">
+      <Label layoutX="38.0" layoutY="68.0" text="Formulação selecionada:" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="14.0" text="Ciclo de dosagem" textFill="WHITE">
+      <Label layoutX="14.0" layoutY="4.0" text="Ciclo de dosagem" textFill="WHITE">
          <font>
             <Font size="35.0" />
          </font>
@@ -110,7 +110,7 @@
             <Bloom />
          </effect>
       </Label>
-      <Button layoutX="216.0" layoutY="152.0" mnemonicParsing="false" onAction="#startDescarga" prefHeight="30.0" prefWidth="174.0" styleClass="btDescargaBalanca" stylesheets="@../css/style.css" text="Descarregar balança">
+      <Button layoutX="218.0" layoutY="137.0" mnemonicParsing="false" onAction="#startDescarga" prefHeight="30.0" prefWidth="174.0" styleClass="btDescargaBalanca" stylesheets="@../css/style.css" text="Descarregar balança">
          <font>
             <Font size="14.0" />
          </font>
@@ -232,5 +232,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
+      <Button layoutX="35.0" layoutY="174.0" mnemonicParsing="false" onAction="#cancelarDosagem" prefHeight="30.0" prefWidth="356.0" styleClass="btCancel" stylesheets="@../css/style.css" text="Cancelar dosagem">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

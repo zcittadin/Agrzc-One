@@ -94,6 +94,17 @@ public class ProcessamentoController implements Initializable, ControlledScreen 
 			sph.setMaterial(grayMaterial);
 	}
 
+	public void updateBalanca2(Integer value) {
+		String strValue = value.toString();
+		if (strValue.length() < 2)
+			strValue = "0".concat(strValue);
+		if (strValue.length() < 3)
+			strValue = "0".concat(strValue);
+		if (strValue.length() < 4)
+			strValue = "0".concat(strValue);
+		lblBalanca.setText(strValue);
+	}
+
 	private void initColors() {
 		grayMaterial.setDiffuseColor(Color.DARKGRAY);
 		grayMaterial.setSpecularColor(Color.GREY);

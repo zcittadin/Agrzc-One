@@ -12,6 +12,9 @@ public class DosagemProperty {
 	private static SimpleBooleanProperty startFormula = new SimpleBooleanProperty();
 	private static Boolean start;
 
+	private static SimpleBooleanProperty cancelaDosagem = new SimpleBooleanProperty();
+	private static Boolean cancela;
+
 	public static SimpleObjectProperty<FormulaDosagemDTO> selectedFormulaProperty() {
 		return selectedFormula;
 	}
@@ -42,6 +45,26 @@ public class DosagemProperty {
 
 	public static void setFormulaStart(Boolean formulaStart) {
 		DosagemProperty.start = formulaStart;
+	}
+
+	public static SimpleBooleanProperty cancelaDosagemProperty() {
+		return cancelaDosagem;
+	}
+	
+	public static Boolean getCancelaDosagem() {
+		return cancelaDosagem.get();
+	}
+	
+	public static void setCancelaDosagem(Boolean cancela) {
+		cancelaDosagemProperty().set(cancela);
+	}
+	
+	public static Boolean getCancelaDosagemChanged() {
+		return cancela;
+	}
+	
+	public static void setCancelaProperty(Boolean cancela) {
+		DosagemProperty.cancela = cancela;
 	}
 
 }

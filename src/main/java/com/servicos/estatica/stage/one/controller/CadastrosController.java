@@ -510,7 +510,7 @@ public class CadastrosController implements Initializable, ControlledScreen {
 								} else {
 									btn.setOnAction(event -> {
 										Optional<ButtonType> result = AlertUtil.makeConfirm("Confirmar exclusão",
-												"Podem haver formulações que estejam utilizando esta matéria-prima. Tem certeza que deseja excluir?.");
+												"Podem haver formulações que estejam utilizando esta matéria-prima. Tem certeza que deseja excluir?");
 										if (result.get() == ButtonType.OK) {
 											Materia mat = getTableView().getItems().get(getIndex());
 											Task<Void> exclusionTask = new Task<Void>() {
