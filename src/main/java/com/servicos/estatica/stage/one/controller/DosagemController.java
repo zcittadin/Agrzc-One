@@ -112,6 +112,14 @@ public class DosagemController implements Initializable, ControlledScreen {
 	private CheckBox chkSensores;
 	@FXML
 	private ImageView switchElevador;
+	@FXML
+	private ImageView switchRosca1;
+	@FXML
+	private ImageView switchRosca2;
+	@FXML
+	private ImageView imgDirRoscaRight;
+	@FXML
+	private ImageView imgDirRoscaLeft;
 
 	private static FormulaDAO formulaDAO = new FormulaDAO();
 	private static SiloDAO siloDAO = new SiloDAO();
@@ -144,6 +152,10 @@ public class DosagemController implements Initializable, ControlledScreen {
 	private Boolean startDosagemFlag = false;
 	private Boolean cancelaDosagemFlag = false;
 	private Boolean comandoElevador = false;
+	private Boolean comandoRosca1 = false;
+	private Boolean comandoRosca2 = false;
+	private Boolean roscaSuperiorHorario = false;
+	private Boolean roscaSuperiorAntiHorario = false;
 	private Boolean siloVazio = false;
 
 	private Formula selectedFormula;
@@ -285,6 +297,64 @@ public class DosagemController implements Initializable, ControlledScreen {
 			switchElevador.setImage(new Image("com/servicos/estatica/stage/one/img/switch_off.png"));
 		}
 		ComandosDosagemProperty.setOnOffElevador(comandoElevador);
+	}
+
+	@FXML
+	private void toggleRosca1() {
+		if (comandoRosca1 == false) {
+			comandoRosca1 = true;
+			switchRosca1.setImage(new Image("com/servicos/estatica/stage/one/img/switch_on.png"));
+		} else {
+			comandoRosca1 = false;
+			switchRosca1.setImage(new Image("com/servicos/estatica/stage/one/img/switch_off.png"));
+		}
+		ComandosDosagemProperty.setRosca1(comandoRosca1);
+	}
+
+	@FXML
+	private void toggleRosca2() {
+		if (comandoRosca2 == false) {
+			comandoRosca2 = true;
+			switchRosca2.setImage(new Image("com/servicos/estatica/stage/one/img/switch_on.png"));
+		} else {
+			comandoRosca2 = false;
+			switchRosca2.setImage(new Image("com/servicos/estatica/stage/one/img/switch_off.png"));
+		}
+		ComandosDosagemProperty.setRosca2(comandoRosca2);
+	}
+
+	@FXML
+	private void roscaSuperiorHorario() {
+		if (roscaSuperiorHorario == false) {
+			roscaSuperiorAntiHorario = false;
+			roscaSuperiorHorario = true;
+			imgDirRoscaLeft.setVisible(true);
+			imgDirRoscaRight.setVisible(false);
+		}
+		ComandosDosagemProperty.setRoscaSuperiorHorario(true);
+		ComandosDosagemProperty.setRoscaSuperiorAntiHorario(false);
+	}
+
+	@FXML
+	private void roscaSuperiorAntiHorario() {
+		if (roscaSuperiorAntiHorario == false) {
+			roscaSuperiorHorario = false;
+			roscaSuperiorAntiHorario = true;
+			imgDirRoscaRight.setVisible(true);
+			imgDirRoscaLeft.setVisible(false);
+		}
+		ComandosDosagemProperty.setRoscaSuperiorAntiHorario(true);
+		ComandosDosagemProperty.setRoscaSuperiorHorario(false);
+	}
+
+	@FXML
+	private void stopRoscaSuperior() {
+		roscaSuperiorAntiHorario = false;
+		roscaSuperiorHorario = false;
+		imgDirRoscaRight.setVisible(false);
+		imgDirRoscaLeft.setVisible(false);
+		ComandosDosagemProperty.setRoscaSuperiorHorario(false);
+		ComandosDosagemProperty.setRoscaSuperiorAntiHorario(false);
 	}
 
 	public void updateIOPoints(int channel, int point, Boolean b) {
@@ -484,6 +554,8 @@ public class DosagemController implements Initializable, ControlledScreen {
 		Tooltip.install(lblSilo9, tooltipSilo9);
 		Tooltip.install(lblSilo10, tooltipSilo10);
 		Tooltip.install(lblBalanca, tooltipBalanca);
+		imgDirRoscaLeft.setVisible(false);
+		imgDirRoscaRight.setVisible(false);
 	}
 
 	private void initColors() {

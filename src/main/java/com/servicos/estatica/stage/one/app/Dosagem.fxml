@@ -248,5 +248,71 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
+      <ImageView fitHeight="74.0" fitWidth="46.0" layoutX="1208.0" layoutY="55.0" onMouseClicked="#roscaSuperiorHorario" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/left_row.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="74.0" fitWidth="46.0" layoutX="1283.0" layoutY="55.0" onMouseClicked="#roscaSuperiorAntiHorario" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/right_row.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="74.0" fitWidth="46.0" layoutX="1246.0" layoutY="65.0" onMouseClicked="#stopRoscaSuperior" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/stop_button.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="imgDirRoscaRight" fitHeight="51.0" fitWidth="126.0" layoutX="1269.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Seta.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgDirRoscaLeft" fitHeight="51.0" fitWidth="126.0" layoutX="1169.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+         <image>
+            <Image url="@../img/Seta.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="740.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/rosca_front.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="987.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/rosca_front.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="switchRosca1" fitHeight="30.0" fitWidth="35.0" layoutX="759.0" layoutY="40.0" onMouseClicked="#toggleRosca1" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Switch_off.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="switchRosca2" fitHeight="30.0" fitWidth="35.0" layoutX="1006.0" layoutY="43.0" onMouseClicked="#toggleRosca2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Switch_off.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>

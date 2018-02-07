@@ -92,6 +92,10 @@ public class AgrzcStageOneController implements Initializable {
 	private static final int REG_FLAG_FINALIZADO = 220;
 	private static final int REG_BALANCA_1 = 212;
 	private static final int REG_COMANDO_ELEVADOR = 240;
+	private static final int REG_ROSCA_SUP_HORARIO = 242;
+	private static final int REG_ROSCA_SUP_ANTI_HORARIO = 244;
+	private static final int REG_COMANDO_ROSCA_1 = 246;
+	private static final int REG_COMANDO_ROSCA_2 = 248;
 
 	ScreensController mainContainer = new ScreensController();
 
@@ -207,6 +211,46 @@ public class AgrzcStageOneController implements Initializable {
 					modbusService.writeRegisterRequest(REG_COMANDO_ELEVADOR, 1);
 				else
 					modbusService.writeRegisterRequest(REG_COMANDO_ELEVADOR, 0);
+			}
+		});
+
+		ComandosDosagemProperty.roscaSuperiorHorarioProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					modbusService.writeRegisterRequest(REG_ROSCA_SUP_HORARIO, 1);
+				else
+					modbusService.writeRegisterRequest(REG_ROSCA_SUP_HORARIO, 0);
+			}
+		});
+
+		ComandosDosagemProperty.roscaSuperiorAntiHorarioProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					modbusService.writeRegisterRequest(REG_ROSCA_SUP_ANTI_HORARIO, 1);
+				else
+					modbusService.writeRegisterRequest(REG_ROSCA_SUP_ANTI_HORARIO, 0);
+			}
+		});
+
+		ComandosDosagemProperty.rosca1Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					modbusService.writeRegisterRequest(REG_COMANDO_ROSCA_1, 1);
+				else
+					modbusService.writeRegisterRequest(REG_COMANDO_ROSCA_1, 0);
+			}
+		});
+
+		ComandosDosagemProperty.rosca2Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					modbusService.writeRegisterRequest(REG_COMANDO_ROSCA_2, 1);
+				else
+					modbusService.writeRegisterRequest(REG_COMANDO_ROSCA_2, 0);
 			}
 		});
 
