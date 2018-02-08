@@ -554,6 +554,9 @@ public class DosagemController implements Initializable, ControlledScreen {
 		Tooltip.install(lblSilo9, tooltipSilo9);
 		Tooltip.install(lblSilo10, tooltipSilo10);
 		Tooltip.install(lblBalanca, tooltipBalanca);
+		switchElevador.setImage(new Image("com/servicos/estatica/stage/one/img/switch_off.png"));
+		switchRosca1.setImage(new Image("com/servicos/estatica/stage/one/img/switch_off.png"));
+		switchRosca2.setImage(new Image("com/servicos/estatica/stage/one/img/switch_off.png"));
 		imgDirRoscaLeft.setVisible(false);
 		imgDirRoscaRight.setVisible(false);
 	}
