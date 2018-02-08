@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="950.0" prefWidth="1920.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.AgrzcStageOneController">
+<AnchorPane prefHeight="930.0" prefWidth="1760.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.servicos.estatica.stage.one.controller.AgrzcStageOneController">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1028.0" prefWidth="1920.0" styleClass="mainGradient" stylesheets="@../css/style.css">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="930.0" prefWidth="1760.0" styleClass="mainGradient" stylesheets="@../css/style.css">
          <top>
-            <AnchorPane prefHeight="104.0" prefWidth="1920.0" styleClass="mainGradient" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="104.0" prefWidth="1760.0" styleClass="mainGradient" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="imgCliente" fitHeight="101.0" fitWidth="200.0" onMouseClicked="#handleImgClienteAction" pickOnBounds="true">
+                  <ImageView fx:id="imgCliente" fitHeight="101.0" fitWidth="185.0" layoutX="1.0" layoutY="1.0" onMouseClicked="#handleImgClienteAction" pickOnBounds="true">
                      <image>
                         <Image url="@../img/agrozacca.png" />
                      </image>
@@ -25,7 +25,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fx:id="imgEstatica" fitHeight="96.0" fitWidth="196.0" layoutX="1716.0" layoutY="4.0" onMouseClicked="#handleImgEstaticaAction" pickOnBounds="true">
+                  <ImageView fx:id="imgEstatica" fitHeight="96.0" fitWidth="185.0" layoutX="1572.0" layoutY="4.0" onMouseClicked="#handleImgEstaticaAction" pickOnBounds="true">
                      <image>
                         <Image url="@../img/logotipo.jpg" />
                      </image>
@@ -33,8 +33,8 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Label layoutX="438.0" layoutY="3.0" prefHeight="102.0" prefWidth="1075.0" styleClass="labelGradient" stylesheets="@../style/style.css" />
-                  <Label fx:id="lblInfo" alignment="CENTER" layoutX="463.0" layoutY="16.0" prefHeight="69.0" prefWidth="1025.0" text="Sistema em espera" textFill="#2fff00">
+                  <Label layoutX="434.0" layoutY="-1.0" prefHeight="102.0" prefWidth="892.0" styleClass="labelGradient" stylesheets="@../style/style.css" />
+                  <Label fx:id="lblInfo" alignment="CENTER" layoutX="460.0" layoutY="15.0" prefHeight="69.0" prefWidth="840.0" text="Sistema em espera" textFill="#2fff00">
                      <font>
                         <Font name="Dot Matrix" size="62.0" />
                      </font>
@@ -46,36 +46,36 @@
             </AnchorPane>
          </top>
          <left>
-            <AnchorPane prefHeight="950.0" prefWidth="220.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="868.0" prefWidth="180.0" BorderPane.alignment="CENTER">
                <children>
-                  <Clock dateVisible="true" layoutX="10.0" layoutY="14.0" lcdDesign="BLUE" prefHeight="83.0" prefWidth="180.0" running="true" secondsVisible="true" skinType="LCD" />
-                  <Button layoutY="134.0" mnemonicParsing="false" onAction="#openDosagem" prefHeight="62.0" prefWidth="214.0" styleClass="btDosagem" stylesheets="@../style/style.css" text="Dosagem">
+                  <Clock dateVisible="true" layoutX="10.0" layoutY="14.0" lcdDesign="BLUE" prefHeight="74.0" prefWidth="157.0" running="true" secondsVisible="true" skinType="LCD" />
+                  <Button layoutY="134.0" mnemonicParsing="false" onAction="#openDosagem" prefHeight="62.0" prefWidth="176.0" styleClass="btDosagem" stylesheets="@../style/style.css" text="Dosagem">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="15.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutY="197.0" mnemonicParsing="false" onAction="#openProcessamento" prefHeight="62.0" prefWidth="214.0" styleClass="btProcessamento" stylesheets="@../style/style.css" text="Processamento">
+                  <Button layoutY="197.0" mnemonicParsing="false" onAction="#openProcessamento" prefHeight="62.0" prefWidth="176.0" styleClass="btProcessamento" stylesheets="@../style/style.css" text="Processamento">
                      <font>
-                        <Font size="19.0" />
+                        <Font size="15.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutY="260.0" mnemonicParsing="false" onAction="#openCadastros" prefHeight="62.0" prefWidth="214.0" styleClass="btFormulacao" stylesheets="@../style/style.css" text="Formulações">
+                  <Button layoutY="260.0" mnemonicParsing="false" onAction="#openCadastros" prefHeight="62.0" prefWidth="176.0" styleClass="btFormulacao" stylesheets="@../style/style.css" text="Formulações">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="15.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutY="856.0" mnemonicParsing="false" onAction="#exit" prefHeight="54.0" prefWidth="214.0" styleClass="btExit" stylesheets="@../css/style.css" text="Sair">
+                  <Button layoutY="766.0" mnemonicParsing="false" onAction="#exit" prefHeight="54.0" prefWidth="176.0" styleClass="btExit" stylesheets="@../css/style.css" text="Sair">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="15.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -85,7 +85,7 @@
             </AnchorPane>
          </left>
          <center>
-            <AnchorPane fx:id="centralPane" prefHeight="950.0" prefWidth="1700.0" BorderPane.alignment="CENTER" />
+            <AnchorPane fx:id="centralPane" prefHeight="826.0" prefWidth="1580.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

@@ -23,7 +23,7 @@ public class AgrzcStageOne extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("/com/servicos/estatica/stage/one/app/AgrzcStageOne.fxml"));
 		stage.setScene(new Scene(root));
 		stage.setTitle("Agrozacca");
-		stage.setMaximized(true);
+//		stage.setMaximized(true);
 		stage.setResizable(false);
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent event) {

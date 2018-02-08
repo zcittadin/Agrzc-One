@@ -14,14 +14,14 @@
 <?import javafx.scene.shape.Sphere?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="920.0" prefWidth="1712.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="826.0" prefWidth="1580.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="790.0" fitWidth="1229.0" layoutX="425.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="702.0" fitWidth="1071.0" layoutX="425.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/Dosagem.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblSilo3" alignment="CENTER" layoutX="903.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+      <Label fx:id="lblSilo3" alignment="CENTER" layoutX="851.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
          <font>
             <Font size="16.0" />
          </font>
@@ -49,7 +49,7 @@
             <Font size="35.0" />
          </font>
       </Label>
-      <Label fx:id="lblSilo2" alignment="CENTER" layoutX="780.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+      <Label fx:id="lblSilo2" alignment="CENTER" layoutX="741.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
          <font>
             <Font size="16.0" />
          </font>
@@ -57,7 +57,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="lblSilo4" alignment="CENTER" layoutX="1027.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+      <Label fx:id="lblSilo4" alignment="CENTER" layoutX="960.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
          <font>
             <Font size="16.0" />
          </font>
@@ -65,44 +65,44 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Circle fill="WHITE" layoutX="712.0" layoutY="231.0" radius="23.0" stroke="#6000fc" strokeType="INSIDE" />
-      <Circle fill="WHITE" layoutX="835.0" layoutY="231.0" radius="23.0" stroke="#6000fc" strokeType="INSIDE" />
-      <Circle fill="WHITE" layoutX="959.0" layoutY="231.0" radius="23.0" stroke="#6000fc" strokeType="INSIDE" />
-      <Circle fill="WHITE" layoutX="1083.0" layoutY="231.0" radius="23.0" stroke="#6000fc" strokeType="INSIDE" />
-      <Label layoutX="707.0" layoutY="219.0" text="1" textFill="#6000fc">
+      <Circle fill="WHITE" layoutX="681.0" layoutY="227.0" radius="19.0" stroke="#6000fc" strokeType="INSIDE" />
+      <Circle fill="WHITE" layoutX="791.0" layoutY="231.0" radius="19.0" stroke="#6000fc" strokeType="INSIDE" />
+      <Circle fill="WHITE" layoutX="902.0" layoutY="231.0" radius="19.0" stroke="#6000fc" strokeType="INSIDE" />
+      <Circle fill="WHITE" layoutX="1011.0" layoutY="231.0" radius="19.0" stroke="#6000fc" strokeType="INSIDE" />
+      <Label layoutX="676.0" layoutY="214.0" text="1" textFill="#6000fc">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="830.0" layoutY="218.0" text="2" textFill="#6000fc">
+      <Label layoutX="786.0" layoutY="218.0" text="2" textFill="#6000fc">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="954.0" layoutY="218.0" text="3" textFill="#6000fc">
+      <Label layoutX="897.0" layoutY="218.0" text="3" textFill="#6000fc">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="1078.0" layoutY="218.0" text="4" textFill="#6000fc">
+      <Label layoutX="1006.0" layoutY="218.0" text="4" textFill="#6000fc">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Sphere fx:id="I0_01" layoutX="660.0" layoutY="207.0" radius="7.0" />
+      <Sphere fx:id="I0_01" layoutX="637.0" layoutY="207.0" radius="7.0" />
       <Sphere fx:id="I0_00" layoutX="703.0" layoutY="420.0" radius="7.0" />
-      <Sphere fx:id="I0_03" layoutX="784.0" layoutY="207.0" radius="7.0" />
+      <Sphere fx:id="I0_03" layoutX="746.0" layoutY="207.0" radius="7.0" />
       <Sphere fx:id="I0_02" layoutX="827.0" layoutY="420.0" radius="7.0" />
-      <Sphere fx:id="I0_05" layoutX="908.0" layoutY="207.0" radius="7.0" />
+      <Sphere fx:id="I0_05" layoutX="856.0" layoutY="207.0" radius="7.0" />
       <Sphere fx:id="I0_04" layoutX="951.0" layoutY="420.0" radius="7.0" />
-      <Sphere fx:id="I0_07" layoutX="1031.0" layoutY="207.0" radius="7.0" />
+      <Sphere fx:id="I0_07" layoutX="966.0" layoutY="207.0" radius="7.0" />
       <Sphere fx:id="I0_06" layoutX="1074.0" layoutY="420.0" radius="7.0" />
-      <Label alignment="CENTER" layoutX="783.0" layoutY="624.0" prefHeight="74.0" prefWidth="246.0" styleClass="labelGradient" stylesheets="@../style/style.css" textFill="#6000fc">
+      <Label alignment="CENTER" layoutX="733.0" layoutY="554.0" prefHeight="74.0" prefWidth="246.0" styleClass="labelGradient" stylesheets="@../style/style.css" textFill="#6000fc">
          <font>
             <Font name="DSEG7 Classic-Bold" size="32.0" />
          </font>
       </Label>
-      <Label fx:id="lblBalanca" alignment="CENTER" layoutX="836.0" layoutY="637.0" text="0000" textFill="#03c60d">
+      <Label fx:id="lblBalanca" alignment="CENTER" layoutX="786.0" layoutY="567.0" text="0000" textFill="#03c60d">
          <font>
             <Font name="DSEG7 Classic-Bold" size="44.0" />
          </font>
@@ -118,30 +118,30 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fitHeight="372.0" fitWidth="690.0" layoutX="25.0" layoutY="225.0" pickOnBounds="true">
+      <ImageView fitHeight="322.0" fitWidth="612.0" layoutX="75.0" layoutY="222.0" pickOnBounds="true">
          <image>
             <Image url="@../img/Silos_parede.png" />
          </image>
       </ImageView>
-      <Sphere fx:id="I0_09" layoutX="1168.0" layoutY="208.0" radius="7.0" />
-      <Sphere fx:id="I0_11" layoutX="1358.0" layoutY="208.0" radius="7.0" />
-      <Sphere fx:id="I1_04" layoutX="157.0" layoutY="327.0" radius="7.0" />
-      <Sphere fx:id="I1_05" layoutX="309.0" layoutY="327.0" radius="7.0" />
-      <Sphere fx:id="I1_06" layoutX="112.0" layoutY="250.0" radius="7.0" />
-      <Sphere fx:id="I1_07" layoutX="261.0" layoutY="250.0" radius="7.0" />
-      <Circle fill="WHITE" layoutX="1258.0" layoutY="231.0" radius="23.0" stroke="#6000fc" strokeType="INSIDE" />
-      <Label layoutX="1253.0" layoutY="218.0" text="5" textFill="#6000fc">
+      <Sphere fx:id="I0_09" layoutX="1088.0" layoutY="208.0" radius="7.0" />
+      <Sphere fx:id="I0_11" layoutX="1258.0" layoutY="208.0" radius="7.0" />
+      <Sphere fx:id="I1_04" layoutX="195.0" layoutY="314.0" radius="7.0" />
+      <Sphere fx:id="I1_05" layoutX="329.0" layoutY="314.0" radius="7.0" />
+      <Sphere fx:id="I1_06" layoutX="154.0" layoutY="241.0" radius="7.0" />
+      <Sphere fx:id="I1_07" layoutX="287.0" layoutY="241.0" radius="7.0" />
+      <Circle fill="WHITE" layoutX="1164.0" layoutY="231.0" radius="19.0" stroke="#6000fc" strokeType="INSIDE" />
+      <Label layoutX="1159.0" layoutY="218.0" text="5" textFill="#6000fc">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Circle fill="WHITE" layoutX="1448.0" layoutY="231.0" radius="23.0" stroke="#6000fc" strokeType="INSIDE" />
-      <Label layoutX="1443.0" layoutY="218.0" text="6" textFill="#6000fc">
+      <Circle fill="WHITE" layoutX="1335.0" layoutY="231.0" radius="19.0" stroke="#6000fc" strokeType="INSIDE" />
+      <Label layoutX="1330.0" layoutY="218.0" text="6" textFill="#6000fc">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblSilo5" alignment="CENTER" layoutX="1202.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+      <Label fx:id="lblSilo5" alignment="CENTER" layoutX="1115.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
          <font>
             <Font size="16.0" />
          </font>
@@ -149,7 +149,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="lblSilo6" alignment="CENTER" layoutX="1392.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+      <Label fx:id="lblSilo6" alignment="CENTER" layoutX="1285.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
          <font>
             <Font size="16.0" />
          </font>
@@ -157,8 +157,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Separator orientation="VERTICAL" prefHeight="920.0" />
-      <Label fx:id="lblSilo9" alignment="CENTER" layoutX="114.0" layoutY="273.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+      <Separator orientation="VERTICAL" prefHeight="826.0" />
+      <Label fx:id="lblSilo9" alignment="CENTER" layoutX="154.0" layoutY="263.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
          <font>
             <Font size="16.0" />
          </font>
@@ -166,13 +166,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Circle fill="WHITE" layoutX="169.0" layoutY="250.0" radius="23.0" stroke="#6000fc" strokeType="INSIDE" />
-      <Label layoutX="164.0" layoutY="237.0" text="9" textFill="#6000fc">
+      <Circle fill="WHITE" layoutX="204.0" layoutY="240.0" radius="19.0" stroke="#6000fc" strokeType="INSIDE" />
+      <Label layoutX="199.0" layoutY="227.0" text="9" textFill="#6000fc">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblSilo10" alignment="CENTER" layoutX="264.0" layoutY="273.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+      <Label fx:id="lblSilo10" alignment="CENTER" layoutX="287.0" layoutY="263.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
          <font>
             <Font size="16.0" />
          </font>
@@ -180,13 +180,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Circle fill="WHITE" layoutX="319.0" layoutY="250.0" radius="23.0" stroke="#6000fc" strokeType="INSIDE" />
-      <Label layoutX="309.0" layoutY="237.0" text="10" textFill="#6000fc">
+      <Circle fill="WHITE" layoutX="336.0" layoutY="240.0" radius="19.0" stroke="#6000fc" strokeType="INSIDE" />
+      <Label layoutX="326.0" layoutY="227.0" text="10" textFill="#6000fc">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblSilo8" alignment="CENTER" layoutX="309.0" layoutY="363.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+      <Label fx:id="lblSilo8" alignment="CENTER" layoutX="328.0" layoutY="343.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
          <font>
             <Font size="16.0" />
          </font>
@@ -194,13 +194,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Circle fill="WHITE" layoutX="364.0" layoutY="340.0" radius="23.0" stroke="#6000fc" strokeType="INSIDE" />
-      <Label layoutX="359.0" layoutY="327.0" text="8" textFill="#6000fc">
+      <Circle fill="WHITE" layoutX="378.0" layoutY="320.0" radius="19.0" stroke="#6000fc" strokeType="INSIDE" />
+      <Label layoutX="373.0" layoutY="307.0" text="8" textFill="#6000fc">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblSilo7" alignment="CENTER" layoutX="159.0" layoutY="363.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+      <Label fx:id="lblSilo7" alignment="CENTER" layoutX="194.0" layoutY="343.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
          <font>
             <Font size="16.0" />
          </font>
@@ -208,23 +208,23 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Circle fill="WHITE" layoutX="214.0" layoutY="340.0" radius="23.0" stroke="#6000fc" strokeType="INSIDE" />
-      <Label layoutX="209.0" layoutY="327.0" text="7" textFill="#6000fc">
+      <Circle fill="WHITE" layoutX="244.0" layoutY="320.0" radius="19.0" stroke="#6000fc" strokeType="INSIDE" />
+      <Label layoutX="239.0" layoutY="307.0" text="7" textFill="#6000fc">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="65.0" fitWidth="154.0" layoutX="1415.0" layoutY="760.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="65.0" fitWidth="154.0" layoutX="1305.0" layoutY="700.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/Seta.png" />
          </image>
       </ImageView>
-      <Label layoutX="1379.0" layoutY="736.0" text="Para o procesamento" textFill="WHITE">
+      <Label layoutX="1269.0" layoutY="676.0" text="Para o procesamento" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lblSilo1" alignment="CENTER" layoutX="656.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
+      <Label fx:id="lblSilo1" alignment="CENTER" layoutX="632.0" layoutY="254.0" onMouseClicked="#editMateria" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color: white;" text="Vazio" textFill="#6000fc">
          <font>
             <Font size="16.0" />
          </font>
@@ -240,7 +240,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fx:id="switchElevador" fitHeight="74.0" fitWidth="46.0" layoutX="532.0" layoutY="793.0" onMouseClicked="#toggleElevador" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="switchElevador" fitHeight="74.0" fitWidth="46.0" layoutX="516.0" layoutY="713.0" onMouseClicked="#toggleElevador" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/Switch_off.png" />
          </image>
@@ -248,7 +248,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="74.0" fitWidth="46.0" layoutX="1208.0" layoutY="55.0" onMouseClicked="#roscaSuperiorHorario" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="74.0" fitWidth="46.0" layoutX="1114.0" layoutY="55.0" onMouseClicked="#roscaSuperiorHorario" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/left_row.png" />
          </image>
@@ -256,7 +256,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="74.0" fitWidth="46.0" layoutX="1283.0" layoutY="55.0" onMouseClicked="#roscaSuperiorAntiHorario" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="74.0" fitWidth="46.0" layoutX="1189.0" layoutY="55.0" onMouseClicked="#roscaSuperiorAntiHorario" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/right_row.png" />
          </image>
@@ -264,7 +264,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="74.0" fitWidth="46.0" layoutX="1246.0" layoutY="65.0" onMouseClicked="#stopRoscaSuperior" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="74.0" fitWidth="46.0" layoutX="1152.0" layoutY="65.0" onMouseClicked="#stopRoscaSuperior" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/stop_button.png" />
          </image>
@@ -272,17 +272,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="imgDirRoscaRight" fitHeight="51.0" fitWidth="126.0" layoutX="1269.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgDirRoscaRight" fitHeight="51.0" fitWidth="126.0" layoutX="1175.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/Seta.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgDirRoscaLeft" fitHeight="51.0" fitWidth="126.0" layoutX="1169.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+      <ImageView fx:id="imgDirRoscaLeft" fitHeight="51.0" fitWidth="126.0" layoutX="1075.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@../img/Seta.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="740.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="702.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/rosca_front.png" />
          </image>
@@ -290,7 +290,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="987.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="922.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/rosca_front.png" />
          </image>
@@ -298,7 +298,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="switchRosca1" fitHeight="30.0" fitWidth="35.0" layoutX="759.0" layoutY="40.0" onMouseClicked="#toggleRosca1" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="switchRosca1" fitHeight="30.0" fitWidth="35.0" layoutX="721.0" layoutY="40.0" onMouseClicked="#toggleRosca1" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/Switch_off.png" />
          </image>
@@ -306,7 +306,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="switchRosca2" fitHeight="30.0" fitWidth="35.0" layoutX="1006.0" layoutY="43.0" onMouseClicked="#toggleRosca2" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="switchRosca2" fitHeight="30.0" fitWidth="35.0" layoutX="941.0" layoutY="43.0" onMouseClicked="#toggleRosca2" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/Switch_off.png" />
          </image>
