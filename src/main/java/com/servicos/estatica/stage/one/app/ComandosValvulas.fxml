@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="299.0" prefWidth="751.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="com.servicos.estatica.stage.one.controller.ComandosValvulasController">
+   <children>
+      <ImageView fx:id="switchSilos12" fitHeight="30.0" fitWidth="35.0" layoutX="58.0" layoutY="60.0" onMouseClicked="#toggleSilos12" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Switch_off.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="100.0" layoutY="63.0" text="Válvula silos 1 e 2" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="switchSilos34" fitHeight="30.0" fitWidth="35.0" layoutX="58.0" layoutY="110.0" onMouseClicked="#toggleSilos34" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Switch_off.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="100.0" layoutY="113.0" text="Válvula silos 3 e 4" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="switchSaidaBalanca1" fitHeight="30.0" fitWidth="35.0" layoutX="58.0" layoutY="160.0" onMouseClicked="#toggleSaidaBalanca1" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Switch_off.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="100.0" layoutY="163.0" text="Válvula saída balança 1" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="switchMistura11" fitHeight="30.0" fitWidth="35.0" layoutX="58.0" layoutY="210.0" onMouseClicked="#toggleMistura11" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Switch_off.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="100.0" layoutY="213.0" text="Válvula mistura 1 superior" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="switchMistura12" fitHeight="30.0" fitWidth="35.0" layoutX="363.0" layoutY="60.0" onMouseClicked="#toggleMistura12" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Switch_off.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="405.0" layoutY="63.0" text="Válvula mistura 1 inferior" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="switchTransportePneumatico" fitHeight="30.0" fitWidth="35.0" layoutX="363.0" layoutY="110.0" onMouseClicked="#toggleTransportePneumatico" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Switch_off.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="405.0" layoutY="113.0" text="Válvula transporte pneumático" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="switchSaidaBalanca2" fitHeight="30.0" fitWidth="35.0" layoutX="363.0" layoutY="160.0" onMouseClicked="#toggleSaidaBalanca2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Switch_off.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="405.0" layoutY="163.0" text="Válvula saída balança 2" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="switchMistura2" fitHeight="30.0" fitWidth="35.0" layoutX="363.0" layoutY="210.0" onMouseClicked="#toggleMistura2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Switch_off.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="405.0" layoutY="213.0" text="Válvula mistura 2" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

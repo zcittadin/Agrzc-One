@@ -17,6 +17,7 @@ import com.servicos.estatica.stage.one.modbus.ModbusTCPService;
 import com.servicos.estatica.stage.one.model.Formula;
 import com.servicos.estatica.stage.one.shared.CadastroProperty;
 import com.servicos.estatica.stage.one.shared.ComandosDosagemProperty;
+import com.servicos.estatica.stage.one.shared.ComandosValvulasProperty;
 import com.servicos.estatica.stage.one.shared.DosagemProperty;
 import com.servicos.estatica.stage.one.shared.HistoricoProperty;
 import com.servicos.estatica.stage.one.shared.ProcessamentoProperty;
@@ -99,6 +100,14 @@ public class AgrzcStageOneController implements Initializable {
 	private static final int REG_ROSCA_SUP_ANTI_HORARIO = 244;
 	private static final int REG_COMANDO_ROSCA_1 = 246;
 	private static final int REG_COMANDO_ROSCA_2 = 248;
+	private static final int REG_VALVULA_SILO_1_2 = 298;
+	private static final int REG_VALVULA_SILO_3_4 = 300;
+	private static final int REG_VALVULA_SAIDA_BALANCA_1 = 270;
+	private static final int REG_VALVULA_MISTURA_1_1 = 276;
+	private static final int REG_VALVULA_MISTURA_1_2 = 278;
+	private static final int REG_VALVULA_TRANSPORTE_PNEUMATICO = 286;
+	private static final int REG_VALVULA_SAIDA_BALANCA_2 = 290;
+	private static final int REG_VALVULA_MISTURA_2 = 292;
 
 	ScreensController mainContainer = new ScreensController();
 
@@ -264,12 +273,12 @@ public class AgrzcStageOneController implements Initializable {
 		DosagemProperty.cancelaDosagemProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				System.out.println("CANCELADO");
 				modbusService.writeRegisterRequest(REG_PESO_MATERIA, 0);
 				modbusService.writeRegisterRequest(REG_PESO_TOTAL_CARGA, 0);
 				modbusService.writeRegisterRequest(REG_SILO, 0);
 				modbusService.writeRegisterRequest(REG_QUANTIDADE_MATERIA, 0);
 				dosagemController.updateSiloCarga("00");
+				formula = null;
 				dosagemIndex = 0;
 			}
 		});
@@ -279,12 +288,6 @@ public class AgrzcStageOneController implements Initializable {
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				formula = DosagemProperty.getSelectedFormula();
 				if (dosagemIndex == 0) {
-					/*
-					 * System.out
-					 * .println(formula.getQuantidades().get(dosagemIndex).getMateriaQuantidade().
-					 * getNomeMateria() + ": " + formula.getSilos().get(dosagemIndex).getSilo() +
-					 * " - " + formula.getQuantidades().get(dosagemIndex).getPeso());
-					 */
 					// Peso da materia-prima
 					modbusService.writeRegisterRequest(REG_PESO_MATERIA,
 							formula.getQuantidades().get(dosagemIndex).getPeso().intValue());
@@ -330,7 +333,7 @@ public class AgrzcStageOneController implements Initializable {
 		});
 
 		// INPUT CANAL 1
-		for (int i = 0; i < Input1.points; i++) {
+		for (int i = 0; i < Input1.POINTS; i++) {
 			Input1.getListeners().add(new SimpleBooleanProperty());
 		}
 		Input1.getListeners().forEach(listener -> {
@@ -343,7 +346,7 @@ public class AgrzcStageOneController implements Initializable {
 		});
 
 		// INPUT CANAL 2
-		for (int i = 0; i < Input2.points; i++) {
+		for (int i = 0; i < Input2.POINTS; i++) {
 			Input2.getListeners().add(new SimpleBooleanProperty());
 		}
 		Input2.getListeners().forEach(listener -> {
@@ -356,7 +359,7 @@ public class AgrzcStageOneController implements Initializable {
 		});
 
 		// OUTPUT CANAL 0
-		for (int i = 0; i < Output0.points; i++) {
+		for (int i = 0; i < Output0.POINTS; i++) {
 			Output0.getListeners().add(new SimpleBooleanProperty());
 		}
 		Output0.getListeners().forEach(listener -> {
@@ -370,7 +373,7 @@ public class AgrzcStageOneController implements Initializable {
 		});
 
 		// OUTPUT CANAL 3
-		for (int i = 0; i < Output3.points; i++) {
+		for (int i = 0; i < Output3.POINTS; i++) {
 			Output3.getListeners().add(new SimpleBooleanProperty());
 		}
 		Output3.getListeners().forEach(listener -> {
@@ -384,7 +387,7 @@ public class AgrzcStageOneController implements Initializable {
 		});
 
 		// OUTPUT CANAL 4
-		for (int i = 0; i < Output4.points; i++) {
+		for (int i = 0; i < Output4.POINTS; i++) {
 			Output4.getListeners().add(new SimpleBooleanProperty());
 		}
 		Output4.getListeners().forEach(listener -> {
@@ -396,6 +399,88 @@ public class AgrzcStageOneController implements Initializable {
 				}
 			});
 		});
+
+		// COMANDOS DE VALVULAS
+		ComandosValvulasProperty.silos12Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					modbusService.writeRegisterRequest(REG_VALVULA_SILO_1_2, 1);
+				else
+					modbusService.writeRegisterRequest(REG_VALVULA_SILO_1_2, 0);
+			}
+		});
+
+		ComandosValvulasProperty.silos34Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					modbusService.writeRegisterRequest(REG_VALVULA_SILO_3_4, 1);
+				else
+					modbusService.writeRegisterRequest(REG_VALVULA_SILO_3_4, 0);
+			}
+		});
+
+		ComandosValvulasProperty.saidaBalanca1Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					modbusService.writeRegisterRequest(REG_VALVULA_SAIDA_BALANCA_1, 1);
+				else
+					modbusService.writeRegisterRequest(REG_VALVULA_SAIDA_BALANCA_1, 0);
+			}
+		});
+
+		ComandosValvulasProperty.mistura11Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					modbusService.writeRegisterRequest(REG_VALVULA_MISTURA_1_1, 1);
+				else
+					modbusService.writeRegisterRequest(REG_VALVULA_MISTURA_1_1, 0);
+			}
+		});
+
+		ComandosValvulasProperty.mistura12Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					modbusService.writeRegisterRequest(REG_VALVULA_MISTURA_1_2, 1);
+				else
+					modbusService.writeRegisterRequest(REG_VALVULA_MISTURA_1_2, 0);
+			}
+		});
+
+		ComandosValvulasProperty.transportePneumaticoProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					modbusService.writeRegisterRequest(REG_VALVULA_TRANSPORTE_PNEUMATICO, 1);
+				else
+					modbusService.writeRegisterRequest(REG_VALVULA_TRANSPORTE_PNEUMATICO, 0);
+			}
+		});
+
+		ComandosValvulasProperty.saidaBalanca2Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					modbusService.writeRegisterRequest(REG_VALVULA_SAIDA_BALANCA_2, 1);
+				else
+					modbusService.writeRegisterRequest(REG_VALVULA_SAIDA_BALANCA_2, 0);
+			}
+		});
+
+		ComandosValvulasProperty.mistura2Property().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					modbusService.writeRegisterRequest(REG_VALVULA_MISTURA_2, 1);
+				else
+					modbusService.writeRegisterRequest(REG_VALVULA_MISTURA_2, 0);
+			}
+		});
+
 	}
 
 	private void configAnimations() {
@@ -458,22 +543,26 @@ public class AgrzcStageOneController implements Initializable {
 			}
 			break;
 		case 8:
-			//dosagemController.updateSiloCarga(formula.getSilos().get(dosagemIndex).getId().toString());
-			Integer[] finalize = modbusService.readMultipleRegisterRequest(REG_FLAG_FINALIZADO, 1);
-			if (finalize[0] > 0 && dosagemIndex < formula.getQuantidades().size()) {
-				modbusService.writeRegisterRequest(REG_PESO_MATERIA,
-						formula.getQuantidades().get(dosagemIndex).getPeso().intValue());
-				modbusService.writeRegisterRequest(REG_SILO, formula.getSilos().get(dosagemIndex).getId().intValue());
-				modbusService.writeRegisterRequest(REG_FLAG_FINALIZADO, 0);
-				dosagemIndex++;
-				return;
-			}
-			if (finalize[0] > 0 && dosagemIndex == formula.getQuantidades().size()) {
-				StatusLabelProperty.setStatusLabel("Dosagem finalizada");
-				System.out.println("FIM!");
-				modbusService.writeRegisterRequest(REG_FLAG_FINALIZADO, 0);
-				dosagemController.updateSiloCarga("00");
-				dosagemIndex = 0;
+			if (formula != null) {
+				dosagemController.updateSiloCarga(formula.getSilos().get(dosagemIndex).getId().toString());
+				Integer[] finalize = modbusService.readMultipleRegisterRequest(REG_FLAG_FINALIZADO, 1);
+				if (finalize[0] > 0 && dosagemIndex < formula.getQuantidades().size()) {
+					modbusService.writeRegisterRequest(REG_PESO_MATERIA,
+							formula.getQuantidades().get(dosagemIndex).getPeso().intValue());
+					modbusService.writeRegisterRequest(REG_SILO,
+							formula.getSilos().get(dosagemIndex).getId().intValue());
+					modbusService.writeRegisterRequest(REG_FLAG_FINALIZADO, 0);
+					dosagemIndex++;
+					return;
+				}
+				if (finalize[0] > 0 && dosagemIndex == formula.getQuantidades().size()) {
+					StatusLabelProperty.setStatusLabel("Dosagem finalizada");
+					System.out.println("FIM!");
+					modbusService.writeRegisterRequest(REG_FLAG_FINALIZADO, 0);
+					dosagemController.updateSiloCarga("00");
+					formula = null;
+					dosagemIndex = 0;
+				}
 			}
 			break;
 		}

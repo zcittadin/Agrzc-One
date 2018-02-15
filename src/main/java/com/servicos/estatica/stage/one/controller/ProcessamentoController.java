@@ -91,14 +91,33 @@ public class ProcessamentoController implements Initializable, ControlledScreen 
 			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
 			root = (Parent) fxmlloader.load(url.openStream());
 			stage.setScene(new Scene(root));
-			// ((Balanca2EscritaController) fxmlloader.getController()).setContext(null,
-			// lblBalancaEscrita.getScene());
-			stage.setTitle("Gerenciar matéria-prima");
+			stage.setTitle("Valor de pesagem");
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(lblBalancaEscrita.getScene().getWindow());
 			stage.setResizable(Boolean.FALSE);
 			stage.showAndWait();
-			// findMaterias();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	private void openComandoValvulas() {
+		try {
+			Stage stage;
+			Parent root;
+			stage = new Stage();
+			URL url = getClass().getResource("/com/servicos/estatica/stage/one/app/ComandosValvulas.fxml");
+			FXMLLoader fxmlloader = new FXMLLoader();
+			fxmlloader.setLocation(url);
+			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
+			root = (Parent) fxmlloader.load(url.openStream());
+			stage.setScene(new Scene(root));
+			stage.setTitle("Comandos manuais");
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(lblBalancaEscrita.getScene().getWindow());
+			stage.setResizable(Boolean.FALSE);
+			stage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

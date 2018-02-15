@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.Bloom?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.shape.Sphere?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="729.0" prefWidth="1425.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="729.0" prefWidth="1425.0" styleClass="mainGradient" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Line fx:id="divLine" endX="1425.0" fill="WHITE" layoutY="425.0" startX="3.0" stroke="WHITE" strokeWidth="2.0" />
       <Separator orientation="VERTICAL" prefHeight="729.0" />
@@ -107,5 +108,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
+      <Button layoutX="1219.0" layoutY="119.0" mnemonicParsing="false" onAction="#openComandoValvulas" styleClass="btManual" stylesheets="@../style/style.css" text="Comando de vávulas">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

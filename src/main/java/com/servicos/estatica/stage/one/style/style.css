@@ -59,6 +59,10 @@
   -fx-graphic: url('broom.png');
 }
 
+.btManual {
+  -fx-graphic: url('Manual.png');
+}
+
 .combo-font {
 	-fx-font: 14px "Regular";
 }
