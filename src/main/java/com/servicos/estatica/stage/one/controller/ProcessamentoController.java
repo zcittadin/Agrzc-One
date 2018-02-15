@@ -1,5 +1,6 @@
 package com.servicos.estatica.stage.one.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,18 +9,26 @@ import java.util.ResourceBundle;
 import com.servicos.estatica.stage.one.app.ControlledScreen;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Sphere;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class ProcessamentoController implements Initializable, ControlledScreen {
 
 	@FXML
 	private Label lblBalanca;
+	@FXML
+	private Label lblBalancaEscrita;
 	@FXML
 	private Line divLine;
 	@FXML
@@ -47,6 +56,7 @@ public class ProcessamentoController implements Initializable, ControlledScreen 
 	private static Map<Integer, Sphere> input_0 = new HashMap<>();
 
 	private Tooltip tooltipBalanca = new Tooltip("Peso atual");
+	private Tooltip tooltipBalancaEscrita = new Tooltip("Clique para programar o peso do aditivo");
 
 	private static String TOOLTIP_CSS = "-fx-font-size: 12pt; -fx-font-weight: bold; -fx-font-style: normal; -fx-background-color: green;";
 
@@ -64,7 +74,44 @@ public class ProcessamentoController implements Initializable, ControlledScreen 
 		initColors();
 		divLine.getStrokeDashArray().addAll(2d, 5d);
 		tooltipBalanca.setStyle(TOOLTIP_CSS);
+		tooltipBalancaEscrita.setStyle(TOOLTIP_CSS);
 		Tooltip.install(lblBalanca, tooltipBalanca);
+		Tooltip.install(lblBalancaEscrita, tooltipBalancaEscrita);
+	}
+
+	@FXML
+	private void openValorPesagem() {
+		try {
+			Stage stage;
+			Parent root;
+			stage = new Stage();
+			URL url = getClass().getResource("/com/servicos/estatica/stage/one/app/Balanca2Escrita.fxml");
+			FXMLLoader fxmlloader = new FXMLLoader();
+			fxmlloader.setLocation(url);
+			fxmlloader.setBuilderFactory(new JavaFXBuilderFactory());
+			root = (Parent) fxmlloader.load(url.openStream());
+			stage.setScene(new Scene(root));
+			// ((Balanca2EscritaController) fxmlloader.getController()).setContext(null,
+			// lblBalancaEscrita.getScene());
+			stage.setTitle("Gerenciar matéria-prima");
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(lblBalancaEscrita.getScene().getWindow());
+			stage.setResizable(Boolean.FALSE);
+			stage.showAndWait();
+			// findMaterias();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void setValorPesagem(String valor) {
+		if (valor.length() < 2)
+			valor = "0".concat(valor);
+		if (valor.length() < 3)
+			valor = "0".concat(valor);
+		if (valor.length() < 4)
+			valor = "0".concat(valor);
+		lblBalancaEscrita.setText(valor);
 	}
 
 	private void initIOPoints() {

@@ -19,6 +19,7 @@ import com.servicos.estatica.stage.one.shared.CadastroProperty;
 import com.servicos.estatica.stage.one.shared.ComandosDosagemProperty;
 import com.servicos.estatica.stage.one.shared.DosagemProperty;
 import com.servicos.estatica.stage.one.shared.HistoricoProperty;
+import com.servicos.estatica.stage.one.shared.ProcessamentoProperty;
 import com.servicos.estatica.stage.one.shared.StatusLabelProperty;
 
 import javafx.animation.FadeTransition;
@@ -90,7 +91,9 @@ public class AgrzcStageOneController implements Initializable {
 	private static final int REG_SILO = 230;
 	private static final int REG_QUANTIDADE_MATERIA = 200;
 	private static final int REG_FLAG_FINALIZADO = 220;
-	private static final int REG_BALANCA_1 = 212;
+	private static final int REG_LEITURA_BALANCA_1 = 212;
+	private static final int REG_LEITURA_BALANCA_2 = 232;
+	private static final int REG_ESCRITA_BALANCA_2 = 234;
 	private static final int REG_COMANDO_ELEVADOR = 240;
 	private static final int REG_ROSCA_SUP_HORARIO = 242;
 	private static final int REG_ROSCA_SUP_ANTI_HORARIO = 244;
@@ -121,6 +124,10 @@ public class AgrzcStageOneController implements Initializable {
 	}
 
 	private void initModbusScan() {
+
+		Integer[] valorEscritaBalanca2 = modbusService.readMultipleRegisterRequest(REG_ESCRITA_BALANCA_2, 1);
+		processamentoController.setValorPesagem(valorEscritaBalanca2[0].toString());
+
 		scanIO = new Timeline(new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -262,6 +269,8 @@ public class AgrzcStageOneController implements Initializable {
 				modbusService.writeRegisterRequest(REG_PESO_TOTAL_CARGA, 0);
 				modbusService.writeRegisterRequest(REG_SILO, 0);
 				modbusService.writeRegisterRequest(REG_QUANTIDADE_MATERIA, 0);
+				dosagemController.updateSiloCarga("00");
+				dosagemIndex = 0;
 			}
 		});
 
@@ -288,7 +297,14 @@ public class AgrzcStageOneController implements Initializable {
 					modbusService.writeRegisterRequest(REG_QUANTIDADE_MATERIA, formula.getQuantidades().size());
 					dosagemIndex++;
 				}
+			}
+		});
 
+		ProcessamentoProperty.writeBalanca2Property().addListener(new ChangeListener<Integer>() {
+			@Override
+			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+				modbusService.writeRegisterRequest(REG_ESCRITA_BALANCA_2, newValue);
+				processamentoController.setValorPesagem(newValue.toString());
 			}
 		});
 
@@ -430,23 +446,21 @@ public class AgrzcStageOneController implements Initializable {
 			}
 			break;
 		case 6:
-			Integer[] valuesBalanca1 = modbusService.readMultipleRegisterRequest(REG_BALANCA_1, 2);
+			Integer[] valuesBalanca1 = modbusService.readMultipleRegisterRequest(REG_LEITURA_BALANCA_1, 2);
 			if (valuesBalanca1.length > 0) {
 				dosagemController.updateBalanca1(valuesBalanca1[0]);
 			}
 			break;
 		case 7:
-			Integer[] valuesBalanca2 = modbusService.readMultipleRegisterRequest(REG_BALANCA_1, 2);
+			Integer[] valuesBalanca2 = modbusService.readMultipleRegisterRequest(REG_LEITURA_BALANCA_2, 2);
 			if (valuesBalanca2.length > 0) {
 				processamentoController.updateBalanca2(valuesBalanca2[0]);
 			}
 			break;
 		case 8:
+			//dosagemController.updateSiloCarga(formula.getSilos().get(dosagemIndex).getId().toString());
 			Integer[] finalize = modbusService.readMultipleRegisterRequest(REG_FLAG_FINALIZADO, 1);
 			if (finalize[0] > 0 && dosagemIndex < formula.getQuantidades().size()) {
-				System.out.println(formula.getQuantidades().get(dosagemIndex).getMateriaQuantidade().getNomeMateria()
-						+ ": " + formula.getSilos().get(dosagemIndex).getSilo() + " - "
-						+ formula.getQuantidades().get(dosagemIndex).getPeso());
 				modbusService.writeRegisterRequest(REG_PESO_MATERIA,
 						formula.getQuantidades().get(dosagemIndex).getPeso().intValue());
 				modbusService.writeRegisterRequest(REG_SILO, formula.getSilos().get(dosagemIndex).getId().intValue());
@@ -458,6 +472,7 @@ public class AgrzcStageOneController implements Initializable {
 				StatusLabelProperty.setStatusLabel("Dosagem finalizada");
 				System.out.println("FIM!");
 				modbusService.writeRegisterRequest(REG_FLAG_FINALIZADO, 0);
+				dosagemController.updateSiloCarga("00");
 				dosagemIndex = 0;
 			}
 			break;

@@ -57,6 +57,8 @@ public class DosagemController implements Initializable, ControlledScreen {
 	@FXML
 	private Rectangle rectForm;
 	@FXML
+	private Rectangle rectForm1;
+	@FXML
 	private ComboBox<Formula> comboFormulas;
 	@FXML
 	private Label lblSilo1;
@@ -78,6 +80,8 @@ public class DosagemController implements Initializable, ControlledScreen {
 	private Label lblSilo9;
 	@FXML
 	private Label lblSilo10;
+	@FXML
+	private Label lblSiloCarga;
 	@FXML
 	private Label lblBalanca;
 	@FXML
@@ -272,6 +276,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 			DosagemProperty.setCancelaDosagem(!cancelaDosagemFlag);
 			cancelaDosagemFlag = !cancelaDosagemFlag;
 			StatusLabelProperty.setStatusLabel("Sistema em espera");
+			updateSiloCarga("00");
 		}
 	}
 
@@ -380,6 +385,12 @@ public class DosagemController implements Initializable, ControlledScreen {
 		if (strValue.length() < 4)
 			strValue = "0".concat(strValue);
 		lblBalanca.setText(strValue);
+	}
+
+	public void updateSiloCarga(String numeroSilo) {
+		if (numeroSilo.length() < 2)
+			numeroSilo = "0".concat(numeroSilo);
+		lblSiloCarga.setText(numeroSilo);
 	}
 
 	public void populateComboFormulas() {
@@ -532,6 +543,7 @@ public class DosagemController implements Initializable, ControlledScreen {
 
 	private void initComponents() {
 		rectForm.setFill(Color.TRANSPARENT);
+		rectForm1.setFill(Color.TRANSPARENT);
 		tooltipSilo1.setStyle(TOOLTIP_CSS);
 		tooltipSilo2.setStyle(TOOLTIP_CSS);
 		tooltipSilo3.setStyle(TOOLTIP_CSS);
@@ -554,6 +566,9 @@ public class DosagemController implements Initializable, ControlledScreen {
 		Tooltip.install(lblSilo9, tooltipSilo9);
 		Tooltip.install(lblSilo10, tooltipSilo10);
 		Tooltip.install(lblBalanca, tooltipBalanca);
+		switchElevador.setImage(new Image("com/servicos/estatica/stage/one/img/switch_off.png"));
+		switchRosca1.setImage(new Image("com/servicos/estatica/stage/one/img/switch_off.png"));
+		switchRosca2.setImage(new Image("com/servicos/estatica/stage/one/img/switch_off.png"));
 		imgDirRoscaLeft.setVisible(false);
 		imgDirRoscaRight.setVisible(false);
 	}
