@@ -87,6 +87,12 @@ public class AgrzcStageOneController implements Initializable {
 	private static FormulaDosagemDTO formula;
 	private int dosagemIndex = 0;
 
+	private static final int REG_INPUT_0 = 0;
+	private static final int REG_INPUT_1 = 24;
+	private static final int REG_INPUT_2 = 40;
+	private static final int REG_OUTPUT_0 = 100;
+	private static final int REG_OUTPUT_3 = 116;
+	private static final int REG_OUTPUT_4 = 132;
 	private static final int REG_PESO_MATERIA = 202;
 	private static final int REG_PESO_TOTAL_CARGA = 224;
 	private static final int REG_SILO = 230;
@@ -495,37 +501,37 @@ public class AgrzcStageOneController implements Initializable {
 		Boolean[] points = new Boolean[0];
 		switch (slot) {
 		case 0:
-			points = modbusService.readMultiplePoints(0, 24);
+			points = modbusService.readMultiplePoints(REG_INPUT_0, 24);
 			for (int i = 0; i < points.length; i++) {
 				Input0.getListeners().get(i).setValue(points[i]);
 			}
 			break;
 		case 1:
-			points = modbusService.readMultiplePoints(24, 16);
+			points = modbusService.readMultiplePoints(REG_INPUT_1, 16);
 			for (int i = 0; i < points.length; i++) {
 				Input1.getListeners().get(i).setValue(points[i]);
 			}
 			break;
 		case 2:
-			points = modbusService.readMultiplePoints(40, 16);
+			points = modbusService.readMultiplePoints(REG_INPUT_2, 16);
 			for (int i = 0; i < points.length; i++) {
 				Input2.getListeners().get(i).setValue(points[i]);
 			}
 			break;
 		case 3:
-			points = modbusService.readMultiplePoints(100, 16);
+			points = modbusService.readMultiplePoints(REG_OUTPUT_0, 16);
 			for (int i = 0; i < points.length; i++) {
 				Output0.getListeners().get(i).setValue(points[i]);
 			}
 			break;
 		case 4:
-			points = modbusService.readMultiplePoints(116, 16);
+			points = modbusService.readMultiplePoints(REG_OUTPUT_3, 16);
 			for (int i = 0; i < points.length; i++) {
 				Output3.getListeners().get(i).setValue(points[i]);
 			}
 			break;
 		case 5:
-			points = modbusService.readMultiplePoints(132, 16);
+			points = modbusService.readMultiplePoints(REG_OUTPUT_4, 16);
 			for (int i = 0; i < points.length; i++) {
 				Output4.getListeners().get(i).setValue(points[i]);
 			}
